@@ -473,6 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
   resetToTop();
   applyLanguage(currentLang, false);
   writeIn(document.querySelector(".gate-card h1"),300);
+  document.querySelectorAll(".gate-vows > span").forEach(n=>writeIn(n,1300));
   document.querySelector("#main").inert=true;
   document.querySelector("#siteHeader").inert=true;
   document.querySelector(".site-footer").inert=true;

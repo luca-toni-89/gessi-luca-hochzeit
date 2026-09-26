@@ -1000,3 +1000,5 @@ body.menu-open::after { opacity:1;visibility:visible;pointer-events:auto; }
 .rice-field i:nth-child(14) { --n:13; }
 .rice-field i:nth-child(15) { --n:14; }
 .rice-field i:nth-child(16) { --n:15; }
+
+.gate-vows { font-family:var(--script);font-size:clamp(1.5rem,3vw,2.4rem);margin:0 0 22px;line-height:1.4;color:#fff; }
