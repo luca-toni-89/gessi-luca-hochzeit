@@ -26,12 +26,12 @@
   <meta name="twitter:description" content="10. Juli 2027 · Muri &amp; Zug. Il nostro giorno, insieme a voi.">
   <meta name="twitter:image" content="https://gessi-luca-hochzeit.pages.dev/images/wedding-share.jpg">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=20260927-14">
-  <link rel="stylesheet" href="/motion.css?v=20260927-14">
-  <script src="/app.js?v=20260927-14" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260927-15">
+  <link rel="stylesheet" href="/motion.css?v=20260927-15">
+  <script src="/app.js?v=20260927-15" defer></script>
 </head>
 <body class="lang-pending">
-  <section class="language-gate" id="languageGate" aria-label="Sprache wählen / Scegli la lingua">
+  <section class="language-gate" id="languageGate" aria-label="Sprache wählen / Scegliete la lingua">
     <div class="gate-backdrop" aria-hidden="true"></div>
     <div class="gate-card">
       <div class="gate-monogram"><span>G</span><i>&amp;</i><span>L</span></div>
@@ -54,7 +54,7 @@
       <span class="brand-mark">G<span>&amp;</span>L</span>
       <span class="brand-date">10.07.27</span>
     </a>
-    <nav class="site-nav" id="siteNav" aria-label="Navigation">
+    <nav class="site-nav" id="siteNav" aria-label="Navigation" data-i18n-aria="navigationLabel">
       <a href="#day" data-i18n="navDay">Der Tag</a>
       <a href="#locations" data-i18n="navLocations">Orte</a>
       <a href="#menu" data-i18n="navMenu">Das Menü</a>
@@ -88,9 +88,9 @@
         <div class="hero-date">
           <span data-i18n="heroWeekday">Samstag</span>
           <strong>10 · 07 · 2027</strong>
-          <span>Muri · Zug</span>
+          <span data-i18n="heroPlaces">Muri · Zug</span>
         </div>
-        <div class="countdown hero-countdown" aria-label="Countdown" role="timer">
+        <div class="countdown hero-countdown" aria-label="Countdown" data-i18n-aria="countdownLabel" role="timer">
           <div class="countdown-unit"><strong id="countDays">000</strong><span data-i18n="days">Tage</span></div>
           <div class="countdown-separator">·</div>
           <div class="countdown-unit"><strong id="countHours">00</strong><span data-i18n="hours">Stunden</span></div>
@@ -115,7 +115,7 @@
           <p class="eyebrow" data-i18n="loveKicker">Eine Geschichte, zwei Familien</p>
           <h2 data-i18n="loveTitle">Zwischen Schweiz und Italien beginnt unser nächstes Kapitel.</h2>
           <p class="lead" data-i18n="loveText">Am 10. Juli 2027 sagen wir Ja – und das Schönste daran ist, diesen Tag mit den Menschen zu teilen, die zu unserem Leben gehören.</p>
-          <div class="signature" aria-label="Gessica und Luca">Gessica <span>&amp;</span> Luca</div>
+          <div class="signature" aria-label="Gessica und Luca" data-i18n-aria="coupleLabel">Gessica <span>&amp;</span> Luca</div>
         </div>
       </div>
     </section>
@@ -179,7 +179,7 @@
               <div class="slide-progress" aria-hidden="true"><span></span></div>
             </div>
             <div class="location-content">
-              <p class="eyebrow">Muri · Aargau</p>
+              <p class="eyebrow" data-i18n="muriRegion">Muri · Aargau</p>
               <h3>Klosterkirche Muri</h3>
               <p data-i18n="churchDescription">In der Klosterkirche Muri beginnt unser Hochzeitstag. Über uns öffnet sich das barocke Oktogon, ein achteckiger Raum unter einer hohen Kuppel. Stuck, Fresken und geschnitzte Altäre geben dem Blick immer wieder neue Details; durch die Fenster fällt Licht in den weiten Kirchenraum. Romanische und gotische Teile erzählen von den Jahrhunderten, in denen dieser Ort gewachsen ist. Hier möchten wir einen Moment innehalten und einander unser Ja geben. Mit unseren Familien und Freunden an unserer Seite wird aus der grossen Kirche ein ganz persönlicher Ort. Wir freuen uns darauf, euch dort zu sehen. Die Uhrzeit unserer Trauung teilen wir euch noch mit.</p>
               <address>Marktstrasse 4 · 5630 Muri AG</address>
@@ -205,7 +205,7 @@
               <div class="slide-progress" aria-hidden="true"><span></span></div>
             </div>
             <div class="location-content">
-              <p class="eyebrow">Zug · Zugersee</p>
+              <p class="eyebrow" data-i18n="zugRegion">Zug · Zugersee</p>
               <h3>Theater Casino Zug</h3>
               <p data-i18n="casinoDescription">Nach dem Ja-Wort führt unser Tag von Muri nach Zug. Das Theater Casino liegt direkt am Zugersee, am Rand der Altstadt. Sein Restaurant gehört zu einem Haus, in dem Kultur und Begegnung zusammenkommen; draussen prägt das Wasser die Umgebung. Für uns beginnt hier der gesellige Teil des Tages: mit euch zusammensitzen, gemeinsam essen, anstossen und Zeit füreinander haben. Wir freuen uns auf Gespräche zwischen unseren Familien und Freunden und auf einen Abend, den wir miteinander verbringen. Welche Räume wir nutzen, wie das Menü aussieht und wann genau die Feier beginnt, ergänzen wir, sobald diese Details feststehen. Bis dahin bleibt die Vorfreude.</p>
               <address>Artherstrasse 2–4 · 6300 Zug</address>
@@ -325,7 +325,7 @@
             <span data-i18n="uploadButton">Fotos hochladen</span>
             <span class="button-arrow" aria-hidden="true">↑</span>
           </button>
-          <progress id="uploadProgress" max="100" value="0" hidden aria-label="Upload"></progress>
+          <progress id="uploadProgress" max="100" value="0" hidden aria-label="Upload" data-i18n-aria="uploadLabel"></progress>
           <p class="form-status" id="uploadStatus" role="status"></p>
         </div>
       </div>
