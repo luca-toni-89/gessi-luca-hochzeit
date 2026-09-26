@@ -501,7 +501,7 @@ function initAudio() {
     // Resume inside the user's gesture; decoding may safely finish later.
     context.resume().then(startBuffer).catch(()=>{wanted=false;sync()});
     if(!loading&&!buffer){
-      loading=raw.then(bytes=>context.decodeAudioData(bytes)).then(decoded=>{buffer=decoded;startBuffer();sync()}).catch(()=>{
+      loading=raw.then(bytes=>context.decodeAudioData(bytes)).then(decoded=>{buffer=decoded;audio.dataset.duration=String(decoded.duration);startBuffer();sync()}).catch(()=>{
         fallback=true;toggle.classList.remove('is-loading');if(wanted)fallbackPlay();
       });
     }

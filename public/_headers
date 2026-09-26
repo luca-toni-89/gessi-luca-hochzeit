@@ -19,3 +19,6 @@
 
 /images/wedding-share.jpg
   Cache-Control: public, max-age=86400
+
+/audio-wedding-full.mp3
+  Cache-Control: public, max-age=31536000, immutable
