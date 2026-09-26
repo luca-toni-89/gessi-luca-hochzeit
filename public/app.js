@@ -285,6 +285,7 @@ function replayHero() {
   hero.classList.remove('intro-playing');
   document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,350+i*850));
   writeIn(document.querySelector('.hero-subtitle'),1600);
+  writeIn(document.querySelector('.hero-mr-mrs'),2200,210);
   void hero.offsetWidth; hero.classList.add('intro-playing');
   animateCountdownIntro();
 }

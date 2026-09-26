@@ -66,8 +66,8 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 
 /* Child motion keeps the section reveal independent of the heartbeat. */
 .footer-monogram > .heartbeat { display:inline-block; color:inherit; font:inherit; }
-.heartbeat { display:inline-block; animation:weddingHeartbeat 3.8s ease-in-out infinite; transform-origin:center; }
-@keyframes weddingHeartbeat { 0%,36%,100%{transform:scale(1)} 12%{transform:scale(1.055)} 22%{transform:scale(1.012)} 29%{transform:scale(1.035)} }
+.heartbeat { display:inline-block; animation:weddingHeartbeat 2.6s ease-in-out infinite; transform-origin:center; }
+@keyframes weddingHeartbeat { 0%,36%,100%{transform:scale(1)} 12%{transform:scale(1.1)} 22%{transform:scale(1.02)} 29%{transform:scale(1.065)} }
 .menu-handwriting { white-space:nowrap; }
 .menu-art:not(.is-visible) .written-letter { animation:none; opacity:0; transform:translate3d(0,.1em,0); }
 .menu-art.is-visible .written-letter { animation:quietInk 1.8s var(--letter-delay) ease both; }
@@ -84,3 +84,10 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 .footer-monogram { overflow:visible; font-size:clamp(3.8rem,18vw,5rem); }
 .footer-monogram > .heartbeat { padding:.12em .4em; line-height:1.5; overflow:visible; }
 .site-footer .footer-heart { overflow:visible; }
+
+.hero-mr-mrs { position:absolute; z-index:2; left:50%; bottom:24px; margin:0; padding:.2em .45em; transform:translateX(-50%) rotate(-5deg); font-family:var(--script); font-size:clamp(2.8rem,7vw,5rem); font-weight:400; line-height:1.2; color:#111; white-space:nowrap; pointer-events:none; text-shadow:0 1px 8px rgba(255,249,237,.5); }
+.hero-mr-mrs .written-letter { animation-duration:2.4s; }
+body.lang-pending .hero-mr-mrs { visibility:hidden; }
+@media(max-width:700px){.hero-mr-mrs{bottom:22px;font-size:3rem}.hero-scroll{bottom:18px}}
+/* Reserve a separate signature area below the RSVP cue. */
+.hero { padding-bottom:130px; }
