@@ -78,6 +78,9 @@ const translations = {
 Object.assign(translations.de, {"skip": "Zum Inhalt", "portraitAlt": "Typografischer Platzhalter – Paarbild noch nicht bereitgestellt", "portraitPending": "Unser Bild folgt.", "muriAlt": "Licht, Stuck und Altarraum der Klosterkirche Muri", "zugAlt": "Theater Casino Zug von aussen", "imageEdits": "Bildausschnitt und WebP-Konvertierung", "switchLanguage": "Auf Italienisch wechseln", "contactEmail": "E-Mail (optional)", "messageLabel": "Nachricht an uns (optional)", "required": "Bitte füllt dieses Feld aus.", "emailError": "Bitte gebt eine gültige E-Mail-Adresse ein.", "uploadInvalid": "Bitte höchstens 12 Fotos in JPG, PNG, WEBP oder HEIC/HEIF auswählen, jedes höchstens 15 MB.", "uploadProgress": "Foto", "uploadOf": "von", "saved": "Gespeichert", "dayIntro": "Unser Ja-Wort in Muri. Danach feiern wir gemeinsam in Zug. Die genauen Uhrzeiten und weitere Details folgen mit der Einladung.", "dinnerTitle": "Gemeinsam feiern", "dinnerText": "Nach der Trauung geht es zum gemeinsamen Essen und Feiern ins Theater Casino Zug.", "churchDescription": "In der Klosterkirche Muri beginnt unser Hochzeitstag. Über uns öffnet sich das barocke Oktogon, ein achteckiger Raum unter einer hohen Kuppel. Stuck, Fresken und geschnitzte Altäre geben dem Blick immer wieder neue Details; durch die Fenster fällt Licht in den weiten Kirchenraum. Romanische und gotische Teile erzählen von den Jahrhunderten, in denen dieser Ort gewachsen ist. Hier möchten wir einen Moment innehalten und einander unser Ja geben. Mit unseren Familien und Freunden an unserer Seite wird aus der grossen Kirche ein ganz persönlicher Ort. Wir freuen uns darauf, euch dort zu sehen. Die Uhrzeit unserer Trauung teilen wir euch noch mit.", "casinoDescription": "Nach dem Ja-Wort führt unser Tag von Muri nach Zug. Das Theater Casino liegt direkt am Zugersee, am Rand der Altstadt. Sein Restaurant gehört zu einem Haus, in dem Kultur und Begegnung zusammenkommen; draussen prägt das Wasser die Umgebung. Für uns beginnt hier der gesellige Teil des Tages: mit euch zusammensitzen, gemeinsam essen, anstossen und Zeit füreinander haben. Wir freuen uns auf Gespräche zwischen unseren Familien und Freunden und auf einen Abend, den wir miteinander verbringen. Welche Räume wir nutzen, wie das Menü aussieht und wann genau die Feier beginnt, ergänzen wir, sobald diese Details feststehen. Bis dahin bleibt die Vorfreude."});
 Object.assign(translations.it, {"skip": "Vai al contenuto", "portraitAlt": "Segnaposto tipografico – immagine della coppia non ancora disponibile", "portraitPending": "La nostra foto arriverà.", "muriAlt": "Luce, stucchi e altare nella chiesa abbaziale di Muri", "zugAlt": "Esterno del Theater Casino Zug", "imageEdits": "Ritaglio e conversione in WebP", "switchLanguage": "Passa al tedesco", "contactEmail": "E-mail (facoltativa)", "messageLabel": "Un messaggio per noi (facoltativo)", "required": "Compilate questo campo.", "emailError": "Inserite un indirizzo e-mail valido.", "uploadInvalid": "Scegliete al massimo 12 foto JPG, PNG, WEBP o HEIC/HEIF, ciascuna di massimo 15 MB.", "uploadProgress": "Foto", "uploadOf": "di", "saved": "Salvata", "dayIntro": "Il nostro sì a Muri. Poi festeggeremo insieme a Zugo. Gli orari precisi e gli altri dettagli arriveranno con l’invito.", "dinnerTitle": "Festeggiare insieme", "dinnerText": "Dopo la cerimonia ci ritroveremo al Theater Casino Zug per mangiare e festeggiare insieme.", "churchDescription": "Il nostro giorno inizierà nella chiesa abbaziale di Muri. Sopra di noi si apre l’ottagono barocco, un ampio spazio raccolto sotto una grande cupola. Gli stucchi, gli affreschi e gli altari intagliati invitano a soffermarsi sui dettagli, mentre la luce entra dalle finestre. Le parti romaniche e gotiche raccontano i secoli durante i quali questo luogo ha preso forma. Qui vorremmo fermarci un momento e dirci sì. Con le nostre famiglie e i nostri amici accanto, questa grande chiesa diventerà un luogo intimo e nostro. Ci emoziona pensare di ritrovarvi lì. Vi comunicheremo più avanti l’orario della cerimonia.", "casinoDescription": "Dopo il sì, il nostro giorno proseguirà da Muri verso Zugo. Il Theater Casino si trova direttamente sul Lago di Zugo, ai margini del centro storico. Il suo ristorante fa parte di una casa dedicata alla cultura e all’incontro, con l’acqua a caratterizzare il paesaggio tutt’intorno. Qui inizierà la parte più conviviale: sederci insieme, mangiare, brindare e avere tempo per ciascuno di voi. Immaginiamo le conversazioni tra le nostre famiglie e i nostri amici, e una serata da condividere. Gli spazi che useremo, il menù e l’orario della festa saranno indicati appena definiti. Intanto, ci godiamo l’attesa di essere tutti insieme."});
 
+Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca am See",galleryLabel:"Impressionen unserer Orte",muriFacadeAlt:"Fassade der Klosterkirche Muri",muriFacadeCaption:"Muri · Fassade",zugWestAlt:"Westseite des Theater Casino Zug",zugLakeCaption:"Zug · Am See",menuOpen:"Menü öffnen",menuClose:"Menü schliessen"});
+Object.assign(translations.it, {portraitAlt:"Illustrazione di Gessica e Luca sul lago",galleryLabel:"Impressioni dei nostri luoghi",muriFacadeAlt:"Facciata della chiesa abbaziale di Muri",muriFacadeCaption:"Muri · Facciata",zugWestAlt:"Lato occidentale del Theater Casino Zug",zugLakeCaption:"Zugo · Sul lago",menuOpen:"Apri il menu",menuClose:"Chiudi il menu"});
+
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
@@ -104,6 +107,8 @@ function applyLanguage(lang, closeGate) {
   var switcher = document.getElementById("langSwitch");
   if (switcher) switcher.textContent = currentLang === "de" ? "IT" : "DE";
   switcher.setAttribute("aria-label", t("switchLanguage"));
+  var menuButton = document.getElementById("menuToggle");
+  if (menuButton) menuButton.setAttribute("aria-label", menuButton.getAttribute("aria-expanded") === "true" ? t("menuClose") : t("menuOpen"));
   document.querySelectorAll('[data-i18n-alt]').forEach(n => n.alt = t(n.dataset.i18nAlt));
   document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', t(n.dataset.i18nAria)));
   document.querySelectorAll('[data-status-key]').forEach(n => n.textContent = t(n.dataset.statusKey));
@@ -172,6 +177,28 @@ function countdown() {
   document.getElementById("countHours").textContent = String(hours).padStart(2, "0");
   document.getElementById("countMinutes").textContent = String(minutes).padStart(2, "0");
   document.getElementById("countSeconds").textContent = String(seconds).padStart(2, "0");
+}
+
+function animateCountdownIntro() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var ids = ["countDays", "countHours", "countMinutes", "countSeconds"];
+  var targets = ids.map(function (id) { return Number(document.getElementById(id).textContent); });
+  var start = performance.now();
+  document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.add("is-counting"); });
+  function frame(now) {
+    var progress = Math.min(1, (now - start) / 1600);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    ids.forEach(function (id, index) {
+      var digits = index === 0 ? 3 : 2;
+      document.getElementById(id).textContent = String(Math.floor(targets[index] * eased)).padStart(digits, "0");
+    });
+    if (progress < 1) requestAnimationFrame(frame);
+    else window.setTimeout(function () {
+      document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.remove("is-counting"); });
+      countdown();
+    }, 120);
+  }
+  requestAnimationFrame(frame);
 }
 
 function initReveal() {
@@ -341,6 +368,21 @@ document.addEventListener("DOMContentLoaded", function () {
     applyLanguage(currentLang === "de" ? "it" : "de", false);
   });
 
+  var menuToggle = document.getElementById("menuToggle");
+  var siteNav = document.getElementById("siteNav");
+  menuToggle.addEventListener("click", function () {
+    var open = menuToggle.getAttribute("aria-expanded") !== "true";
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? t("menuClose") : t("menuOpen"));
+    siteNav.classList.toggle("is-open", open);
+  });
+  siteNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      siteNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
   document.querySelectorAll("[data-footer-lang]").forEach(function (button) {
     button.addEventListener("click", function () {
       applyLanguage(button.dataset.footerLang, false);
@@ -380,7 +422,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
 
   countdown();
-  window.setInterval(countdown, 1000);
+  animateCountdownIntro();
+  window.setTimeout(function () { window.setInterval(countdown, 1000); }, 1800);
   initReveal();
   initMotion();
 });
