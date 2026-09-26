@@ -2,47 +2,397 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f0e7">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Gessica & Luca · 10.07.2027 · Muri & Zug">
   <title>Gessica & Luca · 10.07.2027</title>
-  <style>
-    :root { font-family: Georgia, "Times New Roman", serif; color: #281a27; background: #f8f4f0; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-    main { text-align: center; max-width: 680px; }
-    .date { font: 600 14px/1.5 Arial, sans-serif; letter-spacing: .24em; color: #795466; }
-    h1 { font-size: clamp(3rem, 11vw, 6rem); font-weight: 400; margin: 18px 0; }
-    p { font-size: 1.2rem; line-height: 1.6; }
-    .langs { display: flex; gap: 12px; justify-content: center; margin-top: 30px; }
-    button { font: 600 16px Arial, sans-serif; padding: 13px 22px; border-radius: 100px; border: 1px solid #795466; background: transparent; color: #281a27; cursor: pointer; }
-    button[aria-pressed="true"] { background: #795466; color: white; }
-  </style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
 </head>
-<body>
-  <main>
-    <div class="date">10 · 07 · 2027</div>
-    <h1>Gessica & Luca</h1>
-    <p id="intro">Wir freuen uns, diesen Tag mit euch zu feiern. Die weiteren Informationen folgen bald.</p>
-    <div class="langs" role="group" aria-label="Sprache / Lingua">
-      <button type="button" data-lang="de" aria-pressed="true">Deutsch</button>
-      <button type="button" data-lang="it" aria-pressed="false">Italiano</button>
+<body class="lang-pending">
+  <div class="petals" aria-hidden="true"></div>
+
+  <section class="language-gate" id="languageGate" aria-labelledby="languageTitle">
+    <div class="gate-ornament gate-ornament-left" aria-hidden="true"></div>
+    <div class="gate-ornament gate-ornament-right" aria-hidden="true"></div>
+    <div class="gate-card">
+      <div class="gate-monogram" aria-hidden="true">
+        <span>G</span><i>&amp;</i><span>L</span>
+      </div>
+      <p class="eyebrow">10 · 07 · 2027</p>
+      <h1 id="languageTitle">Gessica &amp; Luca</h1>
+      <p class="gate-copy">Willkommen zu unserem Tag · Benvenuti al nostro giorno</p>
+      <div class="gate-languages" role="group" aria-label="Sprache / Lingua">
+        <button type="button" class="language-choice" data-choose-lang="de">
+          <span class="language-code">DE</span>
+          <span>Deutsch</span>
+        </button>
+        <button type="button" class="language-choice" data-choose-lang="it">
+          <span class="language-code">IT</span>
+          <span>Italiano</span>
+        </button>
+      </div>
+      <p class="gate-note">Bitte wähle deine Sprache · Scegli la tua lingua</p>
     </div>
+  </section>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="Gessica & Luca">
+      <span class="brand-mark">G<span>&amp;</span>L</span>
+      <span class="brand-date">10.07.27</span>
+    </a>
+    <nav class="site-nav" aria-label="Navigation">
+      <a href="#day" data-i18n="navDay">Der Tag</a>
+      <a href="#locations" data-i18n="navLocations">Orte</a>
+      <a href="#rsvp" data-i18n="navRsvp">Anmeldung</a>
+      <a href="#photos" data-i18n="navPhotos">Fotos</a>
+    </nav>
+    <button class="lang-switch" type="button" id="langSwitch" aria-label="Sprache wechseln">IT</button>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-aura hero-aura-one" aria-hidden="true"></div>
+      <div class="hero-aura hero-aura-two" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-two" aria-hidden="true"></div>
+
+      <div class="hero-content reveal">
+        <p class="eyebrow hero-kicker" data-i18n="heroKicker">Il nostro giorno</p>
+        <div class="hero-rings" aria-hidden="true">
+          <span></span><span></span>
+        </div>
+        <h1 class="hero-title">
+          <span>Gessica</span>
+          <i>&amp;</i>
+          <span>Luca</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">Wir heiraten.</p>
+        <div class="hero-date">
+          <span data-i18n="heroWeekday">Samstag</span>
+          <strong>10 · 07 · 2027</strong>
+          <span>Muri · Zug</span>
+        </div>
+        <a class="button button-primary" href="#rsvp">
+          <span data-i18n="heroCta">Zu- oder absagen</span>
+          <span class="button-arrow" aria-hidden="true">↘</span>
+        </a>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span></span>
+        <small data-i18n="discover">Entdecken</small>
+      </div>
+    </section>
+
+    <section class="love-note section">
+      <div class="section-shell editorial reveal">
+        <p class="section-number">01</p>
+        <div class="editorial-copy">
+          <p class="eyebrow" data-i18n="loveKicker">Eine Geschichte, zwei Familien</p>
+          <h2 data-i18n="loveTitle">Zwischen Schweiz und Italien beginnt unser nächstes Kapitel.</h2>
+          <p class="lead" data-i18n="loveText">Am 10. Juli 2027 sagen wir Ja – und das Schönste daran ist, diesen Tag mit den Menschen zu teilen, die zu unserem Leben gehören.</p>
+          <div class="signature" aria-label="Gessica und Luca">Gessica <span>&amp;</span> Luca</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="countdown-section section" aria-labelledby="countdownTitle">
+      <div class="section-shell">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow" data-i18n="countdownKicker">Bis wir Ja sagen</p>
+          <h2 id="countdownTitle" data-i18n="countdownTitle">Der Countdown läuft.</h2>
+        </div>
+        <div class="countdown reveal" aria-live="polite">
+          <div class="countdown-unit"><strong id="countDays">000</strong><span data-i18n="days">Tage</span></div>
+          <div class="countdown-separator">·</div>
+          <div class="countdown-unit"><strong id="countHours">00</strong><span data-i18n="hours">Stunden</span></div>
+          <div class="countdown-separator">·</div>
+          <div class="countdown-unit"><strong id="countMinutes">00</strong><span data-i18n="minutes">Minuten</span></div>
+          <div class="countdown-separator">·</div>
+          <div class="countdown-unit"><strong id="countSeconds">00</strong><span data-i18n="seconds">Sekunden</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-section section" id="day">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <p class="section-number">02</p>
+          <p class="eyebrow" data-i18n="dayKicker">10. Juli 2027</p>
+          <h2 data-i18n="dayTitle">Unser Tag, Schritt für Schritt.</h2>
+          <p data-i18n="dayIntro">Die genauen Uhrzeiten folgen mit der Einladung. Hier findet ihr schon jetzt den Ablauf und alle wichtigen Orte.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-index">01</div>
+            <div class="timeline-body">
+              <p class="timeline-time" data-i18n="timeFollows">Zeit folgt</p>
+              <h3 data-i18n="ceremonyTitle">Kirchliche Trauung</h3>
+              <p data-i18n="ceremonyText">In der Klosterkirche Muri geben wir uns das Ja-Wort.</p>
+              <span class="timeline-place">Klosterkirche Muri</span>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-index">02</div>
+            <div class="timeline-body">
+              <p class="timeline-time" data-i18n="timeFollows">Zeit folgt</p>
+              <h3 data-i18n="aperoTitle">Apéro &amp; Ankommen</h3>
+              <p data-i18n="aperoText">Zeit zum Anstossen, Umarmen und für die ersten gemeinsamen Momente.</p>
+              <span class="timeline-place">Theater Casino Zug</span>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-index">03</div>
+            <div class="timeline-body">
+              <p class="timeline-time" data-i18n="timeFollows">Zeit folgt</p>
+              <h3 data-i18n="dinnerTitle">Dinner &amp; Festa</h3>
+              <p data-i18n="dinnerText">Essen, Musik, Geschichten und eine lange Nacht mit euch.</p>
+              <span class="timeline-place">Theater Casino Zug</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="locations-section section" id="locations">
+      <div class="section-shell">
+        <div class="section-heading centered reveal">
+          <p class="section-number">03</p>
+          <p class="eyebrow" data-i18n="locationsKicker">Zwei besondere Orte</p>
+          <h2 data-i18n="locationsTitle">Vom Ja-Wort direkt an den Zugersee.</h2>
+        </div>
+
+        <div class="location-grid">
+          <article class="location-card reveal">
+            <div class="location-photo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/KlosterkircheMuri.Innen.jpg" alt="Innenansicht der Klosterkirche Muri" loading="lazy" decoding="async">
+              <div class="photo-vignette" aria-hidden="true"></div>
+              <span class="location-badge" data-i18n="ceremonyBadge">Trauung</span>
+            </div>
+            <div class="location-content">
+              <p class="eyebrow">Muri · Aargau</p>
+              <h3>Klosterkirche Muri</h3>
+              <p data-i18n="churchDescription">Barock, Geschichte und genau der feierliche Rahmen, den wir uns für unser Ja-Wort wünschen.</p>
+              <address>Marktstrasse 4 · 5630 Muri AG</address>
+              <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Klosterkirche+Muri+Marktstrasse+4+5630+Muri" target="_blank" rel="noreferrer">
+                <span data-i18n="openMaps">In Maps öffnen</span><span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="location-card location-card-offset reveal">
+            <div class="location-photo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Theater_Casino_Zug%2C_2023.jpg" alt="Theater Casino Zug" loading="lazy" decoding="async">
+              <div class="photo-vignette" aria-hidden="true"></div>
+              <span class="location-badge" data-i18n="celebrationBadge">Feier</span>
+            </div>
+            <div class="location-content">
+              <p class="eyebrow">Zug · Zugersee</p>
+              <h3>Theater Casino Zug</h3>
+              <p data-i18n="casinoDescription">Hier feiern wir weiter – mit Dinner, Musik und euch bis tief in die Nacht.</p>
+              <address>Artherstrasse 2–4 · 6300 Zug</address>
+              <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Theater+Casino+Zug+Artherstrasse+2-4+6300+Zug" target="_blank" rel="noreferrer">
+                <span data-i18n="openMaps">In Maps öffnen</span><span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section section" id="menu">
+      <div class="section-shell menu-shell reveal">
+        <div class="menu-flower" aria-hidden="true">
+          <svg viewBox="0 0 200 280" role="img">
+            <path d="M101 272C105 220 102 176 101 132C100 89 108 52 137 19" />
+            <path d="M102 198C75 181 58 159 48 128" />
+            <path d="M101 164C126 148 142 126 151 96" />
+            <path d="M49 128C27 126 13 114 9 92C31 92 46 104 49 128Z" />
+            <path d="M151 96C173 90 187 78 191 55C169 56 154 70 151 96Z" />
+            <path d="M137 19C127 16 119 8 119 1C129 1 138 8 137 19Z" />
+          </svg>
+        </div>
+        <div class="menu-copy">
+          <p class="section-number">04</p>
+          <p class="eyebrow" data-i18n="menuKicker">Mangiare, ridere, brindare</p>
+          <h2 data-i18n="menuTitle">Das Menü bleibt noch ein kleines Geheimnis.</h2>
+          <p data-i18n="menuText">Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien und Unverträglichkeiten könnt ihr direkt bei der Anmeldung angeben.</p>
+          <div class="menu-tags">
+            <span data-i18n="menuTag1">Menü folgt</span>
+            <span data-i18n="menuTag2">Unverträglichkeiten bei RSVP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rsvp-section section" id="rsvp">
+      <div class="section-shell rsvp-shell">
+        <div class="section-heading reveal">
+          <p class="section-number">05</p>
+          <p class="eyebrow">RSVP</p>
+          <h2 data-i18n="rsvpTitle">Seid ihr dabei?</h2>
+          <p data-i18n="rsvpIntro">Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.</p>
+        </div>
+
+        <form class="rsvp-form reveal" id="rsvpForm" novalidate>
+          <div class="form-row form-row-two">
+            <label>
+              <span data-i18n="contactName">Kontaktperson</span>
+              <input type="text" name="contactName" autocomplete="name" maxlength="120" required>
+            </label>
+            <label>
+              <span data-i18n="contactEmail">E-Mail <small data-i18n="optional">(optional)</small></span>
+              <input type="email" name="contactEmail" autocomplete="email" maxlength="254">
+            </label>
+          </div>
+
+          <fieldset class="attendance-fieldset">
+            <legend data-i18n="attendanceQuestion">Könnt ihr mit uns feiern?</legend>
+            <div class="attendance-options">
+              <label class="choice-card">
+                <input type="radio" name="attending" value="yes" checked>
+                <span class="choice-dot"></span>
+                <span><strong data-i18n="attendYes">Ja, wir sind dabei!</strong><small data-i18n="attendYesSub">Wir freuen uns.</small></span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="attending" value="no">
+                <span class="choice-dot"></span>
+                <span><strong data-i18n="attendNo">Leider schaffen wir es nicht.</strong><small data-i18n="attendNoSub">Wir denken an euch.</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="guest-area" id="guestArea">
+            <div class="guest-area-head">
+              <div>
+                <p class="eyebrow" data-i18n="guestsKicker">Eure Gruppe</p>
+                <h3 data-i18n="guestsTitle">Wer kommt mit?</h3>
+              </div>
+              <button class="button button-quiet" type="button" id="addGuest">
+                <span aria-hidden="true">＋</span><span data-i18n="addGuest">Person hinzufügen</span>
+              </button>
+            </div>
+            <div id="guestList" class="guest-list"></div>
+          </div>
+
+          <label class="form-message">
+            <span data-i18n="messageLabel">Noch etwas, das wir wissen sollten? <small data-i18n="optional">(optional)</small></span>
+            <textarea name="notes" rows="4" maxlength="1000" data-i18n-placeholder="messagePlaceholder" placeholder="Nachricht an uns"></textarea>
+          </label>
+
+          <p class="privacy-note" data-i18n="privacy">Eure Angaben werden ausschliesslich für die Organisation unserer Hochzeit verwendet und nicht öffentlich gespeichert.</p>
+
+          <div class="form-submit-row">
+            <button class="button button-primary button-submit" type="submit">
+              <span data-i18n="sendRsvp">Anmeldung senden</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+            <p class="form-status" id="rsvpStatus" role="status"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="photos-section section" id="photos">
+      <div class="section-shell photo-shell">
+        <div class="photo-intro reveal">
+          <p class="section-number">06</p>
+          <p class="eyebrow" data-i18n="photosKicker">Eure Perspektive</p>
+          <h2 data-i18n="photosTitle">Zeigt uns den Tag durch eure Augen.</h2>
+          <p data-i18n="photosText">Schnappschuss, Selfie oder Tanzflächen-Meisterwerk: Ladet eure Lieblingsmomente direkt hier hoch.</p>
+        </div>
+
+        <div class="upload-card reveal" id="uploadCard">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden>
+          <button class="upload-dropzone" type="button" id="uploadDropzone">
+            <span class="upload-icon" aria-hidden="true">↥</span>
+            <strong data-i18n="uploadTitle">Fotos auswählen oder hier ablegen</strong>
+            <small data-i18n="uploadHint">JPG, PNG, WEBP oder HEIC · max. 15 MB pro Foto</small>
+          </button>
+          <div class="upload-files" id="uploadFiles"></div>
+          <button class="button button-primary upload-submit" type="button" id="uploadSubmit" disabled>
+            <span data-i18n="uploadButton">Fotos hochladen</span>
+            <span class="button-arrow" aria-hidden="true">↑</span>
+          </button>
+          <p class="form-status" id="uploadStatus" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section section" id="faq">
+      <div class="section-shell faq-shell">
+        <div class="section-heading reveal">
+          <p class="section-number">07</p>
+          <p class="eyebrow">FAQ</p>
+          <h2 data-i18n="faqTitle">Gut zu wissen.</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <details>
+            <summary><span data-i18n="faqDressQ">Gibt es einen Dresscode?</span><i>＋</i></summary>
+            <p data-i18n="faqDressA">Die Details folgen mit der Einladung. Vor allem wünschen wir uns, dass ihr euch wohlfühlt und mit uns feiert.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqTravelQ">Wie komme ich zwischen Muri und Zug?</span><i>＋</i></summary>
+            <p data-i18n="faqTravelA">Die finalen Reise- und Transferinformationen ergänzen wir hier, sobald der Tagesablauf feststeht.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqFoodQ">Was ist mit Allergien oder Unverträglichkeiten?</span><i>＋</i></summary>
+            <p data-i18n="faqFoodA">Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqKidsQ">Was ist mit Kindern?</span><i>＋</i></summary>
+            <p data-i18n="faqKidsA">Falls Kinder Teil eurer Einladung sind, könnt ihr sie wie jede andere Person bei der Anmeldung hinzufügen.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
-  <script>
-    const copy = {
-      de: "Wir freuen uns, diesen Tag mit euch zu feiern. Die weiteren Informationen folgen bald.",
-      it: "Non vediamo l'ora di festeggiare questo giorno con voi. Presto troverete qui tutte le informazioni."
-    };
-    for (const button of document.querySelectorAll("[data-lang]")) {
-      button.addEventListener("click", () => {
-        const lang = button.dataset.lang;
-        document.documentElement.lang = lang;
-        document.getElementById("intro").textContent = copy[lang];
-        for (const other of document.querySelectorAll("[data-lang]")) {
-          other.setAttribute("aria-pressed", String(other === button));
-        }
-      });
-    }
-  </script>
+
+  <footer class="site-footer">
+    <div class="footer-monogram" aria-hidden="true">G<span>&amp;</span>L</div>
+    <p class="footer-date">10 · 07 · 2027</p>
+    <p data-i18n="footerLine">Wir können es kaum erwarten, mit euch zu feiern.</p>
+    <div class="footer-language" role="group" aria-label="Sprache / Lingua">
+      <button type="button" data-footer-lang="de">Deutsch</button>
+      <span>·</span>
+      <button type="button" data-footer-lang="it">Italiano</button>
+    </div>
+    <p class="photo-credits">
+      <span data-i18n="photoCredits">Location-Fotos:</span>
+      <a href="https://commons.wikimedia.org/wiki/File:KlosterkircheMuri.Innen.jpg" target="_blank" rel="noreferrer">Wici / Wikimedia Commons</a>
+      ·
+      <a href="https://commons.wikimedia.org/wiki/File:Theater_Casino_Zug,_2023.jpg" target="_blank" rel="noreferrer">Elena Ternovaja / Wikimedia Commons</a>
+    </p>
+  </footer>
+
+  <template id="guestTemplate">
+    <article class="guest-card">
+      <div class="guest-card-head">
+        <strong class="guest-heading"></strong>
+        <button class="guest-remove" type="button" aria-label="Person entfernen">×</button>
+      </div>
+      <div class="form-row form-row-two">
+        <label>
+          <span class="guest-label-first"></span>
+          <input type="text" data-field="firstName" maxlength="80" autocomplete="given-name" required>
+        </label>
+        <label>
+          <span class="guest-label-last"></span>
+          <input type="text" data-field="lastName" maxlength="80" autocomplete="family-name" required>
+        </label>
+      </div>
+      <label>
+        <span class="guest-label-diet"></span>
+        <input type="text" data-field="dietary" maxlength="300">
+      </label>
+    </article>
+  </template>
 </body>
 </html>
