@@ -835,4 +835,11 @@ input:focus,textarea:focus { border-color:#738c70; box-shadow:0 0 0 4px rgba(115
   .location-filmstrip figure:nth-child(2),.location-filmstrip figure:nth-child(3) { height:42vw; }
   .menu-art { font-size:27vw; margin-bottom:40px; }
 }
+@media (min-width:701px) and (max-width:900px) {
+  .site-header { padding:8px 8px 8px 24px; }
+  .menu-toggle { display:grid; }
+  .site-nav { display:flex; position:fixed; z-index:100; top:96px; left:20px; right:20px; padding:32px; flex-direction:column; align-items:flex-start; gap:20px; background:#f5f0e8; border:1px solid rgba(115,140,112,.3); border-radius:28px; box-shadow:0 24px 70px rgba(23,23,23,.22); backdrop-filter:none; transform:translateY(-18px); opacity:0; visibility:hidden; transition:opacity .3s,transform .3s,visibility .3s; }
+  .site-nav.is-open { transform:none; opacity:1; visibility:visible; }
+  .site-nav a,.site-nav.is-open a { font-family:var(--serif); font-size:1.8rem; width:100%; color:#171717; opacity:1; text-shadow:none; }
+}
 @media(prefers-reduced-motion:reduce) { .hero-picture img,.countdown-unit.is-counting strong { animation:none !important; } }
