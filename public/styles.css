@@ -1024,3 +1024,54 @@ body.menu-open::after { opacity:1;visibility:visible;pointer-events:auto; }
 .hero-countdown .countdown-separator { display:none; }
 .hero-countdown .countdown-unit span { font-size:.7rem;letter-spacing:.08em; }
 @media(max-width:700px){.hero-countdown .countdown-unit span{font-size:.66rem;letter-spacing:.04em}}
+
+/* Breathing room, slower journeys and a little more celebration. */
+html { scroll-behavior:auto; }
+.day-section { padding-bottom:32px; }
+.timeline-item:last-child { padding-bottom:8px; }
+.locations-section { padding-top:42px; }
+.location-slides figure { visibility:visible;opacity:0;z-index:0;transition:opacity 2.3s ease; }
+.location-slides figure.is-active { opacity:1;z-index:1; }
+.location-slides img { transform:scale(1.08);transition:transform 7.3s cubic-bezier(.15,.4,.3,1); }
+.location-slides figure.is-active img,.location-card:hover .location-slides figure.is-active img { transform:scale(1); }
+.location-slideshow.is-timing .slide-progress span { animation-duration:5s; }
+.slideshow-ui { left:auto;right:18px;bottom:19px; }
+.slide-pause { width:36px;height:36px;background:#17201930;border-color:#ffffff70;opacity:.7; }
+.slide-pause:hover,.slide-pause:focus-visible { opacity:1; }
+.slide-pause[aria-pressed=true] { opacity:1; }
+.rice-field i { width:3px;height:9px;background:#ffedcf;box-shadow:0 0 2px #69584355; }
+@keyframes riceFall { 0%{opacity:0;transform:translate(0,-2vh) rotate(0)} 12%,82%{opacity:.62} 100%{opacity:0;transform:translate(7vw,105vh) rotate(310deg)} }
+.reveal { transition:opacity 1.65s ease,transform 1.8s cubic-bezier(.16,.7,.2,1),filter 1.4s ease; }
+.reveal:not(.is-visible) { transform:translateY(38px);filter:blur(4px); }
+.hero-content.reveal { transform:none;filter:none; }
+.section-heading.reveal > *, .editorial-copy > * { transition:opacity 1.7s ease,transform 1.7s cubic-bezier(.16,.7,.2,1); }
+.section-heading.reveal:not(.is-visible) > *, .editorial:not(.is-visible) .editorial-copy > * { opacity:0;transform:translateY(22px); }
+.section-heading.reveal.is-visible > :nth-child(2),.editorial.is-visible .editorial-copy > :nth-child(2){transition-delay:.14s}
+.section-heading.reveal.is-visible > :nth-child(3),.editorial.is-visible .editorial-copy > :nth-child(3){transition-delay:.28s}
+.section-heading.reveal.is-visible > :nth-child(4),.editorial.is-visible .editorial-copy > :nth-child(4){transition-delay:.42s}
+.location-content > .reveal { transition-duration:1.6s; }
+.section-number { animation:sectionBreath 5.5s ease-in-out infinite; }
+@keyframes sectionBreath { 0%,100%{opacity:.55} 50%{opacity:1} }
+.timeline-item.is-current .timeline-index { animation:timelineGlow 3.8s ease-in-out infinite; }
+@keyframes timelineGlow { 0%,100%{box-shadow:0 0 0 0 #738c7020} 50%{box-shadow:0 0 0 10px #738c7000} }
+.faq-list details[open] p { animation:answerIn .75s ease both; }
+@keyframes answerIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+.site-footer { padding-bottom:50px; }
+.footer-monogram { animation:softPulse 6s ease-in-out infinite; }
+.sound-toggle.is-loading .sound-bars { animation:sectionBreath 1s ease infinite; }
+.location-credits { margin:15px 0 0;font-size:.68rem;color:#536b53;line-height:1.6; }
+.location-credits summary { cursor:pointer;display:inline-block;border-bottom:1px solid #738c7050; }
+.location-credits p { margin:8px 0;max-width:65ch;font-size:.68rem!important; }
+.location-credits a { color:inherit; }
+@media(max-width:700px){
+ .day-section{padding-bottom:24px}.locations-section{padding-top:32px}
+ .rice-field i{width:2.5px;height:8px}.slide-pause{width:36px;height:36px}
+ .site-footer{padding-bottom:36px}
+}
+@media(prefers-reduced-motion:reduce){
+ .reveal,.section-heading.reveal > *,.editorial-copy > *,.location-slides figure,.location-slides img{transition:none!important;transform:none!important;filter:none!important}
+ .section-heading.reveal > *,.editorial-copy > *{opacity:1!important}
+ .section-number,.timeline-index,.faq-list details[open] p,.footer-monogram{animation:none!important}
+}
+main section[tabindex="-1"]:focus { outline:none; }
+.skip-link:not(:focus) { visibility:hidden; }

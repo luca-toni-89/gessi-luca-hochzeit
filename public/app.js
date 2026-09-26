@@ -85,6 +85,8 @@ Object.assign(translations.it, {heroCta:"Conferma presenza più in basso",musicP
 
 Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
 Object.assign(translations.it,{navMenu:'Il menù',navFaq:'Da sapere',pauseSlides:'Pausa cambio automatico delle immagini'});
+Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Gebt uns bei der Anmeldung bitte kurz Bescheid, wenn ihr einen Platz braucht oder jemanden mitnehmen könnt. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
+Object.assign(translations.it,{"faqDressA": "No: venite come vi sentite a vostro agio. Un tocco di eleganza sarà perfetto per il nostro giorno, ma la cosa più importante è sentirvi voi stessi e festeggiare insieme a noi.", "faqTravelQ": "Come raggiungo le location?", "faqTravelA": "Vi consigliamo di raggiungere la chiesa abbaziale di Muri e poi il Theater Casino Zug con la vostra auto. Per chi arriva in aereo organizzeremo dei passaggi. Segnalateci nella conferma se avete bisogno di un posto o se potete accompagnare qualcuno. Gli indirizzi e i link per le indicazioni stradali si trovano accanto alle due location.", "musicLoading": "Caricamento della musica", "galleryCredits": "Crediti fotografici", "muriDomeAlt": "Affreschi della cupola della chiesa abbaziale di Muri", "muriAltarAlt": "Coro e altare maggiore della chiesa abbaziale di Muri", "muriCloisterAlt": "Chiesa abbaziale di Muri con chiostro", "zugLakeAlt": "Theater Casino Zug e Lago di Zugo", "zugEastAlt": "Facciata del Theater Casino Zug verso la collina", "zugTerraceAlt": "Lato del Theater Casino Zug verso il lago"});
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
@@ -118,6 +120,7 @@ function applyLanguage(lang, closeGate) {
   document.querySelectorAll('[data-status-key]').forEach(n => n.textContent = t(n.dataset.statusKey));
   document.querySelectorAll('input,textarea').forEach(n => n.setCustomValidity(''));
   syncGuestLabels();
+  document.dispatchEvent(new Event('wedding:languagechange'));
 
   if (!document.getElementById("languageGate")) document.body.classList.remove("lang-pending");
   document.body.classList.add("is-ready");
@@ -140,7 +143,29 @@ function applyLanguage(lang, closeGate) {
 
 }
 
+let navigationFrame=0, navigationDelay=0;
+function stopNavigation(){cancelAnimationFrame(navigationFrame);clearTimeout(navigationDelay);}
+function travelTo(target){
+  stopNavigation();
+  const destination=Math.max(0,Math.min(document.documentElement.scrollHeight-innerHeight,target.getBoundingClientRect().top+scrollY-110));
+  const from=scrollY, distance=destination-from;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){window.scrollTo({top:destination,behavior:'instant'});return;}
+  const duration=Math.min(2800,Math.max(1600,Math.abs(distance)*.24));
+  const start=performance.now();
+  function frame(now){
+    const progress=Math.min(1,(now-start)/duration);
+    const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
+    window.scrollTo({top:from+distance*eased,behavior:'instant'});
+    if(progress<1) navigationFrame=requestAnimationFrame(frame);
+    else { target.setAttribute('tabindex','-1');target.focus({preventScroll:true}); }
+  }
+  navigationFrame=requestAnimationFrame(frame);
+}
+['wheel','touchstart','pointerdown'].forEach(type=>addEventListener(type,stopNavigation,{passive:true}));
+addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End','Escape',' '].includes(event.key))stopNavigation()});
+
 function resetToTop() {
+  stopNavigation();
   history.scrollRestoration = 'manual';
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   window.scrollTo({top:0, left:0, behavior:'instant'});
@@ -257,6 +282,7 @@ function animateCountdownIntro() {
 }
 
 function initReveal() {
+  document.querySelectorAll(".location-content > *, .faq-list details, .photo-intro > p").forEach(n=>n.classList.add("reveal"));
   var items = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
     items.forEach(function (item) { item.classList.add("is-visible"); });
@@ -266,7 +292,8 @@ function initReveal() {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove("is-visible");
       }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
@@ -420,23 +447,21 @@ function initSlideshow() {
   let index=0,timer,visible=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pause=root.querySelector('.slide-pause');
   function schedule(){
-    clearTimeout(timer); root.classList.remove('is-timing');
-    if(!visible||paused||document.hidden||root.matches(':hover')||root.contains(document.activeElement)) return;
-    void root.offsetWidth; root.classList.add('is-timing');
-    timer=setTimeout(()=>show(index+1),4000);
+    clearTimeout(timer);root.classList.remove('is-timing');
+    if(!visible||paused||document.hidden)return;
+    void root.offsetWidth;root.classList.add('is-timing');
+    timer=setTimeout(()=>show(index+1),5000);
   }
   function show(next){
     index=(next+slides.length)%slides.length;
-    slides.forEach((s,i)=>{s.classList.toggle('is-active',i===index);s.setAttribute('aria-hidden',String(i!==index))});
-    root.querySelector('.slide-current').textContent=String(index+1).padStart(2,'0'); schedule();
+    slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
+    schedule();
   }
-  root.querySelector('.slide-prev').onclick=()=>show(index-1);
-  root.querySelector('.slide-next').onclick=()=>show(index+1);
   pause.setAttribute('aria-pressed',String(paused));
   pause.onclick=()=>{paused=!paused;pause.setAttribute('aria-pressed',String(paused));schedule()};
-  ['mouseenter','mouseleave','focusin','focusout'].forEach(e=>root.addEventListener(e,()=>setTimeout(schedule,0)));
+  root.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1))}});
   document.addEventListener('visibilitychange',schedule);
-  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule()},{threshold:.15}).observe(root);
+  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)slides.forEach(s=>s.querySelector('img').loading='eager');schedule()},{threshold:.1}).observe(root);
   let x=0;root.addEventListener('touchstart',e=>{x=e.changedTouches[0].clientX},{passive:true});
   root.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-x;if(Math.abs(dx)>45)show(index+(dx<0?1:-1))},{passive:true});
   show(0);
@@ -444,16 +469,61 @@ function initSlideshow() {
 }
 
 function initAudio() {
-  var audio=document.getElementById('weddingAudio');
-  var toggle=document.getElementById('soundToggle');
-  if(!audio||!toggle) return;
-  audio.volume=.68;
-  function sync(){var playing=!audio.paused;toggle.classList.toggle('is-playing',playing);toggle.setAttribute('aria-label',t(playing?'musicPause':'musicPlay'))}
-  function play(){audio.play().then(sync).catch(function(){toggle.classList.remove('is-playing');sync()})}
-  toggle.addEventListener('click',function(){if(audio.paused) play();else {audio.pause();sync()}});
-  document.querySelectorAll('[data-choose-lang]').forEach(function(button){button.addEventListener('click',play,{once:true})});
+  const audio=document.getElementById('weddingAudio'),toggle=document.getElementById('soundToggle');
+  if(!audio||!toggle)return;
+  const Context=window.AudioContext||window.webkitAudioContext;
+  let context,gain,source,buffer,loading,offset=0,startedAt=0,wanted=false,fallback=!Context;
+  let raw=fetch(audio.getAttribute('src'),{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error('Audio unavailable');return r.arrayBuffer()});
+  raw.catch(()=>{});
+  function sync(){
+    const playing=fallback?!audio.paused:!!source&&context?.state==='running';
+    toggle.classList.toggle('is-playing',playing);
+    toggle.classList.toggle('is-loading',wanted&&!playing);
+    toggle.setAttribute('aria-pressed',String(wanted));
+    toggle.setAttribute('aria-label',t(playing?'musicPause':wanted?'musicLoading':'musicPlay'));
+    toggle.dataset.playback=playing?'playing':wanted?'loading':'paused';
+  }
+  function startBuffer(){
+    if(!wanted||!buffer||source||context.state!=='running')return;
+    source=context.createBufferSource();source.buffer=buffer;source.loop=true;source.connect(gain);
+    gain.gain.cancelScheduledValues(context.currentTime);gain.gain.setValueAtTime(0,context.currentTime);
+    gain.gain.linearRampToValueAtTime(.68,context.currentTime+1.2);
+    startedAt=context.currentTime;source.start(0,offset%buffer.duration);sync();
+  }
+  function fallbackPlay(){audio.volume=.68;audio.play().then(sync).catch(()=>{wanted=false;sync()})}
+  function play(){
+    wanted=true;
+    if(fallback){fallbackPlay();return;}
+    if(!context){
+      context=new Context();gain=context.createGain();gain.connect(context.destination);
+      context.addEventListener('statechange',()=>{startBuffer();sync()});
+    }
+    // Resume inside the user's gesture; decoding may safely finish later.
+    context.resume().then(startBuffer).catch(()=>{wanted=false;sync()});
+    if(!loading&&!buffer){
+      loading=raw.then(bytes=>context.decodeAudioData(bytes)).then(decoded=>{buffer=decoded;startBuffer();sync()}).catch(()=>{
+        fallback=true;toggle.classList.remove('is-loading');if(wanted)fallbackPlay();
+      });
+    }
+    startBuffer();sync();
+  }
+  function pause(){
+    wanted=false;
+    if(source){offset=(offset+context.currentTime-startedAt)%buffer.duration;source.stop();source.disconnect();source=null;}
+    audio.pause();sync();
+  }
+  function recover(){
+    if(!wanted)return;
+    if(fallback){if(audio.paused)fallbackPlay();return;}
+    if(context&&context.state!=='running')context.resume().then(startBuffer).catch(sync);
+  }
+  toggle.addEventListener('click',()=>wanted?pause():play());
+  document.querySelectorAll('[data-choose-lang]').forEach(button=>button.addEventListener('click',play,{once:true}));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)recover()});
+  document.addEventListener('pointerdown',recover,{passive:true});
+  document.addEventListener('wedding:languagechange',sync);
   audio.addEventListener('play',sync);audio.addEventListener('pause',sync);
-  play();
+  sync();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -490,7 +560,13 @@ document.addEventListener("DOMContentLoaded", function () {
     else menuToggle.focus({preventScroll:true});
   }
   menuToggle.addEventListener('click',()=>setMenu(menuToggle.getAttribute('aria-expanded')!=='true'));
-  siteNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
+  siteNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',event=>{
+    const target=document.querySelector(link.getAttribute('href'));
+    if(!target)return;
+    event.preventDefault();setMenu(false);
+    history.replaceState(null,'',link.getAttribute('href'));
+    navigationDelay=setTimeout(()=>travelTo(target),180);
+  }));
   document.addEventListener('keydown',e=>{
     if(menuToggle.getAttribute('aria-expanded')!=='true')return;
     if(e.key==='Escape')setMenu(false);

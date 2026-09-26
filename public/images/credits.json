@@ -1,0 +1,32 @@
+[
+  {
+    "file": "muri-dome.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Klosterkirche.Muri.Kuppel.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  },
+  {
+    "file": "muri-altar.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:KlosterkircheMuri.Choraltar.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  },
+  {
+    "file": "muri-cloister.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:KlosterkircheMuri.Kreuzgang.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  },
+  {
+    "file": "zug-lake.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Casino_in_Zug_mit_See%2C_June_2023.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  },
+  {
+    "file": "zug-east.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Bergseite_des_Theater_Casino_Zug.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  },
+  {
+    "file": "zug-terrace.webp",
+    "source": "https://commons.wikimedia.org/wiki/File:Theater_Casino_Zug.jpg",
+    "changes": "Resized and WebP conversion; responsive display crop"
+  }
+]
