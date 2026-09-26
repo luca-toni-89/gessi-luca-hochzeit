@@ -26,7 +26,7 @@ const translations = {
     sendRsvp: "Anmeldung senden", rsvpSending: "Wird gesendet …", rsvpSuccess: "Danke! Eure Antwort ist bei uns angekommen. ♡",
     rsvpUnavailable: "Die Anmeldung wird gerade freigeschaltet. Bitte versucht es später noch einmal.", rsvpError: "Das hat leider nicht geklappt. Bitte versucht es noch einmal.",
     photosKicker: "Eure Perspektive", photosTitle: "Zeigt uns den Tag durch eure Augen.",
-    photosText: "Schnappschuss, Selfie oder Tanzflächen-Meisterwerk: Ladet eure Lieblingsmomente direkt hier hoch.",
+    photosText: "Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!",
     uploadTitle: "Fotos auswählen oder hier ablegen", uploadHint: "JPG, PNG, WEBP oder HEIC · max. 15 MB pro Foto", uploadButton: "Fotos hochladen",
     uploadNone: "Bitte wählt zuerst mindestens ein Foto aus.", uploadUploading: "Fotos werden hochgeladen …", uploadSuccess: "Geschafft! Danke für eure Erinnerungen. ♡",
     uploadUnavailable: "Der Foto-Upload wird gerade freigeschaltet. Bitte versucht es später noch einmal.", uploadError: "Mindestens ein Foto konnte nicht hochgeladen werden.",
@@ -63,7 +63,7 @@ const translations = {
     sendRsvp: "Invia conferma", rsvpSending: "Invio in corso …", rsvpSuccess: "Grazie! La vostra risposta è arrivata. ♡",
     rsvpUnavailable: "La conferma online è in fase di attivazione. Riprovate più tardi.", rsvpError: "Qualcosa non ha funzionato. Riprovate.",
     photosKicker: "Il vostro punto di vista", photosTitle: "Mostrateci il giorno attraverso i vostri occhi.",
-    photosText: "Scatto spontaneo, selfie o capolavoro dalla pista da ballo: caricate qui i vostri momenti preferiti.",
+    photosText: "Dal giorno del nostro matrimonio potrete caricare qui i vostri momenti preferiti, dagli scatti spontanei ai capolavori sulla pista da ballo. Non vediamo l’ora di scoprire i vostri ricordi!",
     uploadTitle: "Scegliete le foto o trascinatele qui", uploadHint: "JPG, PNG, WEBP o HEIC · max. 15 MB per foto", uploadButton: "Carica foto",
     uploadNone: "Scegliete prima almeno una foto.", uploadUploading: "Caricamento foto …", uploadSuccess: "Fatto! Grazie per i vostri ricordi. ♡",
     uploadUnavailable: "Il caricamento foto è in fase di attivazione. Riprovate più tardi.", uploadError: "Almeno una foto non è stata caricata.",
@@ -96,6 +96,10 @@ function t(key) {
   return translations[currentLang][key] || translations.de[key] || key;
 }
 
+function motionMilliseconds(name) {
+  const value=getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return parseFloat(value)*(value.endsWith('ms')?1:1000);
+}
 function applyLanguage(lang, closeGate) {
   currentLang = lang === "it" ? "it" : "de";
   document.documentElement.lang = currentLang;
@@ -138,7 +142,7 @@ function applyLanguage(lang, closeGate) {
       resetToTop();
       replayHero();
       document.querySelector('.hero-title').focus({preventScroll:true});
-    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1500);
+    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : motionMilliseconds('--gate-fade'));
   }
 
 }
@@ -150,11 +154,11 @@ function travelTo(target){
   const destination=Math.max(0,Math.min(document.documentElement.scrollHeight-innerHeight,target.getBoundingClientRect().top+scrollY-110));
   const from=scrollY, distance=destination-from;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){window.scrollTo({top:destination,behavior:'instant'});return;}
-  const duration=Math.min(2800,Math.max(1600,Math.abs(distance)*.24));
+  const duration=Math.min(4200,Math.max(2400,Math.abs(distance)*.45));
   const start=performance.now();
   function frame(now){
     const progress=Math.min(1,(now-start)/duration);
-    const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
+    const eased=(1-Math.cos(Math.PI*progress))/2;
     window.scrollTo({top:from+distance*eased,behavior:'instant'});
     if(progress<1) navigationFrame=requestAnimationFrame(frame);
     else { target.setAttribute('tabindex','-1');target.focus({preventScroll:true}); }
@@ -178,15 +182,15 @@ function writeIn(node, delay=0) {
     const span=document.createElement('span');
     span.className='written-letter'; span.textContent=char===' '? '\u00a0':char;
     span.setAttribute('aria-hidden','true');
-    span.style.setProperty('--letter-delay', `${delay+i*65}ms`);
+    span.style.setProperty('--letter-delay', `${delay+i*90}ms`);
     node.append(span);
   });
 }
 function replayHero() {
   const hero=document.querySelector('.hero-content');
   hero.classList.remove('intro-playing');
-  document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,250+i*600));
-  writeIn(document.querySelector('.hero-subtitle'),1300);
+  document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,350+i*850));
+  writeIn(document.querySelector('.hero-subtitle'),1600);
   void hero.offsetWidth; hero.classList.add('intro-playing');
   animateCountdownIntro();
 }
@@ -204,7 +208,7 @@ function changeLanguage(lang) {
     applyLanguage(lang,false); resetToTop();
     document.body.classList.remove('language-changing'); replayHero();
     languageChanging=false;
-  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:650);
+  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:motionMilliseconds('--language-fade'));
 }
 
 function syncGuestLabels() {
@@ -278,26 +282,40 @@ function animateCountdownIntro() {
       else{countdown();countdownTimer=setInterval(countdown,1000);}
     }
     countdownFrame=requestAnimationFrame(frame);
-  },1900);
+  },2400);
 }
 
 function initReveal() {
-  document.querySelectorAll(".location-content > *, .faq-list details, .photo-intro > p").forEach(n=>n.classList.add("reveal"));
-  var items = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) {
-    items.forEach(function (item) { item.classList.add("is-visible"); });
-    return;
-  }
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      } else {
-        entry.target.classList.remove("is-visible");
-      }
+  // Each piece has one motion owner: never fade both a card and its text.
+  document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
+  const selector='.section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .footer-monogram, .site-footer > p';
+  const items=[...document.querySelectorAll(selector)];
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  items.forEach(node=>{
+    node.classList.add('reveal');
+    const siblings=[...node.parentElement.children];
+    node.style.setProperty('--reveal-delay',Math.min(siblings.indexOf(node),3)*90+'ms');
+  });
+  if(!('IntersectionObserver' in window)||reduced.matches){items.forEach(n=>n.classList.add('is-visible'));return;}
+  const entrance=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('is-visible');entrance.unobserve(entry.target);}
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-  items.forEach(function (item) { observer.observe(item); });
+  },{threshold:0,rootMargin:'0px 0px -35px 0px'});
+  items.forEach(n=>entrance.observe(n));
+  // Re-arm only when an entire section is far outside the viewport.
+  const reset=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting)return;
+      entry.target.querySelectorAll('.reveal.is-visible').forEach(node=>{
+        node.classList.remove('is-visible');entrance.observe(node);
+      });
+    });
+  },{rootMargin:'600px 0px',threshold:0});
+  document.querySelectorAll('main > section, .site-footer').forEach(n=>reset.observe(n));
+  reduced.addEventListener('change',()=>{
+    if(reduced.matches){entrance.disconnect();reset.disconnect();items.forEach(n=>n.classList.add('is-visible'));}
+  });
 }
 
 async function submitRsvp(event) {
@@ -423,22 +441,29 @@ async function uploadPhotos() {
   setStatus(status,unavailable?'uploadUnavailable':failed.length?'uploadError':'uploadSuccess');
 }
 function initMotion() {
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const timeline=document.querySelector('.timeline'); const art=document.querySelector('.hero-art');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const timeline=document.querySelector('.timeline');
+  const steps=[...timeline.querySelectorAll('.timeline-item')];
+  const progressBar=document.getElementById('pageProgress');
   let scheduled=false;
-  function draw() {
+  function draw(){
     scheduled=false;
+    // Read geometry together, before any style writes.
     const rect=timeline.getBoundingClientRect();
+    const tops=steps.map(n=>n.getBoundingClientRect().top);
+    const max=document.documentElement.scrollHeight-innerHeight;
     const progress=Math.max(0,Math.min(1,(innerHeight*.7-rect.top)/rect.height));
     timeline.style.setProperty('--progress',reduced.matches?1:progress);
-    timeline.querySelectorAll('.timeline-item').forEach(n=>n.classList.toggle('is-current',n.getBoundingClientRect().top<innerHeight*.7));
-    if (art) art.style.transform=reduced.matches?'none':'translateY('+Math.min(scrollY*.09,60)+'px)';
-    var max=document.documentElement.scrollHeight-innerHeight;
-    var pageProgress=document.getElementById('pageProgress');
-    if(pageProgress) pageProgress.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';
+    steps.forEach((n,i)=>n.classList.toggle('is-current',tops[i]<innerHeight*.7));
+    progressBar.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';
   }
-  addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(draw)}},{passive:true});
-  reduced.addEventListener('change',draw); draw();
+  function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(draw)}}
+  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
+  reduced.addEventListener('change',schedule);draw();
+  const hero=document.querySelector('.hero');
+  new IntersectionObserver(entries=>document.body.classList.toggle('hero-offscreen',!entries[0].isIntersecting)).observe(hero);
+  function visibility(){document.body.classList.toggle('motion-sleeping',document.hidden)}
+  document.addEventListener('visibilitychange',visibility);visibility();
 }
 
 function initSlideshow() {
@@ -446,22 +471,26 @@ function initSlideshow() {
   const slides=[...root.querySelectorAll('figure')];
   let index=0,timer,visible=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pause=root.querySelector('.slide-pause');
+  let progressAnimation;
   function schedule(){
     clearTimeout(timer);root.classList.remove('is-timing');
+    progressAnimation?.cancel();
     if(!visible||paused||document.hidden)return;
-    void root.offsetWidth;root.classList.add('is-timing');
+    progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:5000,fill:'forwards',easing:'linear'});
     timer=setTimeout(()=>show(index+1),5000);
   }
   function show(next){
     index=(next+slides.length)%slides.length;
     slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
+    const nextImage=slides[(index+1)%slides.length].querySelector('img');
+    nextImage.loading='eager';nextImage.decode().catch(()=>{});
     schedule();
   }
   pause.setAttribute('aria-pressed',String(paused));
   pause.onclick=()=>{paused=!paused;pause.setAttribute('aria-pressed',String(paused));schedule()};
   root.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1))}});
   document.addEventListener('visibilitychange',schedule);
-  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)slides.forEach(s=>s.querySelector('img').loading='eager');schedule()},{threshold:.1}).observe(root);
+  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible){const next=slides[(index+1)%slides.length].querySelector('img');next.loading='eager';next.decode().catch(()=>{});}schedule()},{threshold:.1}).observe(root);
   let x=0;root.addEventListener('touchstart',e=>{x=e.changedTouches[0].clientX},{passive:true});
   root.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-x;if(Math.abs(dx)>45)show(index+(dx<0?1:-1))},{passive:true});
   show(0);
@@ -565,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(!target)return;
     event.preventDefault();setMenu(false);
     history.replaceState(null,'',link.getAttribute('href'));
-    navigationDelay=setTimeout(()=>travelTo(target),180);
+    navigationDelay=setTimeout(()=>travelTo(target),matchMedia('(prefers-reduced-motion: reduce)').matches?0:900);
   }));
   document.addEventListener('keydown',e=>{
     if(menuToggle.getAttribute('aria-expanded')!=='true')return;

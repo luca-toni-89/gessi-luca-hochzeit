@@ -1045,7 +1045,7 @@ html { scroll-behavior:auto; }
 .reveal:not(.is-visible) { transform:translateY(38px);filter:blur(4px); }
 .hero-content.reveal { transform:none;filter:none; }
 .section-heading.reveal > *, .editorial-copy > * { transition:opacity 1.7s ease,transform 1.7s cubic-bezier(.16,.7,.2,1); }
-.section-heading.reveal:not(.is-visible) > *, .editorial:not(.is-visible) .editorial-copy > * { opacity:0;transform:translateY(22px); }
+.section-heading.reveal:not(.is-visible) > *, .editorial.reveal:not(.is-visible) .editorial-copy > * { opacity:0;transform:translateY(22px); }
 .section-heading.reveal.is-visible > :nth-child(2),.editorial.is-visible .editorial-copy > :nth-child(2){transition-delay:.14s}
 .section-heading.reveal.is-visible > :nth-child(3),.editorial.is-visible .editorial-copy > :nth-child(3){transition-delay:.28s}
 .section-heading.reveal.is-visible > :nth-child(4),.editorial.is-visible .editorial-copy > :nth-child(4){transition-delay:.42s}
