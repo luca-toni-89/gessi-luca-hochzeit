@@ -80,6 +80,8 @@ Object.assign(translations.it, {"skip": "Vai al contenuto", "portraitAlt": "Segn
 
 Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca am See",galleryLabel:"Impressionen unserer Orte",muriFacadeAlt:"Fassade der Klosterkirche Muri",muriFacadeCaption:"Muri · Fassade",zugWestAlt:"Westseite des Theater Casino Zug",zugLakeCaption:"Zug · Am See",menuOpen:"Menü öffnen",menuClose:"Menü schliessen"});
 Object.assign(translations.it, {portraitAlt:"Illustrazione di Gessica e Luca sul lago",galleryLabel:"Impressioni dei nostri luoghi",muriFacadeAlt:"Facciata della chiesa abbaziale di Muri",muriFacadeCaption:"Muri · Facciata",zugWestAlt:"Lato occidentale del Theater Casino Zug",zugLakeCaption:"Zugo · Sul lago",menuOpen:"Apri il menu",menuClose:"Chiudi il menu"});
+Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren"});
+Object.assign(translations.it, {heroCta:"Conferma presenza più in basso",musicPlay:"Riproduci musica",musicPause:"Metti in pausa la musica"});
 
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
@@ -115,7 +117,7 @@ function applyLanguage(lang, closeGate) {
   document.querySelectorAll('input,textarea').forEach(n => n.setCustomValidity(''));
   syncGuestLabels();
 
-  document.body.classList.remove("lang-pending");
+  if (closeGate || !document.getElementById("languageGate")) document.body.classList.remove("lang-pending");
   document.body.classList.add("is-ready");
 
   if (closeGate) {
@@ -180,14 +182,20 @@ function countdown() {
 }
 
 function animateCountdownIntro() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var countdownNode = document.querySelector(".countdown");
+  var started = false;
+  function begin() {
+    if (started) return;
+    started = true;
+    countdown();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { window.setInterval(countdown,1000); return; }
   var ids = ["countDays", "countHours", "countMinutes", "countSeconds"];
   var targets = ids.map(function (id) { return Number(document.getElementById(id).textContent); });
   var start = performance.now();
   document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.add("is-counting"); });
   function frame(now) {
-    var progress = Math.min(1, (now - start) / 1600);
-    var eased = 1 - Math.pow(1 - progress, 3);
+    var progress = Math.min(1, (now - start) / 3000);
+    var eased = 1 - Math.pow(1 - progress, 4);
     ids.forEach(function (id, index) {
       var digits = index === 0 ? 3 : 2;
       document.getElementById(id).textContent = String(Math.floor(targets[index] * eased)).padStart(digits, "0");
@@ -196,9 +204,16 @@ function animateCountdownIntro() {
     else window.setTimeout(function () {
       document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.remove("is-counting"); });
       countdown();
+      window.setInterval(countdown, 1000);
     }, 120);
   }
   requestAnimationFrame(frame);
+  }
+  if (!("IntersectionObserver" in window)) return begin();
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { begin(); observer.disconnect(); }
+  }, { threshold:.35 });
+  observer.observe(countdownNode);
 }
 
 function initReveal() {
@@ -350,10 +365,46 @@ function initMotion() {
     const progress=Math.max(0,Math.min(1,(innerHeight*.7-rect.top)/rect.height));
     timeline.style.setProperty('--progress',reduced.matches?1:progress);
     timeline.querySelectorAll('.timeline-item').forEach(n=>n.classList.toggle('is-current',n.getBoundingClientRect().top<innerHeight*.7));
-    art.style.transform=reduced.matches?'none':'translateY('+Math.min(scrollY*.09,60)+'px)';
+    if (art) art.style.transform=reduced.matches?'none':'translateY('+Math.min(scrollY*.09,60)+'px)';
+    var max=document.documentElement.scrollHeight-innerHeight;
+    var pageProgress=document.getElementById('pageProgress');
+    if(pageProgress) pageProgress.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';
   }
   addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(draw)}},{passive:true});
   reduced.addEventListener('change',draw); draw();
+}
+
+function initSlideshow() {
+  var root=document.getElementById('locationSlideshow');
+  if(!root) return;
+  var slides=Array.from(root.querySelectorAll('figure'));
+  var currentNode=document.getElementById('slideCurrent');
+  var index=0, timer;
+  function show(next) {
+    index=(next+slides.length)%slides.length;
+    slides.forEach(function(slide,i){slide.classList.toggle('is-active',i===index)});
+    currentNode.textContent=String(index+1).padStart(2,'0');
+    root.classList.remove('is-timing'); void root.offsetWidth; root.classList.add('is-timing');
+    clearTimeout(timer); timer=setTimeout(function(){show(index+1)},4000);
+  }
+  root.querySelector('.slide-prev').addEventListener('click',function(){show(index-1)});
+  root.querySelector('.slide-next').addEventListener('click',function(){show(index+1)});
+  root.addEventListener('mouseenter',function(){clearTimeout(timer);root.classList.remove('is-timing')});
+  root.addEventListener('mouseleave',function(){show(index)});
+  show(0);
+}
+
+function initAudio() {
+  var audio=document.getElementById('weddingAudio');
+  var toggle=document.getElementById('soundToggle');
+  if(!audio||!toggle) return;
+  audio.volume=.68;
+  function sync(){var playing=!audio.paused;toggle.classList.toggle('is-playing',playing);toggle.setAttribute('aria-label',t(playing?'musicPause':'musicPlay'))}
+  function play(){audio.play().then(sync).catch(function(){toggle.classList.remove('is-playing');sync()})}
+  toggle.addEventListener('click',function(){if(audio.paused) play();else {audio.pause();sync()}});
+  document.querySelectorAll('[data-choose-lang]').forEach(function(button){button.addEventListener('click',play,{once:true})});
+  audio.addEventListener('play',sync);audio.addEventListener('pause',sync);
+  play();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -421,9 +472,9 @@ document.addEventListener("DOMContentLoaded", function () {
   dropzone.addEventListener("drop", function (event) { setSelectedPhotos(event.dataTransfer.files); });
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
 
-  countdown();
   animateCountdownIntro();
-  window.setTimeout(function () { window.setInterval(countdown, 1000); }, 1800);
   initReveal();
   initMotion();
+  initSlideshow();
+  initAudio();
 });

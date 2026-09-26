@@ -8,10 +8,26 @@
   <meta name="description" content="Gessica & Luca · 10.07.2027 · Muri & Zug">
   <title>Gessica & Luca · 10.07.2027</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=20260926-5">
-  <script src="/app.js?v=20260926-5" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260926-6">
+  <script src="/app.js?v=20260926-6" defer></script>
 </head>
-<body>
+<body class="lang-pending">
+  <section class="language-gate" id="languageGate" aria-label="Sprache wählen / Scegli la lingua">
+    <div class="gate-backdrop" aria-hidden="true"></div>
+    <div class="gate-card">
+      <div class="gate-monogram"><span>G</span><i>&amp;</i><span>L</span></div>
+      <p class="gate-script">Il nostro giorno</p>
+      <h1>Gessica <i>&amp;</i> Luca</h1>
+      <p class="gate-copy">Wählt eure Sprache · Scegliete la vostra lingua</p>
+      <div class="gate-languages">
+        <button class="language-choice" type="button" data-choose-lang="de"><span>Deutsch</span><span class="language-code">DE</span></button>
+        <button class="language-choice" type="button" data-choose-lang="it"><span>Italiano</span><span class="language-code">IT</span></button>
+      </div>
+      <p class="gate-note">Mit Musik erleben · Con musica</p>
+    </div>
+  </section>
+  <div class="page-progress" aria-hidden="true"><span id="pageProgress"></span></div>
+  <audio id="weddingAudio" src="/audio-wedding-ceremony.mp3" preload="auto" autoplay loop></audio>
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt</a>
   <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="Gessica & Luca">
@@ -25,6 +41,7 @@
       <a href="#photos" data-i18n="navPhotos">Fotos</a>
     </nav>
     <div class="header-actions">
+      <button class="sound-toggle is-playing" type="button" id="soundToggle" aria-label="Musik pausieren"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
       <button class="lang-switch" type="button" id="langSwitch" aria-label="Sprache wechseln">IT</button>
       <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Menü öffnen"><span></span><span></span></button>
     </div>
@@ -48,10 +65,7 @@
           <strong>10 · 07 · 2027</strong>
           <span>Muri · Zug</span>
         </div>
-        <a class="button button-primary" href="#rsvp">
-          <span data-i18n="heroCta">Zu- oder absagen</span>
-          <span class="button-arrow" aria-hidden="true">↘</span>
-        </a>
+        <p class="hero-rsvp-note"><span data-i18n="heroCta">Anmeldung weiter unten</span><span aria-hidden="true">↓</span></p>
       </div>
 
       <div class="hero-scroll" aria-hidden="true">
@@ -168,11 +182,19 @@
             </div>
           </article>
         </div>
-        <div class="location-filmstrip" data-i18n-aria="galleryLabel" aria-label="Impressionen unserer Orte">
-          <figure><img src="/images/muri-facade-900.webp" width="700" height="930" data-i18n-alt="muriFacadeAlt" alt="Fassade der Klosterkirche Muri" loading="lazy"><figcaption data-i18n="muriFacadeCaption">Muri · Fassade</figcaption></figure>
-          <figure><img src="/images/muri-1600.webp" width="1600" height="1200" data-i18n-alt="muriAlt" alt="Innenraum der Klosterkirche Muri" loading="lazy"><figcaption>Muri · Oktogon</figcaption></figure>
-          <figure><img src="/images/zug-west-1200.webp" width="1200" height="900" data-i18n-alt="zugWestAlt" alt="Westseite des Theater Casino Zug" loading="lazy"><figcaption data-i18n="zugLakeCaption">Zug · Am See</figcaption></figure>
-          <figure><img src="/images/zug-1600.webp" width="1600" height="1200" data-i18n-alt="zugAlt" alt="Theater Casino Zug" loading="lazy"><figcaption>Zug · Casino</figcaption></figure>
+        <div class="location-slideshow reveal" id="locationSlideshow" data-i18n-aria="galleryLabel" aria-label="Impressionen unserer Orte">
+          <div class="location-slides">
+            <figure class="is-active"><img src="/images/muri-facade-900.webp" width="700" height="930" data-i18n-alt="muriFacadeAlt" alt="Fassade der Klosterkirche Muri" loading="lazy"><figcaption data-i18n="muriFacadeCaption">Muri · Fassade</figcaption></figure>
+            <figure><img src="/images/muri-1600.webp" width="1600" height="1200" data-i18n-alt="muriAlt" alt="Innenraum der Klosterkirche Muri" loading="lazy"><figcaption>Muri · Oktogon</figcaption></figure>
+            <figure><img src="/images/zug-west-1200.webp" width="1200" height="900" data-i18n-alt="zugWestAlt" alt="Westseite des Theater Casino Zug" loading="lazy"><figcaption data-i18n="zugLakeCaption">Zug · Am See</figcaption></figure>
+            <figure><img src="/images/zug-1600.webp" width="1600" height="1200" data-i18n-alt="zugAlt" alt="Theater Casino Zug" loading="lazy"><figcaption>Zug · Casino</figcaption></figure>
+          </div>
+          <div class="slideshow-ui">
+            <button type="button" class="slide-arrow slide-prev" aria-label="Vorheriges Bild">←</button>
+            <div class="slide-counter" aria-live="polite"><strong id="slideCurrent">01</strong><span> / 04</span></div>
+            <button type="button" class="slide-arrow slide-next" aria-label="Nächstes Bild">→</button>
+          </div>
+          <div class="slide-progress" aria-hidden="true"><span></span></div>
         </div>
       </div>
     </section>
