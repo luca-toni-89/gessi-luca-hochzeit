@@ -7,15 +7,18 @@ Cloudflare-Pages-Vorschau: **https://gessi-luca-hochzeit.pages.dev**
 
 ## Inhalt
 
-- Sprachwahl Deutsch / Italiano beim Einstieg
+- Filmische Editorial-Identität „Il nostro giorno“ in Aubergine, Papierweiss und Gold
+- Sprachwahl Deutsch / Italiano ohne vorgeschaltete Zugangssperre
 - Countdown bis zur Hochzeit
-- Tagesablauf
-- Locations: Klosterkirche Muri und Theater Casino Zug
+- Animierter Tagesablauf mit zeichnender Linie
+- Ausführliche, zweisprachige Kapitel zur Klosterkirche Muri und zum Theater Casino Zug
 - Menübereich
 - RSVP mit allen teilnehmenden Personen sowie Allergien / Unverträglichkeiten
 - Foto-Upload für Gäste
 - FAQ
-- Responsive, mobile-first und ohne Frontend-Framework
+- Responsive, barrierearm und ohne Frontend-Framework
+
+Das Paarbild ist als klar gekennzeichneter typografischer Platzhalter angelegt, bis das Originalfoto beziehungsweise die freigegebene Paarillustration vorliegt. Es wird keine fremde oder erfundene Person verwendet.
 
 ## Cloudflare
 
@@ -40,7 +43,7 @@ Gästedaten und Fotos werden **nicht** im öffentlichen GitHub-Repository gespei
 
 ## Bildnachweise
 
-Die Location-Fotos werden direkt von Wikimedia Commons geladen:
+Die Location-Fotos stammen von Wikimedia Commons und werden als optimierte WebP-Dateien lokal ausgeliefert:
 
 - Klosterkirche Muri: Wici, Wikimedia Commons – CC BY-SA 3.0 / GFDL
 - Theater Casino Zug: Elena Ternovaja, Wikimedia Commons – CC BY-SA 3.0

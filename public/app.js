@@ -75,7 +75,11 @@ const translations = {
   }
 };
 
-let currentLang = localStorage.getItem("weddingLanguage") || "de";
+Object.assign(translations.de, {"skip": "Zum Inhalt", "portraitAlt": "Typografischer Platzhalter – Paarbild noch nicht bereitgestellt", "portraitPending": "Unser Bild folgt.", "muriAlt": "Licht, Stuck und Altarraum der Klosterkirche Muri", "zugAlt": "Theater Casino Zug von aussen", "imageEdits": "Bildausschnitt und WebP-Konvertierung", "switchLanguage": "Auf Italienisch wechseln", "contactEmail": "E-Mail (optional)", "messageLabel": "Nachricht an uns (optional)", "required": "Bitte füllt dieses Feld aus.", "emailError": "Bitte gebt eine gültige E-Mail-Adresse ein.", "uploadInvalid": "Bitte höchstens 12 Fotos in JPG, PNG, WEBP oder HEIC/HEIF auswählen, jedes höchstens 15 MB.", "uploadProgress": "Foto", "uploadOf": "von", "saved": "Gespeichert", "dayIntro": "Unser Ja-Wort in Muri. Danach feiern wir gemeinsam in Zug. Die genauen Uhrzeiten und weitere Details folgen mit der Einladung.", "dinnerTitle": "Gemeinsam feiern", "dinnerText": "Nach der Trauung geht es zum gemeinsamen Essen und Feiern ins Theater Casino Zug.", "churchDescription": "In der Klosterkirche Muri beginnt unser Hochzeitstag. Über uns öffnet sich das barocke Oktogon, ein achteckiger Raum unter einer hohen Kuppel. Stuck, Fresken und geschnitzte Altäre geben dem Blick immer wieder neue Details; durch die Fenster fällt Licht in den weiten Kirchenraum. Romanische und gotische Teile erzählen von den Jahrhunderten, in denen dieser Ort gewachsen ist. Hier möchten wir einen Moment innehalten und einander unser Ja geben. Mit unseren Familien und Freunden an unserer Seite wird aus der grossen Kirche ein ganz persönlicher Ort. Wir freuen uns darauf, euch dort zu sehen. Die Uhrzeit unserer Trauung teilen wir euch noch mit.", "casinoDescription": "Nach dem Ja-Wort führt unser Tag von Muri nach Zug. Das Theater Casino liegt direkt am Zugersee, am Rand der Altstadt. Sein Restaurant gehört zu einem Haus, in dem Kultur und Begegnung zusammenkommen; draussen prägt das Wasser die Umgebung. Für uns beginnt hier der gesellige Teil des Tages: mit euch zusammensitzen, gemeinsam essen, anstossen und Zeit füreinander haben. Wir freuen uns auf Gespräche zwischen unseren Familien und Freunden und auf einen Abend, den wir miteinander verbringen. Welche Räume wir nutzen, wie das Menü aussieht und wann genau die Feier beginnt, ergänzen wir, sobald diese Details feststehen. Bis dahin bleibt die Vorfreude."});
+Object.assign(translations.it, {"skip": "Vai al contenuto", "portraitAlt": "Segnaposto tipografico – immagine della coppia non ancora disponibile", "portraitPending": "La nostra foto arriverà.", "muriAlt": "Luce, stucchi e altare nella chiesa abbaziale di Muri", "zugAlt": "Esterno del Theater Casino Zug", "imageEdits": "Ritaglio e conversione in WebP", "switchLanguage": "Passa al tedesco", "contactEmail": "E-mail (facoltativa)", "messageLabel": "Un messaggio per noi (facoltativo)", "required": "Compilate questo campo.", "emailError": "Inserite un indirizzo e-mail valido.", "uploadInvalid": "Scegliete al massimo 12 foto JPG, PNG, WEBP o HEIC/HEIF, ciascuna di massimo 15 MB.", "uploadProgress": "Foto", "uploadOf": "di", "saved": "Salvata", "dayIntro": "Il nostro sì a Muri. Poi festeggeremo insieme a Zugo. Gli orari precisi e gli altri dettagli arriveranno con l’invito.", "dinnerTitle": "Festeggiare insieme", "dinnerText": "Dopo la cerimonia ci ritroveremo al Theater Casino Zug per mangiare e festeggiare insieme.", "churchDescription": "Il nostro giorno inizierà nella chiesa abbaziale di Muri. Sopra di noi si apre l’ottagono barocco, un ampio spazio raccolto sotto una grande cupola. Gli stucchi, gli affreschi e gli altari intagliati invitano a soffermarsi sui dettagli, mentre la luce entra dalle finestre. Le parti romaniche e gotiche raccontano i secoli durante i quali questo luogo ha preso forma. Qui vorremmo fermarci un momento e dirci sì. Con le nostre famiglie e i nostri amici accanto, questa grande chiesa diventerà un luogo intimo e nostro. Ci emoziona pensare di ritrovarvi lì. Vi comunicheremo più avanti l’orario della cerimonia.", "casinoDescription": "Dopo il sì, il nostro giorno proseguirà da Muri verso Zugo. Il Theater Casino si trova direttamente sul Lago di Zugo, ai margini del centro storico. Il suo ristorante fa parte di una casa dedicata alla cultura e all’incontro, con l’acqua a caratterizzare il paesaggio tutt’intorno. Qui inizierà la parte più conviviale: sederci insieme, mangiare, brindare e avere tempo per ciascuno di voi. Immaginiamo le conversazioni tra le nostre famiglie e i nostri amici, e una serata da condividere. Gli spazi che useremo, il menù e l’orario della festa saranno indicati appena definiti. Intanto, ci godiamo l’attesa di essere tutti insieme."});
+
+let currentLang = "de";
+try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
 let selectedPhotos = [];
 
@@ -86,7 +90,7 @@ function t(key) {
 function applyLanguage(lang, closeGate) {
   currentLang = lang === "it" ? "it" : "de";
   document.documentElement.lang = currentLang;
-  localStorage.setItem("weddingLanguage", currentLang);
+  try { localStorage.setItem("weddingLanguage", currentLang); } catch {}
 
   document.querySelectorAll("[data-i18n]").forEach(function (node) {
     var key = node.getAttribute("data-i18n");
@@ -99,6 +103,11 @@ function applyLanguage(lang, closeGate) {
 
   var switcher = document.getElementById("langSwitch");
   if (switcher) switcher.textContent = currentLang === "de" ? "IT" : "DE";
+  switcher.setAttribute("aria-label", t("switchLanguage"));
+  document.querySelectorAll('[data-i18n-alt]').forEach(n => n.alt = t(n.dataset.i18nAlt));
+  document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', t(n.dataset.i18nAria)));
+  document.querySelectorAll('[data-status-key]').forEach(n => n.textContent = t(n.dataset.statusKey));
+  document.querySelectorAll('input,textarea').forEach(n => n.setCustomValidity(''));
   syncGuestLabels();
 
   document.body.classList.remove("lang-pending");
@@ -106,6 +115,7 @@ function applyLanguage(lang, closeGate) {
 
   if (closeGate) {
     var gate = document.getElementById("languageGate");
+    if (!gate) return;
     gate.classList.add("is-closing");
     window.setTimeout(function () { gate.hidden = true; }, 760);
   }
@@ -181,26 +191,17 @@ function initReveal() {
   items.forEach(function (item) { observer.observe(item); });
 }
 
-function initPetals() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var host = document.querySelector(".petals");
-  for (var i = 0; i < 12; i += 1) {
-    var p = document.createElement("span");
-    p.className = "petal";
-    p.style.setProperty("--left", (4 + Math.random() * 92) + "%");
-    p.style.setProperty("--delay", (-Math.random() * 16) + "s");
-    p.style.setProperty("--fall", (12 + Math.random() * 10) + "s");
-    p.style.setProperty("--rotate", (Math.random() * 180) + "deg");
-    host.appendChild(p);
-  }
-}
-
 async function submitRsvp(event) {
   event.preventDefault();
   var form = event.currentTarget;
   var status = document.getElementById("rsvpStatus");
   var submit = form.querySelector('button[type="submit"]');
 
+  for (const field of form.querySelectorAll('input,textarea')) {
+    field.setCustomValidity('');
+    if (field.required && !field.value.trim()) field.setCustomValidity(t('required'));
+    else if (field.validity.typeMismatch) field.setCustomValidity(t('emailError'));
+  }
   if (!form.reportValidity()) return;
 
   var attending = form.elements.attending.value === "yes";
@@ -226,7 +227,7 @@ async function submitRsvp(event) {
 
   submit.disabled = true;
   status.className = "form-status";
-  status.textContent = t("rsvpSending");
+  setStatus(status, "rsvpSending");
 
   try {
     var response = await fetch("/api/rsvp", {
@@ -237,16 +238,16 @@ async function submitRsvp(event) {
     var data = await response.json().catch(function () { return {}; });
     if (response.ok) {
       status.className = "form-status success";
-      status.textContent = t("rsvpSuccess");
+      setStatus(status, "rsvpSuccess");
     } else if (response.status === 503) {
       status.className = "form-status error";
-      status.textContent = t("rsvpUnavailable");
+      setStatus(status, "rsvpUnavailable");
     } else {
       throw new Error(data.error || "RSVP failed");
     }
   } catch (error) {
     status.className = "form-status error";
-    status.textContent = t("rsvpError");
+    setStatus(status, "rsvpError");
   } finally {
     submit.disabled = false;
   }
@@ -257,76 +258,80 @@ function formatBytes(bytes) {
   return (bytes / (1024 * 1024)).toFixed(1) + " MB";
 }
 
-function setSelectedPhotos(files) {
-  var allowed = Array.from(files || []).filter(function (file) {
-    return file.type.startsWith("image/") || /\.(heic|heif)$/i.test(file.name);
-  }).slice(0, 12);
-  selectedPhotos = allowed;
-  var list = document.getElementById("uploadFiles");
-  list.innerHTML = "";
-  allowed.forEach(function (file) {
-    var row = document.createElement("div");
-    row.className = "upload-file";
-    var name = document.createElement("span");
-    name.textContent = file.name;
-    var size = document.createElement("span");
-    size.textContent = formatBytes(file.size);
-    row.append(name, size);
-    list.appendChild(row);
+let uploading = false;
+function setStatus(node, key) { node.dataset.statusKey = key; node.textContent = t(key); }
+function renderPhotos() {
+  const list = document.getElementById('uploadFiles'); list.replaceChildren();
+  selectedPhotos.forEach(file => {
+    const row = document.createElement('div'); row.className = 'upload-file';
+    const name = document.createElement('span'); name.textContent = file.name;
+    const size = document.createElement('span'); size.textContent = formatBytes(file.size);
+    row.append(name,size); list.append(row);
   });
-  document.getElementById("uploadSubmit").disabled = allowed.length === 0;
+  document.getElementById('uploadSubmit').disabled = uploading || !selectedPhotos.length;
 }
-
+function setSelectedPhotos(files) {
+  if (uploading) return;
+  const candidates = Array.from(files || []);
+  const valid = candidates.length <= 12 && candidates.every(f => f.size > 0 && f.size <= 15*1024*1024 && /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name) && ['', 'image/jpeg','image/png','image/webp','image/heic','image/heif'].includes(f.type));
+  const status = document.getElementById('uploadStatus');
+  selectedPhotos = valid ? candidates : [];
+  status.className = 'form-status error'; status.textContent = ''; delete status.dataset.statusKey;
+  if (!valid) setStatus(status,'uploadInvalid');
+  renderPhotos();
+}
+function sendPhoto(file, onProgress) {
+  return new Promise((resolve,reject) => {
+    const xhr = new XMLHttpRequest(); xhr.open('POST','/api/photos'); xhr.timeout = 120000;
+    xhr.upload.onprogress = e => { if(e.lengthComputable) onProgress(e.loaded/e.total); };
+    xhr.onload = () => resolve(xhr.status); xhr.onerror = xhr.ontimeout = () => reject(new Error('network'));
+    const body = new FormData(); body.append('photo',file); body.append('language',currentLang); xhr.send(body);
+  });
+}
 async function uploadPhotos() {
-  var status = document.getElementById("uploadStatus");
-  var button = document.getElementById("uploadSubmit");
-  if (!selectedPhotos.length) {
-    status.className = "form-status error";
-    status.textContent = t("uploadNone");
-    return;
-  }
-
-  button.disabled = true;
-  status.className = "form-status";
-  status.textContent = t("uploadUploading");
-  var unavailable = false;
-  var failed = false;
-
-  for (var i = 0; i < selectedPhotos.length; i += 1) {
-    var body = new FormData();
-    body.append("photo", selectedPhotos[i]);
-    body.append("language", currentLang);
+  if(uploading || !selectedPhotos.length) return;
+  uploading = true;
+  const status = document.getElementById('uploadStatus');
+  const progress = document.getElementById('uploadProgress');
+  const input = document.getElementById('photoInput');
+  const drop = document.getElementById('uploadDropzone');
+  input.disabled = drop.disabled = true; renderPhotos();
+  status.className='form-status'; setStatus(status,'uploadUploading'); progress.hidden=false; progress.value=0;
+  const batch=[...selectedPhotos]; const failed=[]; let unavailable=false;
+  for(let i=0;i<batch.length;i++) {
     try {
-      var response = await fetch("/api/photos", { method: "POST", body: body });
-      if (response.status === 503) unavailable = true;
-      else if (!response.ok) failed = true;
-    } catch (error) {
-      failed = true;
-    }
-    if (unavailable) break;
+      const code=await sendPhoto(batch[i], fraction => {
+        progress.value=(i+fraction)/batch.length*100;
+        delete status.dataset.statusKey;
+        status.textContent=t('uploadProgress')+' '+(i+1)+' '+t('uploadOf')+' '+batch.length+' · '+Math.round(fraction*100)+'%';
+      });
+      if(code<200 || code>=300) failed.push(batch[i]);
+      if(code===503) { unavailable=true; failed.push(...batch.slice(i+1)); break; }
+    } catch { failed.push(batch[i]); }
   }
-
-  if (unavailable) {
-    status.className = "form-status error";
-    status.textContent = t("uploadUnavailable");
-  } else if (failed) {
-    status.className = "form-status error";
-    status.textContent = t("uploadError");
-  } else {
-    status.className = "form-status success";
-    status.textContent = t("uploadSuccess");
-    selectedPhotos = [];
-    document.getElementById("photoInput").value = "";
-    document.getElementById("uploadFiles").innerHTML = "";
+  selectedPhotos=failed; uploading=false; input.disabled=drop.disabled=false; input.value=''; renderPhotos();
+  progress.hidden=true; status.className='form-status '+(failed.length?'error':'success');
+  setStatus(status,unavailable?'uploadUnavailable':failed.length?'uploadError':'uploadSuccess');
+}
+function initMotion() {
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const timeline=document.querySelector('.timeline'); const art=document.querySelector('.hero-art');
+  let scheduled=false;
+  function draw() {
+    scheduled=false;
+    const rect=timeline.getBoundingClientRect();
+    const progress=Math.max(0,Math.min(1,(innerHeight*.7-rect.top)/rect.height));
+    timeline.style.setProperty('--progress',reduced.matches?1:progress);
+    timeline.querySelectorAll('.timeline-item').forEach(n=>n.classList.toggle('is-current',n.getBoundingClientRect().top<innerHeight*.7));
+    art.style.transform=reduced.matches?'none':'translateY('+Math.min(scrollY*.09,60)+'px)';
   }
-  button.disabled = selectedPhotos.length === 0;
+  addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(draw)}},{passive:true});
+  reduced.addEventListener('change',draw); draw();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var saved = localStorage.getItem("weddingLanguage");
-  if (saved === "de" || saved === "it") {
-    applyLanguage(saved, true);
-  }
+  applyLanguage(currentLang, false);
+  document.querySelectorAll("input,textarea").forEach(n => n.addEventListener("input", () => n.setCustomValidity("")));
 
   document.querySelectorAll("[data-choose-lang]").forEach(function (button) {
     button.addEventListener("click", function () { applyLanguage(button.dataset.chooseLang, true); });
@@ -374,18 +379,8 @@ document.addEventListener("DOMContentLoaded", function () {
   dropzone.addEventListener("drop", function (event) { setSelectedPhotos(event.dataTransfer.files); });
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
 
-  var hero = document.querySelector(".hero");
-  hero.addEventListener("pointermove", function (event) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var rect = hero.getBoundingClientRect();
-    var x = ((event.clientX - rect.left) / rect.width - .5) * 18;
-    var y = ((event.clientY - rect.top) / rect.height - .5) * 18;
-    hero.style.setProperty("--mx", x + "px");
-    hero.style.setProperty("--my", y + "px");
-  });
-
   countdown();
   window.setInterval(countdown, 1000);
   initReveal();
-  initPetals();
+  initMotion();
 });
