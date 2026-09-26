@@ -15,7 +15,7 @@ const translations = {
     casinoDescription: "Hier feiern wir weiter – mit Dinner, Musik und euch bis tief in die Nacht.", openMaps: "In Maps öffnen",
     menuKicker: "Mangiare, ridere, brindare", menuTitle: "Das Menü bleibt noch ein kleines Geheimnis.",
     menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien und Unverträglichkeiten könnt ihr direkt bei der Anmeldung angeben.",
-    menuTag1: "Menü folgt", menuTag2: "Unverträglichkeiten bei RSVP",
+    menuTag1: "Menü folgt", menuTag2: "Unverträglichkeiten bei der Anmeldung",
     rsvpTitle: "Seid ihr dabei?", rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.",
     contactName: "Kontaktperson", contactEmail: "E-Mail", optional: "(optional)", attendanceQuestion: "Könnt ihr mit uns feiern?",
     attendYes: "Ja, wir sind dabei!", attendYesSub: "Wir freuen uns.", attendNo: "Leider schaffen wir es nicht.", attendNoSub: "Wir denken an euch.",
