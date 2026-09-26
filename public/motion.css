@@ -84,14 +84,6 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 .footer-monogram { overflow:visible; font-size:clamp(3.8rem,18vw,5rem); }
 .footer-monogram > .heartbeat { padding:.12em .4em; line-height:1.5; overflow:visible; }
 .site-footer .footer-heart { overflow:visible; }
-
-.hero-mr-mrs { position:absolute; z-index:2; left:50%; bottom:24px; margin:0; padding:.2em .45em; transform:translateX(-50%) rotate(-5deg); font-family:var(--script); font-size:clamp(2.8rem,7vw,5rem); font-weight:400; line-height:1.2; color:#111; white-space:nowrap; pointer-events:none; text-shadow:0 1px 8px rgba(255,249,237,.5); }
-.hero-mr-mrs .written-letter { animation-duration:2.4s; }
-body.lang-pending .hero-mr-mrs { visibility:hidden; }
-@media(max-width:700px){.hero-mr-mrs{bottom:22px;font-size:3rem}.hero-scroll{bottom:18px}}
-/* Reserve a separate signature area below the RSVP cue. */
-.hero { padding-bottom:130px; }
-
 /* Scroll reveals fade in place, without shifting text or large photo layers. */
 .reveal,.location-content > .reveal,.editorial-copy > .reveal { transition-property:opacity; transition-duration:2.2s; transition-timing-function:ease-in-out; }
 .reveal:not(.is-visible),.reveal.is-visible,.location-photo.reveal:not(.is-visible) { transform:none; }
@@ -103,3 +95,11 @@ body.lang-pending .hero-mr-mrs { visibility:hidden; }
 .timeline::after { height:calc(100% - 76px); transform:scaleY(var(--progress,0)); transform-origin:top; transition:none; }
 .hero-offscreen .hero-picture img { will-change:auto; }
 @media(prefers-reduced-motion:reduce){.location-slides figure.is-active{transition:none}}
+
+/* A single pen line is progressively uncovered; no visible pen or letter fade. */
+.hero-mr-mrs { display:block; position:relative; width:clamp(190px,28vw,300px); height:auto; margin:0 auto 14px; overflow:visible; color:#111; transform:rotate(-4deg); }
+.hero-mr-mrs path { stroke-dasharray:1; stroke-dashoffset:1; }
+.hero-content.intro-playing > .hero-mr-mrs { animation:none; }
+.hero-content.intro-playing .hero-mr-mrs path { animation:handwrittenStroke var(--ink-time) var(--ink-delay) linear forwards; }
+@keyframes handwrittenStroke { to{stroke-dashoffset:0} }
+@media(prefers-reduced-motion:reduce){.hero-mr-mrs path{animation:none!important;stroke-dashoffset:0}}
