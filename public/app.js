@@ -174,7 +174,7 @@ function resetToTop() {
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   window.scrollTo({top:0, left:0, behavior:'instant'});
 }
-function writeIn(node, delay=0) {
+function writeIn(node, delay=0, pace=90) {
   const text=node.textContent;
   node.setAttribute('aria-label',text);
   node.replaceChildren();
@@ -182,7 +182,7 @@ function writeIn(node, delay=0) {
     const span=document.createElement('span');
     span.className='written-letter'; span.textContent=char===' '? '\u00a0':char;
     span.setAttribute('aria-hidden','true');
-    span.style.setProperty('--letter-delay', `${delay+i*90}ms`);
+    span.style.setProperty('--letter-delay', `${delay+i*pace}ms`);
     node.append(span);
   });
 }
@@ -286,6 +286,7 @@ function animateCountdownIntro() {
 }
 
 function initReveal() {
+  document.querySelectorAll('.menu-handwriting').forEach((node,i)=>writeIn(node,250+i*1200,130));
   // Each piece has one motion owner: never fade both a card and its text.
   document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
   const selector='.section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .footer-monogram, .site-footer > p';
@@ -301,7 +302,7 @@ function initReveal() {
     entries.forEach(entry=>{
       if(entry.isIntersecting){entry.target.classList.add('is-visible');entrance.unobserve(entry.target);}
     });
-  },{threshold:0,rootMargin:'0px 0px -35px 0px'});
+  },{threshold:.12,rootMargin:'0px 0px -90px 0px'});
   items.forEach(n=>entrance.observe(n));
   // Re-arm only when an entire section is far outside the viewport.
   const reset=new IntersectionObserver(entries=>{

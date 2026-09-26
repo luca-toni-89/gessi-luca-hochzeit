@@ -31,7 +31,7 @@ body::after { backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(
 .reveal,.location-content > .reveal { filter:none!important;animation:none!important;transition:opacity var(--reveal-time) var(--motion-ease),transform var(--reveal-time) var(--motion-ease);transition-delay:var(--reveal-delay,0ms); }
 .reveal:not(.is-visible) { opacity:0;transform:translate3d(0,36px,0);filter:none!important; }
 .reveal.is-visible { opacity:1;transform:translate3d(0,0,0); }
-.section-heading h2,.editorial-copy h2,.menu-copy h2 { transition:none; }
+
 .editorial-copy > * { transition:opacity var(--reveal-time) var(--motion-ease),transform var(--reveal-time) var(--motion-ease); }
 .location-photo.reveal:not(.is-visible) { transform:translate3d(0,46px,0); }
 .location-slides img { filter:none;transition:transform 8s ease; }
@@ -49,7 +49,7 @@ body::after { backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(
 .sound-toggle.is-playing .sound-bars i { animation:soundQuiet 1.3s ease-in-out infinite alternate; }
 @keyframes soundQuiet { to{transform:scaleY(1)} }
 .motion-sleeping *, .motion-sleeping *::before, .motion-sleeping *::after { animation-play-state:paused!important; }
-@media(max-width:700px){ .rice-field i:nth-child(n+11){display:none} .rice-field i{left:calc(var(--n)*10%)} }
+@media(max-width:700px){ .rice-field i:nth-child(n+19){display:none} .rice-field i{left:calc(var(--n)*5.5%)} }
 @media(prefers-reduced-motion:reduce){
  .language-gate,main,.site-nav,.site-nav a,.reveal,.editorial-copy > *,.location-slides figure,.location-slides img { transition:none!important; }
  .reveal:not(.is-visible),.reveal.is-visible { opacity:1;transform:none; }
@@ -57,9 +57,23 @@ body::after { backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(
  .rice-field,.ambient-rings { display:none; }
 }
 /* Start the continuous portrait movement when the language curtain opens. */
-.hero-picture img { animation:portraitAlive 24s ease-in-out infinite alternate; }
-@keyframes portraitAlive { from{transform:scale(1.015)} to{transform:scale(1.09)} }
+.hero-picture img { animation:portraitAlive 16s ease-in-out infinite alternate; }
+@keyframes portraitAlive { from{transform:scale(1.015)} to{transform:scale(1.17)} }
 body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animation-play-state:paused; }
 @media(prefers-reduced-motion:reduce){.hero-picture img{animation:none!important;transform:none}}
 
 .site-footer .footer-heart { color:#111; font-family:Georgia,serif; font-size:30px; line-height:1; text-align:center; margin:42px auto 0; padding-bottom:12px; }
+
+/* Child motion keeps the section reveal independent of the heartbeat. */
+.footer-monogram > .heartbeat { display:inline-block; color:inherit; font:inherit; }
+.heartbeat { display:inline-block; animation:weddingHeartbeat 3.8s ease-in-out infinite; transform-origin:center; }
+@keyframes weddingHeartbeat { 0%,36%,100%{transform:scale(1)} 12%{transform:scale(1.055)} 22%{transform:scale(1.012)} 29%{transform:scale(1.035)} }
+.menu-handwriting { white-space:nowrap; }
+.menu-art:not(.is-visible) .written-letter { animation:none; opacity:0; transform:translate3d(0,.1em,0); }
+.menu-art.is-visible .written-letter { animation:quietInk 1.8s var(--letter-delay) ease both; }
+.rice-field i { left:calc(var(--n)*4.15%); animation-delay:calc(var(--n)*-3.7s); }
+@media(max-width:700px){.rice-field i{left:calc(var(--n)*5.5%)}}
+@media(prefers-reduced-motion:reduce){
+ .heartbeat {animation:none!important;}
+ .menu-art .written-letter {animation:none!important;opacity:1;transform:none;}
+}
