@@ -1080,7 +1080,7 @@ main section[tabindex="-1"]:focus { outline:none; }
 @media(max-width:700px){.gate-backdrop{background-image:linear-gradient(180deg,rgba(7,13,9,.2),rgba(7,13,9,.74)),url('/images/gessica-luca-900.webp')}}
 
 /* Leave room for the script L's flourish inside both monogram rings. */
-.gate-monogram { font-size:32px; gap:2px; padding:10px 17px 10px 11px; }
+.gate-monogram { width:132px; height:132px; font-size:2.5rem; gap:4px; padding:12px 20px 12px 12px; }
 .gate-monogram > span { flex:0 0 auto; line-height:1.4; }
 .gate-monogram > i { flex:0 0 auto; font-size:.5em; }
-@media(max-width:700px){.gate-monogram{font-size:27px;gap:1px;padding:9px 14px 9px 9px}}
+@media(max-width:700px){.gate-monogram{width:120px;height:120px;font-size:2.5rem;gap:3px;padding:12px 18px 12px 10px}}
