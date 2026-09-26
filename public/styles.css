@@ -516,7 +516,7 @@ input:focus, textarea:focus { border-color: rgba(127,75,77,.62); box-shadow: 0 0
 .footer-monogram { font-family: var(--serif); font-size: 3.3rem; }
 .footer-monogram span { color: var(--wine); font-size: .65em; }
 .footer-date { font-size: .7rem; letter-spacing: .2em; color: var(--gold); }
-.site-footer > p:not(.footer-date):not(.photo-credits) { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
+.site-footer > p:not(.footer-date):not(.photo-credits):not(.footer-heart) { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
 .footer-language { margin: 26px 0 22px; display: flex; gap: 9px; justify-content: center; color: var(--muted); }
 .footer-language button { border: 0; background: transparent; color: inherit; cursor: pointer; padding: 0; font-size: .72rem; }
 .footer-language button:hover { color: var(--wine); }
