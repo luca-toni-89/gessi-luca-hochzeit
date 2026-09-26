@@ -163,6 +163,7 @@ function replayHero() {
   document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,250+i*600));
   writeIn(document.querySelector('.hero-subtitle'),1300);
   void hero.offsetWidth; hero.classList.add('intro-playing');
+  animateCountdownIntro();
 }
 let languageChanging=false;
 function changeLanguage(lang) {
@@ -234,39 +235,25 @@ function countdown() {
   document.getElementById("countSeconds").textContent = String(seconds).padStart(2, "0");
 }
 
+let countdownTimer, countdownFrame, countdownDelay;
 function animateCountdownIntro() {
-  var countdownNode = document.querySelector(".countdown");
-  var started = false;
-  function begin() {
-    if (started) return;
-    started = true;
-    countdown();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { window.setInterval(countdown,1000); return; }
-  var ids = ["countDays", "countHours", "countMinutes", "countSeconds"];
-  var targets = ids.map(function (id) { return Number(document.getElementById(id).textContent); });
-  var start = performance.now();
-  document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.add("is-counting"); });
-  function frame(now) {
-    var progress = Math.min(1, (now - start) / 1500);
-    var eased = 1 - Math.pow(1 - progress, 4);
-    ids.forEach(function (id, index) {
-      var digits = index === 0 ? 3 : 2;
-      document.getElementById(id).textContent = String(Math.floor(targets[index] * eased)).padStart(digits, "0");
-    });
-    if (progress < 1) requestAnimationFrame(frame);
-    else window.setTimeout(function () {
-      document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.remove("is-counting"); });
-      countdown();
-      window.setInterval(countdown, 1000);
-    }, 120);
-  }
-  requestAnimationFrame(frame);
-  }
-  if (!("IntersectionObserver" in window)) return begin();
-  var observer = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) { begin(); observer.disconnect(); }
-  }, { threshold:.35 });
-  observer.observe(countdownNode);
+  clearInterval(countdownTimer); clearTimeout(countdownDelay); cancelAnimationFrame(countdownFrame);
+  const ids=['countDays','countHours','countMinutes','countSeconds'];
+  countdown();
+  const targets=ids.map(id=>Number(document.getElementById(id).textContent));
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){countdownTimer=setInterval(countdown,1000);return;}
+  ids.forEach((id,i)=>document.getElementById(id).textContent=i===0?'000':'00');
+  countdownDelay=setTimeout(()=>{
+    const start=performance.now();
+    function frame(now){
+      const progress=Math.min(1,(now-start)/1600);
+      const eased=1-Math.pow(1-progress,3);
+      ids.forEach((id,i)=>document.getElementById(id).textContent=String(Math.floor(targets[i]*eased)).padStart(i===0?3:2,'0'));
+      if(progress<1) countdownFrame=requestAnimationFrame(frame);
+      else{countdown();countdownTimer=setInterval(countdown,1000);}
+    }
+    countdownFrame=requestAnimationFrame(frame);
+  },1900);
 }
 
 function initReveal() {
@@ -552,7 +539,6 @@ document.addEventListener("DOMContentLoaded", function () {
   dropzone.addEventListener("drop", function (event) { setSelectedPhotos(event.dataTransfer.files); });
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
 
-  animateCountdownIntro();
   initReveal();
   initMotion();
   initSlideshow();
