@@ -77,3 +77,10 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
  .heartbeat {animation:none!important;}
  .menu-art .written-letter {animation:none!important;opacity:1;transform:none;}
 }
+
+/* Reveal the footer as a whole: the last heart cannot reach the inset trigger
+   on short mobile viewports. Leave room for script swashes and pulse layers. */
+.site-footer { padding-bottom:calc(72px + env(safe-area-inset-bottom, 0px)); overflow:visible; }
+.footer-monogram { overflow:visible; font-size:clamp(3.8rem,18vw,5rem); }
+.footer-monogram > .heartbeat { padding:.12em .4em; line-height:1.5; overflow:visible; }
+.site-footer .footer-heart { overflow:visible; }

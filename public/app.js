@@ -118,7 +118,7 @@ const translations = {
     "faqDressQ": "È previsto un dress code?",
     "faqDressA": "Non c'è un dress code obbligatorio: scegliete un abbigliamento in cui vi sentiate a vostro agio. Un tocco di eleganza sarà perfetto per l'occasione, ma la cosa più importante è festeggiare insieme.",
     "faqTravelQ": "Come raggiungere i luoghi della cerimonia e del ricevimento?",
-    "faqTravelA": "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Theater Casino Zug. Per chi arriva in aereo organizzeremo dei passaggi in auto. Segnalateci al momento della conferma se avete bisogno di un passaggio oppure se potete accompagnare qualcuno. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle rispettive sezioni.",
+    "faqTravelA": "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Theater Casino Zug. Per chi arriva in aereo organizzeremo dei passaggi in auto. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle rispettive sezioni.",
     "faqFoodQ": "E per quanto riguarda allergie o intolleranze alimentari?",
     "faqFoodA": "Segnalatele per ciascun ospite direttamente nel modulo di conferma, così potremo tenerne conto nella scelta del menù.",
     "faqKidsQ": "Anche i bambini sono invitati?",
@@ -178,7 +178,7 @@ Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca a
 Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren",slidePrev:"Vorheriges Bild",slideNext:"Nächstes Bild"});
 
 Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
-Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Gebt uns bei der Anmeldung bitte kurz Bescheid, wenn ihr einen Platz braucht oder jemanden mitnehmen könnt. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
+Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
 Object.assign(translations.de, {"navigationLabel": "Navigation", "countdownLabel": "Countdown", "coupleLabel": "Gessica und Luca", "uploadLabel": "Upload", "heroPlaces": "Muri · Zug", "muriRegion": "Muri · Aargau", "zugRegion": "Zug · Zugersee", "documentTitle": "Gessica & Luca 🤍 Wir heiraten · 10.07.2027"});
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
@@ -383,7 +383,7 @@ function initReveal() {
   document.querySelectorAll('.menu-handwriting').forEach((node,i)=>writeIn(node,250+i*1200,130));
   // Each piece has one motion owner: never fade both a card and its text.
   document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
-  const selector='.section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .footer-monogram, .site-footer > p';
+  const selector='.section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .site-footer';
   const items=[...document.querySelectorAll(selector)];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   items.forEach(node=>{
