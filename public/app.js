@@ -399,18 +399,8 @@ function initReveal() {
     });
   },{threshold:.12,rootMargin:'0px 0px -90px 0px'});
   items.forEach(n=>entrance.observe(n));
-  // Re-arm only when an entire section is far outside the viewport.
-  const reset=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting)return;
-      entry.target.querySelectorAll('.reveal.is-visible').forEach(node=>{
-        node.classList.remove('is-visible');entrance.observe(node);
-      });
-    });
-  },{rootMargin:'600px 0px',threshold:0});
-  document.querySelectorAll('main > section, .site-footer').forEach(n=>reset.observe(n));
   reduced.addEventListener('change',()=>{
-    if(reduced.matches){entrance.disconnect();reset.disconnect();items.forEach(n=>n.classList.add('is-visible'));}
+    if(reduced.matches){entrance.disconnect();items.forEach(n=>n.classList.add('is-visible'));}
   });
 }
 
@@ -575,9 +565,21 @@ function initSlideshow() {
     progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:5000,fill:'forwards',easing:'linear'});
     timer=setTimeout(()=>show(index+1),5000);
   }
-  function show(next){
-    index=(next+slides.length)%slides.length;
-    slides.forEach((slide,i)=>{slide.classList.toggle('is-active',i===index);slide.setAttribute('aria-hidden',String(i!==index))});
+  let changeRequest=0;
+  async function show(next){
+    const request=++changeRequest;
+    const target=(next+slides.length)%slides.length;
+    const image=slides[target].querySelector('img');
+    image.loading='eager';
+    try { await image.decode(); } catch { if(!image.naturalWidth){schedule();return;} }
+    if(request!==changeRequest)return;
+    const previous=index;
+    index=target;
+    slides.forEach((slide,i)=>{
+      slide.classList.toggle('is-previous',i===previous && previous!==index);
+      slide.classList.toggle('is-active',i===index);
+      slide.setAttribute('aria-hidden',String(i!==index));
+    });
     const nextImage=slides[(index+1)%slides.length].querySelector('img');
     nextImage.loading='eager';nextImage.decode().catch(()=>{});
     schedule();
