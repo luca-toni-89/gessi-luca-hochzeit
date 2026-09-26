@@ -383,23 +383,40 @@ function initReveal() {
   document.querySelectorAll('.menu-handwriting').forEach((node,i)=>writeIn(node,250+i*1200,130));
   // Each piece has one motion owner: never fade both a card and its text.
   document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
-  const selector='.signature-interlude, .section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .site-footer';
-  const items=[...document.querySelectorAll(selector)];
+  const selector='.signature-interlude, .section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-index, .timeline-body > *, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form > .form-row > label, .attendance-fieldset, .guest-area-head > *, .guest-card, .form-message, .privacy-note, .form-submit-row, .photo-intro > *, .upload-dropzone, .upload-submit, .faq-list details, .site-footer';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  items.forEach(node=>{
-    node.classList.add('reveal');
-    const siblings=[...node.parentElement.children];
-    node.style.setProperty('--reveal-delay',Math.min(siblings.indexOf(node),3)*90+'ms');
-  });
-  if(!('IntersectionObserver' in window)||reduced.matches){items.forEach(n=>n.classList.add('is-visible'));return;}
-  const entrance=new IntersectionObserver(entries=>{
+  const items=new Set();
+  const entrance='IntersectionObserver' in window ? new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){entry.target.classList.add('is-visible');entrance.unobserve(entry.target);}
     });
-  },{threshold:.12,rootMargin:'0px 0px -90px 0px'});
-  items.forEach(n=>entrance.observe(n));
+  },{threshold:.08,rootMargin:'0px 0px -32px 0px'}):null;
+  function register(node){
+    if(items.has(node))return;
+    items.add(node);
+    const kind=node.matches('h2,h3')?'title':node.matches('.eyebrow,.section-number,.timeline-time,.timeline-place')?'caption':node.matches('.location-photo')?'image':node.matches('p,address,.text-link')?'copy':'panel';
+    node.classList.add('reveal','motion-'+kind);
+    node.style.setProperty('--reveal-delay',Math.min([...node.parentElement.children].indexOf(node),3)*100+'ms');
+    if(!entrance||reduced.matches)node.classList.add('is-visible');else entrance.observe(node);
+  }
+  document.querySelectorAll(selector).forEach(register);
+  // Only re-arm after the complete section is well beyond the screen.
+  // The entrance observer unobserves immediately, so its own movement cannot retrigger it.
+  const reset=entrance?new IntersectionObserver(entries=>{
+    if(reduced.matches)return;
+    entries.forEach(entry=>{
+      if(entry.isIntersecting)return;
+      entry.target.querySelectorAll('.reveal.is-visible').forEach(node=>{
+        node.classList.remove('is-visible');entrance.observe(node);
+      });
+    });
+  },{rootMargin:Math.round(innerHeight*1.5)+'px 0px',threshold:0}):null;
+  document.querySelectorAll('main > section').forEach(n=>reset?.observe(n));
+  new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{
+    if(node.nodeType===1&&node.matches('.guest-card'))register(node);
+  }))).observe(document.getElementById('guestList'),{childList:true});
   reduced.addEventListener('change',()=>{
-    if(reduced.matches){entrance.disconnect();items.forEach(n=>n.classList.add('is-visible'));}
+    if(reduced.matches){entrance?.disconnect();reset?.disconnect();items.forEach(n=>n.classList.add('is-visible'));}
   });
 }
 
