@@ -83,6 +83,8 @@ Object.assign(translations.it, {portraitAlt:"Illustrazione di Gessica e Luca sul
 Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren",slidePrev:"Vorheriges Bild",slideNext:"Nächstes Bild"});
 Object.assign(translations.it, {heroCta:"Conferma presenza più in basso",musicPlay:"Riproduci musica",musicPause:"Metti in pausa la musica",slidePrev:"Immagine precedente",slideNext:"Immagine successiva"});
 
+Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
+Object.assign(translations.it,{navMenu:'Il menù',navFaq:'Da sapere',pauseSlides:'Pausa cambio automatico delle immagini'});
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
@@ -117,15 +119,66 @@ function applyLanguage(lang, closeGate) {
   document.querySelectorAll('input,textarea').forEach(n => n.setCustomValidity(''));
   syncGuestLabels();
 
-  if (closeGate || !document.getElementById("languageGate")) document.body.classList.remove("lang-pending");
+  if (!document.getElementById("languageGate")) document.body.classList.remove("lang-pending");
   document.body.classList.add("is-ready");
 
   if (closeGate) {
-    var gate = document.getElementById("languageGate");
-    if (!gate) return;
-    gate.classList.add("is-closing");
-    window.setTimeout(function () { gate.hidden = true; }, 760);
+    const gate = document.getElementById('languageGate');
+    resetToTop();
+    gate.classList.add('is-closing');
+    setTimeout(() => {
+      gate.hidden = true;
+      document.querySelector('#main').inert=false;
+      document.querySelector('#siteHeader').inert=false;
+      document.querySelector('.site-footer').inert=false;
+      document.body.classList.remove('lang-pending');
+      resetToTop();
+      replayHero();
+      document.querySelector('.hero-title').focus({preventScroll:true});
+    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1500);
   }
+
+}
+
+function resetToTop() {
+  history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo({top:0, left:0, behavior:'instant'});
+}
+function writeIn(node, delay=0) {
+  const text=node.textContent;
+  node.setAttribute('aria-label',text);
+  node.replaceChildren();
+  [...text].forEach((char,i)=>{
+    const span=document.createElement('span');
+    span.className='written-letter'; span.textContent=char===' '? '\u00a0':char;
+    span.setAttribute('aria-hidden','true');
+    span.style.setProperty('--letter-delay', `${delay+i*65}ms`);
+    node.append(span);
+  });
+}
+function replayHero() {
+  const hero=document.querySelector('.hero-content');
+  hero.classList.remove('intro-playing');
+  document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,250+i*600));
+  writeIn(document.querySelector('.hero-subtitle'),1300);
+  void hero.offsetWidth; hero.classList.add('intro-playing');
+}
+let languageChanging=false;
+function changeLanguage(lang) {
+  if(languageChanging) return;
+  languageChanging=true;
+  document.getElementById('siteNav').classList.remove('is-open');
+  document.getElementById('menuToggle').setAttribute('aria-expanded','false');
+  document.body.classList.remove('menu-open');
+  document.getElementById('main').inert=false;
+  document.querySelector('.site-footer').inert=false;
+  document.body.classList.add('language-changing');
+  setTimeout(()=>{
+    applyLanguage(lang,false); resetToTop();
+    document.body.classList.remove('language-changing'); replayHero();
+    languageChanging=false;
+  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:650);
 }
 
 function syncGuestLabels() {
@@ -194,7 +247,7 @@ function animateCountdownIntro() {
   var start = performance.now();
   document.querySelectorAll(".countdown-unit").forEach(function (unit) { unit.classList.add("is-counting"); });
   function frame(now) {
-    var progress = Math.min(1, (now - start) / 3000);
+    var progress = Math.min(1, (now - start) / 1500);
     var eased = 1 - Math.pow(1 - progress, 4);
     ids.forEach(function (id, index) {
       var digits = index === 0 ? 3 : 2;
@@ -375,23 +428,32 @@ function initMotion() {
 }
 
 function initSlideshow() {
-  var root=document.getElementById('locationSlideshow');
-  if(!root) return;
-  var slides=Array.from(root.querySelectorAll('figure'));
-  var currentNode=document.getElementById('slideCurrent');
-  var index=0, timer;
-  function show(next) {
-    index=(next+slides.length)%slides.length;
-    slides.forEach(function(slide,i){slide.classList.toggle('is-active',i===index)});
-    currentNode.textContent=String(index+1).padStart(2,'0');
-    root.classList.remove('is-timing'); void root.offsetWidth; root.classList.add('is-timing');
-    clearTimeout(timer); timer=setTimeout(function(){show(index+1)},4000);
+ document.querySelectorAll('.location-slideshow').forEach(root=>{
+  const slides=[...root.querySelectorAll('figure')];
+  let index=0,timer,visible=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pause=root.querySelector('.slide-pause');
+  function schedule(){
+    clearTimeout(timer); root.classList.remove('is-timing');
+    if(!visible||paused||document.hidden||root.matches(':hover')||root.contains(document.activeElement)) return;
+    void root.offsetWidth; root.classList.add('is-timing');
+    timer=setTimeout(()=>show(index+1),4000);
   }
-  root.querySelector('.slide-prev').addEventListener('click',function(){show(index-1)});
-  root.querySelector('.slide-next').addEventListener('click',function(){show(index+1)});
-  root.addEventListener('mouseenter',function(){clearTimeout(timer);root.classList.remove('is-timing')});
-  root.addEventListener('mouseleave',function(){show(index)});
+  function show(next){
+    index=(next+slides.length)%slides.length;
+    slides.forEach((s,i)=>{s.classList.toggle('is-active',i===index);s.setAttribute('aria-hidden',String(i!==index))});
+    root.querySelector('.slide-current').textContent=String(index+1).padStart(2,'0'); schedule();
+  }
+  root.querySelector('.slide-prev').onclick=()=>show(index-1);
+  root.querySelector('.slide-next').onclick=()=>show(index+1);
+  pause.setAttribute('aria-pressed',String(paused));
+  pause.onclick=()=>{paused=!paused;pause.setAttribute('aria-pressed',String(paused));schedule()};
+  ['mouseenter','mouseleave','focusin','focusout'].forEach(e=>root.addEventListener(e,()=>setTimeout(schedule,0)));
+  document.addEventListener('visibilitychange',schedule);
+  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule()},{threshold:.15}).observe(root);
+  let x=0;root.addEventListener('touchstart',e=>{x=e.changedTouches[0].clientX},{passive:true});
+  root.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-x;if(Math.abs(dx)>45)show(index+(dx<0?1:-1))},{passive:true});
   show(0);
+ });
 }
 
 function initAudio() {
@@ -408,36 +470,53 @@ function initAudio() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  resetToTop();
   applyLanguage(currentLang, false);
+  writeIn(document.querySelector(".gate-card h1"),300);
+  document.querySelector("#main").inert=true;
+  document.querySelector("#siteHeader").inert=true;
+  document.querySelector(".site-footer").inert=true;
   document.querySelectorAll("input,textarea").forEach(n => n.addEventListener("input", () => n.setCustomValidity("")));
 
   document.querySelectorAll("[data-choose-lang]").forEach(function (button) {
-    button.addEventListener("click", function () { applyLanguage(button.dataset.chooseLang, true); });
+    button.addEventListener("click", function () {
+      document.querySelectorAll("[data-choose-lang]").forEach(n=>n.disabled=true);
+      applyLanguage(button.dataset.chooseLang, true);
+    });
   });
 
   document.getElementById("langSwitch").addEventListener("click", function () {
-    applyLanguage(currentLang === "de" ? "it" : "de", false);
+    changeLanguage(currentLang === "de" ? "it" : "de");
   });
 
   var menuToggle = document.getElementById("menuToggle");
   var siteNav = document.getElementById("siteNav");
-  menuToggle.addEventListener("click", function () {
-    var open = menuToggle.getAttribute("aria-expanded") !== "true";
-    menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.setAttribute("aria-label", open ? t("menuClose") : t("menuOpen"));
-    siteNav.classList.toggle("is-open", open);
+  function setMenu(open) {
+    menuToggle.setAttribute('aria-expanded',String(open));
+    menuToggle.setAttribute('aria-label',t(open?'menuClose':'menuOpen'));
+    siteNav.classList.toggle('is-open',open);
+    document.body.classList.toggle('menu-open',open);
+    document.getElementById('main').inert=open;
+    document.querySelector('.site-footer').inert=open;
+    if(open) siteNav.querySelector('a').focus({preventScroll:true});
+    else menuToggle.focus({preventScroll:true});
+  }
+  menuToggle.addEventListener('click',()=>setMenu(menuToggle.getAttribute('aria-expanded')!=='true'));
+  siteNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
+  document.addEventListener('keydown',e=>{
+    if(menuToggle.getAttribute('aria-expanded')!=='true')return;
+    if(e.key==='Escape')setMenu(false);
+    if(e.key==='Tab'){
+      const nodes=[...siteNav.querySelectorAll('a'),...document.querySelectorAll('.header-actions button')];
+      const i=nodes.indexOf(document.activeElement);
+      e.preventDefault();nodes[(i+(e.shiftKey?-1:1)+nodes.length)%nodes.length].focus();
+    }
   });
-  siteNav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      siteNav.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-    });
-  });
+  document.addEventListener('click',e=>{if(menuToggle.getAttribute('aria-expanded')==='true'&&!e.target.closest('.site-header'))setMenu(false)});
 
   document.querySelectorAll("[data-footer-lang]").forEach(function (button) {
     button.addEventListener("click", function () {
-      applyLanguage(button.dataset.footerLang, false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      changeLanguage(button.dataset.footerLang);
     });
   });
 

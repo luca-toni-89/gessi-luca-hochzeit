@@ -8,8 +8,8 @@
   <meta name="description" content="Gessica & Luca · 10.07.2027 · Muri & Zug">
   <title>Gessica & Luca · 10.07.2027</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=20260926-7">
-  <script src="/app.js?v=20260926-7" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260926-8">
+  <script src="/app.js?v=20260926-8" defer></script>
 </head>
 <body class="lang-pending">
   <section class="language-gate" id="languageGate" aria-label="Sprache wählen / Scegli la lingua">
@@ -37,8 +37,11 @@
     <nav class="site-nav" id="siteNav" aria-label="Navigation">
       <a href="#day" data-i18n="navDay">Der Tag</a>
       <a href="#locations" data-i18n="navLocations">Orte</a>
+      <a href="#menu" data-i18n="navMenu">Das Menü</a>
       <a href="#rsvp" data-i18n="navRsvp">Anmeldung</a>
       <a href="#photos" data-i18n="navPhotos">Fotos</a>
+      <a href="#faq" data-i18n="navFaq">Gut zu wissen</a>
+      <div class="nav-signature" aria-hidden="true">Gessica &amp; Luca<small>10 · 07 · 2027 — Il nostro giorno</small></div>
     </nav>
     <div class="header-actions">
       <button class="sound-toggle is-playing" type="button" id="soundToggle" aria-label="Musik pausieren"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
@@ -47,6 +50,8 @@
     </div>
   </header>
 
+  <div class="ambient-rings" aria-hidden="true"><i></i><i></i></div>
+  <div class="rice-field" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <main id="main">
     <section class="hero" id="top">
       <picture class="hero-picture">
@@ -58,7 +63,7 @@
       <div class="hero-content reveal">
         <p class="eyebrow hero-kicker" data-i18n="heroKicker">Il nostro giorno</p>
 
-        <h1 class="hero-title"><span>Gessica</span><i>&amp;</i><span>Luca</span></h1>
+        <h1 class="hero-title" tabindex="-1"><span>Gessica</span><i>&amp;</i><span>Luca</span></h1>
         <p class="hero-subtitle" data-i18n="heroSubtitle">Wir heiraten.</p>
         <div class="hero-date">
           <span data-i18n="heroWeekday">Samstag</span>
@@ -149,10 +154,18 @@
 
         <div class="location-grid">
           <article class="location-card reveal">
-            <div class="location-photo">
-              <img src="/images/muri-1600.webp" srcset="/images/muri-800.webp 800w, /images/muri-1600.webp 1600w" sizes="(max-width: 700px) 100vw, 60vw" width="1600" height="1200" data-i18n-alt="muriAlt" alt="Innenansicht der Klosterkirche Muri" loading="lazy" decoding="async">
-              <div class="photo-vignette" aria-hidden="true"></div>
-              <span class="location-badge" data-i18n="ceremonyBadge">Trauung</span>
+            <div class="location-photo location-slideshow" aria-label="Klosterkirche Muri">
+              <div class="location-slides">
+                <figure class="is-active"><img src="/images/muri-1600.webp" width="1600" height="1200" data-i18n-alt="muriAlt" alt="Klosterkirche Muri" loading="lazy"></figure>
+                <figure><img src="/images/muri-facade-900.webp" width="1200" height="900" data-i18n-alt="muriFacadeAlt" alt="Klosterkirche Muri" loading="lazy"></figure>
+              </div>
+              <div class="slideshow-ui">
+                <button type="button" class="slide-arrow slide-prev" data-i18n-aria="slidePrev" aria-label="Vorheriges Bild">←</button>
+                <div class="slide-counter"><strong class="slide-current">01</strong><span> / 02</span></div>
+                <button type="button" class="slide-arrow slide-next" data-i18n-aria="slideNext" aria-label="Nächstes Bild">→</button>
+                <button type="button" class="slide-arrow slide-pause" data-i18n-aria="pauseSlides" aria-label="Automatischen Bildwechsel pausieren" aria-pressed="false">Ⅱ</button>
+              </div>
+              <div class="slide-progress" aria-hidden="true"><span></span></div>
             </div>
             <div class="location-content">
               <p class="eyebrow">Muri · Aargau</p>
@@ -166,10 +179,18 @@
           </article>
 
           <article class="location-card location-card-offset reveal">
-            <div class="location-photo">
-              <img src="/images/zug-1600.webp" srcset="/images/zug-800.webp 800w, /images/zug-1600.webp 1600w" sizes="(max-width: 700px) 100vw, 60vw" width="1600" height="1200" data-i18n-alt="zugAlt" alt="Theater Casino Zug" loading="lazy" decoding="async">
-              <div class="photo-vignette" aria-hidden="true"></div>
-              <span class="location-badge" data-i18n="celebrationBadge">Feier</span>
+            <div class="location-photo location-slideshow" aria-label="Theater Casino Zug">
+              <div class="location-slides">
+                <figure class="is-active"><img src="/images/zug-1600.webp" width="1600" height="1200" data-i18n-alt="zugAlt" alt="Theater Casino Zug" loading="lazy"></figure>
+                <figure><img src="/images/zug-west-1200.webp" width="1200" height="900" data-i18n-alt="zugWestAlt" alt="Theater Casino Zug" loading="lazy"></figure>
+              </div>
+              <div class="slideshow-ui">
+                <button type="button" class="slide-arrow slide-prev" data-i18n-aria="slidePrev" aria-label="Vorheriges Bild">←</button>
+                <div class="slide-counter"><strong class="slide-current">01</strong><span> / 02</span></div>
+                <button type="button" class="slide-arrow slide-next" data-i18n-aria="slideNext" aria-label="Nächstes Bild">→</button>
+                <button type="button" class="slide-arrow slide-pause" data-i18n-aria="pauseSlides" aria-label="Automatischen Bildwechsel pausieren" aria-pressed="false">Ⅱ</button>
+              </div>
+              <div class="slide-progress" aria-hidden="true"><span></span></div>
             </div>
             <div class="location-content">
               <p class="eyebrow">Zug · Zugersee</p>
@@ -182,20 +203,7 @@
             </div>
           </article>
         </div>
-        <div class="location-slideshow reveal" id="locationSlideshow" data-i18n-aria="galleryLabel" aria-label="Impressionen unserer Orte">
-          <div class="location-slides">
-            <figure class="is-active"><img src="/images/muri-facade-900.webp" width="700" height="930" data-i18n-alt="muriFacadeAlt" alt="Fassade der Klosterkirche Muri" loading="lazy"><figcaption data-i18n="muriFacadeCaption">Muri · Fassade</figcaption></figure>
-            <figure><img src="/images/muri-1600.webp" width="1600" height="1200" data-i18n-alt="muriAlt" alt="Innenraum der Klosterkirche Muri" loading="lazy"><figcaption>Muri · Oktogon</figcaption></figure>
-            <figure><img src="/images/zug-west-1200.webp" width="1200" height="900" data-i18n-alt="zugWestAlt" alt="Westseite des Theater Casino Zug" loading="lazy"><figcaption data-i18n="zugLakeCaption">Zug · Am See</figcaption></figure>
-            <figure><img src="/images/zug-1600.webp" width="1600" height="1200" data-i18n-alt="zugAlt" alt="Theater Casino Zug" loading="lazy"><figcaption>Zug · Casino</figcaption></figure>
-          </div>
-          <div class="slideshow-ui">
-            <button type="button" class="slide-arrow slide-prev" data-i18n-aria="slidePrev" aria-label="Vorheriges Bild">←</button>
-            <div class="slide-counter" aria-live="polite"><strong id="slideCurrent">01</strong><span> / 04</span></div>
-            <button type="button" class="slide-arrow slide-next" data-i18n-aria="slideNext" aria-label="Nächstes Bild">→</button>
-          </div>
-          <div class="slide-progress" aria-hidden="true"><span></span></div>
-        </div>
+
       </div>
     </section>
 
