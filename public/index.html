@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Gessica & Luca · 10.07.2027</title>
+  <style>
+    :root { font-family: Georgia, "Times New Roman", serif; color: #281a27; background: #f8f4f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    main { text-align: center; max-width: 680px; }
+    .date { font: 600 14px/1.5 Arial, sans-serif; letter-spacing: .24em; color: #795466; }
+    h1 { font-size: clamp(3rem, 11vw, 6rem); font-weight: 400; margin: 18px 0; }
+    p { font-size: 1.2rem; line-height: 1.6; }
+    .langs { display: flex; gap: 12px; justify-content: center; margin-top: 30px; }
+    button { font: 600 16px Arial, sans-serif; padding: 13px 22px; border-radius: 100px; border: 1px solid #795466; background: transparent; color: #281a27; cursor: pointer; }
+    button[aria-pressed="true"] { background: #795466; color: white; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="date">10 · 07 · 2027</div>
+    <h1>Gessica & Luca</h1>
+    <p id="intro">Wir freuen uns, diesen Tag mit euch zu feiern. Die weiteren Informationen folgen bald.</p>
+    <div class="langs" role="group" aria-label="Sprache / Lingua">
+      <button type="button" data-lang="de" aria-pressed="true">Deutsch</button>
+      <button type="button" data-lang="it" aria-pressed="false">Italiano</button>
+    </div>
+  </main>
+  <script>
+    const copy = {
+      de: "Wir freuen uns, diesen Tag mit euch zu feiern. Die weiteren Informationen folgen bald.",
+      it: "Non vediamo l'ora di festeggiare questo giorno con voi. Presto troverete qui tutte le informazioni."
+    };
+    for (const button of document.querySelectorAll("[data-lang]")) {
+      button.addEventListener("click", () => {
+        const lang = button.dataset.lang;
+        document.documentElement.lang = lang;
+        document.getElementById("intro").textContent = copy[lang];
+        for (const other of document.querySelectorAll("[data-lang]")) {
+          other.setAttribute("aria-pressed", String(other === button));
+        }
+      });
+    }
+  </script>
+</body>
+</html>
