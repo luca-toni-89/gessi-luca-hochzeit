@@ -12,8 +12,10 @@ Website für den 10. Juli 2027. Geplante Adresse: https://ilnostrogiorno.congiu.
 
 ## Infrastruktur
 
-- Cloudflare Worker für Website und API
-- Cloudflare D1 für Anmeldungen
-- Cloudflare R2 für Fotos
+- Cloudflare Pages für Website und Pages Functions für die API
+- Cloudflare D1 für Anmeldungen (Einrichtung ausstehend)
+- Cloudflare R2 für Fotos (Einrichtung ausstehend)
+- GitHub-Repository `luca-toni-89/gessi-luca-hochzeit`, Produktionsbranch `main`
+- Vorschau: https://gessi-luca-hochzeit.pages.dev
 
-Die Infrastruktur wird eingerichtet, bevor die Website veröffentlicht wird. Keine Gästedaten oder Zugangsdaten in dieses öffentliche Repository committen.
+Die Domain `congiu.ch` und ihre Mail-DNS-Einträge bleiben bei Hostpoint. Die Hochzeits-Subdomain wird später separat verbunden. Keine Gästedaten oder Zugangsdaten in dieses öffentliche Repository committen.
