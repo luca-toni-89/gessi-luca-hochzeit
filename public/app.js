@@ -80,8 +80,8 @@ Object.assign(translations.it, {"skip": "Vai al contenuto", "portraitAlt": "Segn
 
 Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca am See",galleryLabel:"Impressionen unserer Orte",muriFacadeAlt:"Fassade der Klosterkirche Muri",muriFacadeCaption:"Muri · Fassade",zugWestAlt:"Westseite des Theater Casino Zug",zugLakeCaption:"Zug · Am See",menuOpen:"Menü öffnen",menuClose:"Menü schliessen"});
 Object.assign(translations.it, {portraitAlt:"Illustrazione di Gessica e Luca sul lago",galleryLabel:"Impressioni dei nostri luoghi",muriFacadeAlt:"Facciata della chiesa abbaziale di Muri",muriFacadeCaption:"Muri · Facciata",zugWestAlt:"Lato occidentale del Theater Casino Zug",zugLakeCaption:"Zugo · Sul lago",menuOpen:"Apri il menu",menuClose:"Chiudi il menu"});
-Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren"});
-Object.assign(translations.it, {heroCta:"Conferma presenza più in basso",musicPlay:"Riproduci musica",musicPause:"Metti in pausa la musica"});
+Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren",slidePrev:"Vorheriges Bild",slideNext:"Nächstes Bild"});
+Object.assign(translations.it, {heroCta:"Conferma presenza più in basso",musicPlay:"Riproduci musica",musicPause:"Metti in pausa la musica",slidePrev:"Immagine precedente",slideNext:"Immagine successiva"});
 
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
