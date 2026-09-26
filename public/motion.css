@@ -103,3 +103,18 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 .hero-content.intro-playing .hero-mr-mrs path { animation:handwrittenStroke var(--ink-time) var(--ink-delay) linear forwards; }
 @keyframes handwrittenStroke { to{stroke-dashoffset:0} }
 @media(prefers-reduced-motion:reduce){.hero-mr-mrs path{animation:none!important;stroke-dashoffset:0}}
+
+.hero-mr-mrs path:nth-child(1) {--ink-delay:0.4s;--ink-time:2s;}
+.hero-mr-mrs path:nth-child(2) {--ink-delay:2.3s;--ink-time:1.1s;}
+.hero-mr-mrs path:nth-child(3) {--ink-delay:3.3s;--ink-time:1.3s;}
+.hero-mr-mrs path:nth-child(4) {--ink-delay:4.5s;--ink-time:2s;}
+.hero-mr-mrs path:nth-child(5) {--ink-delay:6.4s;--ink-time:1s;}
+.hero-mr-mrs path:nth-child(6) {--ink-delay:7.3s;--ink-time:1.4s;}
+.rice-field i:nth-child(17) {--n:16;}
+.rice-field i:nth-child(18) {--n:17;}
+.rice-field i:nth-child(19) {--n:18;}
+.rice-field i:nth-child(20) {--n:19;}
+.rice-field i:nth-child(21) {--n:20;}
+.rice-field i:nth-child(22) {--n:21;}
+.rice-field i:nth-child(23) {--n:22;}
+.rice-field i:nth-child(24) {--n:23;}
