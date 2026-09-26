@@ -99,8 +99,7 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 /* A single pen line is progressively uncovered; no visible pen or letter fade. */
 .hero-mr-mrs { display:block; position:relative; width:clamp(220px,28vw,300px); height:auto; margin:8px auto 30px; overflow:visible; color:#111; transform:translateX(-10px) rotate(-16deg); }
 .hero-mr-mrs path { stroke-width:5.2; stroke-dasharray:1; stroke-dashoffset:1; }
-.hero-content.intro-playing > .hero-mr-mrs { animation:none; }
-.hero-content.intro-playing .hero-mr-mrs path { animation:handwrittenStroke var(--ink-time) var(--ink-delay) linear forwards; }
+.signature-interlude.is-visible .hero-mr-mrs path { animation:handwrittenStroke var(--ink-time) var(--ink-delay) linear forwards; }
 @keyframes handwrittenStroke { to{stroke-dashoffset:0} }
 @media(prefers-reduced-motion:reduce){.hero-mr-mrs path{animation:none!important;stroke-dashoffset:0}}
 
@@ -118,3 +117,7 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 .rice-field i:nth-child(22) {--n:21;}
 .rice-field i:nth-child(23) {--n:22;}
 .rice-field i:nth-child(24) {--n:23;}
+
+.signature-interlude { padding:44px 24px 30px; background:#f5f0e8; }
+.signature-interlude .hero-mr-mrs { margin:0 auto; }
+.signature-interlude + .love-note { padding-top:40px; }

@@ -383,7 +383,7 @@ function initReveal() {
   document.querySelectorAll('.menu-handwriting').forEach((node,i)=>writeIn(node,250+i*1200,130));
   // Each piece has one motion owner: never fade both a card and its text.
   document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
-  const selector='.section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .site-footer';
+  const selector='.signature-interlude, .section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-item, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form, .photo-intro > *, .upload-card, .faq-list details, .site-footer';
   const items=[...document.querySelectorAll(selector)];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   items.forEach(node=>{
