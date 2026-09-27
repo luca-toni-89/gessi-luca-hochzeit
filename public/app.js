@@ -176,6 +176,8 @@ Object.assign(translations.de, {"skip": "Zum Inhalt", "portraitAlt": "Typografis
 
 Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca am See",galleryLabel:"Impressionen unserer Orte",muriFacadeAlt:"Fassade der Klosterkirche Muri",muriFacadeCaption:"Muri · Fassade",zugWestAlt:"Westseite des Theater Casino Zug",zugLakeCaption:"Zug · Am See",menuOpen:"Menü öffnen",menuClose:"Menü schliessen"});
 Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren",slidePrev:"Vorheriges Bild",slideNext:"Nächstes Bild"});
+Object.assign(translations.de, {musicStarting:"♪ Musik startet"});
+Object.assign(translations.it, {musicStarting:"♪ La musica inizia"});
 
 Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
 Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
@@ -235,6 +237,12 @@ function applyLanguage(lang, closeGate) {
       document.body.classList.remove('lang-pending');
       resetToTop();
       replayHero();
+      const hint=document.getElementById('musicHint');
+      if (document.getElementById('soundToggle').getAttribute('aria-pressed') === 'true') {
+        hint.textContent=t('musicStarting');
+        hint.classList.add('is-visible');
+        setTimeout(() => hint.classList.remove('is-visible'), 4200);
+      }
       document.querySelector('.hero-title').focus({preventScroll:true});
     }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : motionMilliseconds('--gate-fade'));
   }
