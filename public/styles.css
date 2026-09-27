@@ -710,11 +710,11 @@ progress { width:100%; height:6px; margin-top:18px; accent-color:#e4b76d; }
 
 /* Sage & Ivory — final art direction */
 @font-face { font-family:Allura; src:url('/fonts/allura.ttf') format('truetype'); font-display:swap; }
-@font-face { font-family:Gessele; src:url('/fonts/gessele.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:GreatVibes; src:url('/fonts/great-vibes.woff') format('woff'); font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-regular.ttf') format('truetype'); font-weight:400; font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-medium.ttf') format('truetype'); font-weight:500; font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-italic.ttf') format('truetype'); font-style:italic; font-display:swap; }
-:root { --paper:#f5f0e8; --paper-deep:#e8dfd0; --ink:#171717; --muted:#4f554e; --wine:#738c70; --wine-dark:#536b53; --sage:#8baa88; --gold:#b7a071; --line:rgba(23,23,23,.16); --white:#fffdf7; --serif:Cormorant,Georgia,serif; --script:Gessele,Allura,'Snell Roundhand',cursive; --radius:2px; }
+:root { --paper:#f5f0e8; --paper-deep:#e8dfd0; --ink:#171717; --muted:#4f554e; --wine:#738c70; --wine-dark:#536b53; --sage:#8baa88; --gold:#b7a071; --line:rgba(23,23,23,.16); --white:#fffdf7; --serif:Cormorant,Georgia,serif; --script:GreatVibes,Allura,'Snell Roundhand',cursive; --radius:2px; }
 body { background:var(--paper); color:var(--ink); }
 ::selection { background:#8baa88; color:#fff; }
 .site-header { top:22px; width:min(1180px,calc(100% - 40px)); border-radius:999px; padding:10px 12px 10px 24px; background:rgba(245,240,232,.88); color:var(--ink); border:1px solid rgba(255,255,255,.7); box-shadow:0 16px 45px rgba(28,43,29,.12); backdrop-filter:blur(18px); }
@@ -733,7 +733,7 @@ body { background:var(--paper); color:var(--ink); }
 .hero::before,.hero::after { display:none; }
 .hero-picture,.hero-picture img,.hero-shade { position:absolute; inset:0; width:100%; height:100%; }
 .hero-picture { z-index:-3; }
-.hero-picture img { object-fit:cover; object-position:center 48%; transform:scale(1.025); animation:heroZoom 10s ease-out both; }
+.hero-picture img { object-fit:cover; object-position:center 28%; transform:scale(1.025); animation:heroZoom 10s ease-out both; }
 .hero-shade { z-index:-2; background:linear-gradient(180deg,rgba(10,20,14,.12) 12%,rgba(10,18,13,.08) 42%,rgba(9,15,11,.72) 100%),linear-gradient(90deg,rgba(0,0,0,.24),transparent 55%); }
 .hero-content { width:min(900px,100%); max-width:900px; margin:0 auto; display:grid; place-items:center; text-align:center; padding:0; text-shadow:0 2px 24px rgba(0,0,0,.28); }
 .hero-kicker { color:#fff; font-size:.72rem; }
@@ -847,7 +847,7 @@ input:focus,textarea:focus { border-color:#738c70; box-shadow:0 0 0 4px rgba(115
 .page-progress { position:fixed; inset:0 0 auto; height:3px; z-index:2000; background:rgba(245,240,232,.18); pointer-events:none; }
 .page-progress span { display:block; width:100%; height:100%; background:#8baa88; transform:scaleX(0); transform-origin:left center; will-change:transform; }
 .language-gate { padding:24px; color:#fff; background:#172019; overflow:hidden; }
-.gate-backdrop { position:absolute; inset:0; background:linear-gradient(180deg,rgba(7,13,9,.2),rgba(7,13,9,.74)),url('/images/gessica-luca-1600.webp') center 46%/cover no-repeat; animation:gateImage 9s ease-out both; }
+.gate-backdrop { position:absolute; inset:0; background:linear-gradient(180deg,rgba(7,13,9,.2),rgba(7,13,9,.74)),url('/images/gessica-luca-1600.webp?v=20260927-2') center 28%/cover no-repeat; animation:gateImage 9s ease-out both; }
 .language-gate::before,.language-gate::after { z-index:1; border-color:rgba(255,255,255,.24); animation:gateOrb 5s ease-in-out infinite alternate; }
 .gate-card { width:min(720px,100%); text-shadow:0 4px 30px rgba(0,0,0,.4); animation:gateCard 1.8s .15s cubic-bezier(.2,.8,.2,1) both; }
 .gate-monogram { width:108px; height:108px; margin-bottom:18px; border-color:rgba(255,255,255,.55); font-family:var(--script); font-size:2.5rem; }
@@ -1078,7 +1078,7 @@ main section[tabindex="-1"]:focus { outline:none; }
 .skip-link:not(:focus) { visibility:hidden; }
 
 /* Reuse the mobile hero asset on the language screen instead of downloading both portraits. */
-@media(max-width:700px){.gate-backdrop{background-image:linear-gradient(180deg,rgba(7,13,9,.2),rgba(7,13,9,.74)),url('/images/gessica-luca-900.webp')}}
+@media(max-width:700px){.gate-backdrop{background-image:linear-gradient(180deg,rgba(7,13,9,.2),rgba(7,13,9,.74)),url('/images/gessica-luca-900.webp?v=20260927-2')}}
 
 /* Leave room for the script L's flourish inside both monogram rings. */
 .gate-monogram { width:132px; height:132px; font-size:2.5rem; gap:4px; padding:12px 20px 12px 12px; }
