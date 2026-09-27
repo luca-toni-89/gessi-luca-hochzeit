@@ -30,7 +30,7 @@
   <link rel="preload" as="image" href="/images/gessica-luca-1600.webp" media="(min-width: 701px)" fetchpriority="high">
   <link rel="stylesheet" href="/styles.css?v=20260927-27">
   <link rel="stylesheet" href="/motion.css?v=20260927-23">
-  <script src="/app.js?v=20260927-24" defer></script>
+  <script src="/app.js?v=20260927-28" defer></script>
 </head>
 <body class="lang-pending">
   <section class="language-gate" id="languageGate" aria-label="Sprache wählen / Scegliete la lingua">
@@ -60,9 +60,9 @@
       <a href="#day" data-i18n="navDay">Der Tag</a>
       <a href="#locations" data-i18n="navLocations">Orte</a>
       <a href="#menu" data-i18n="navMenu">Das Menü</a>
-      <a href="#rsvp" data-i18n="navRsvp">Anmeldung</a>
       <a href="#photos" data-i18n="navPhotos">Fotos</a>
       <a href="#faq" data-i18n="navFaq">Gut zu wissen</a>
+      <a href="#rsvp" data-i18n="navRsvp">Anmeldung</a>
       <div class="nav-signature" aria-hidden="true">Gessica &amp; Luca<small>10 · 07 · 2027 — Il nostro giorno</small></div>
     </nav>
     <div class="header-actions">
@@ -251,10 +251,65 @@
       </div>
     </section>
 
+    <section class="photos-section section" id="photos">
+      <div class="section-shell photo-shell">
+        <div class="photo-intro reveal">
+          <p class="section-number">05</p>
+          <p class="eyebrow" data-i18n="photosKicker">Eure Perspektive</p>
+          <h2 data-i18n="photosTitle">Zeigt uns den Tag durch eure Augen.</h2>
+          <p data-i18n="photosText">Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!</p>
+        </div>
+
+        <div class="upload-card reveal" id="uploadCard">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden>
+          <button class="upload-dropzone" type="button" id="uploadDropzone">
+            <span class="upload-icon" aria-hidden="true">↥</span>
+            <strong data-i18n="uploadTitle">Fotos auswählen oder hier ablegen</strong>
+            <small data-i18n="uploadHint">JPG, PNG, WEBP oder HEIC · max. 15 MB pro Foto</small>
+          </button>
+          <div class="upload-files" id="uploadFiles"></div>
+          <button class="button button-primary upload-submit" type="button" id="uploadSubmit" disabled>
+            <span data-i18n="uploadButton">Fotos hochladen</span>
+            <span class="button-arrow" aria-hidden="true">↑</span>
+          </button>
+          <progress id="uploadProgress" max="100" value="0" hidden aria-label="Upload" data-i18n-aria="uploadLabel"></progress>
+          <p class="form-status" id="uploadStatus" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section section" id="faq">
+      <div class="section-shell faq-shell">
+        <div class="section-heading reveal">
+          <p class="section-number">06</p>
+          <p class="eyebrow">FAQ</p>
+          <h2 data-i18n="faqTitle">Gut zu wissen.</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <details>
+            <summary><span data-i18n="faqDressQ">Gibt es einen Dresscode?</span><i>＋</i></summary>
+            <p data-i18n="faqDressA">Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqTravelQ">Wie gelange ich zu den Locations?</span><i>＋</i></summary>
+            <p data-i18n="faqTravelA">Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqFoodQ">Was ist mit Allergien oder Unverträglichkeiten?</span><i>＋</i></summary>
+            <p data-i18n="faqFoodA">Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.</p>
+          </details>
+          <details>
+            <summary><span data-i18n="faqKidsQ">Was ist mit Kindern?</span><i>＋</i></summary>
+            <p data-i18n="faqKidsA">Falls Kinder Teil eurer Einladung sind, könnt ihr sie wie jede andere Person bei der Anmeldung hinzufügen.</p>
+          </details>
+        </div>
+      </div>
+    </section>
     <section class="rsvp-section section" id="rsvp">
       <div class="section-shell rsvp-shell">
         <div class="section-heading reveal">
-          <p class="section-number">05</p>
+          <p class="section-number">07</p>
           <p class="eyebrow" data-i18n="navRsvp">Anmeldung</p>
           <h2 data-i18n="rsvpTitle">Seid ihr dabei?</h2>
           <p data-i18n="rsvpIntro">Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.</p>
@@ -319,61 +374,6 @@
       </div>
     </section>
 
-    <section class="photos-section section" id="photos">
-      <div class="section-shell photo-shell">
-        <div class="photo-intro reveal">
-          <p class="section-number">06</p>
-          <p class="eyebrow" data-i18n="photosKicker">Eure Perspektive</p>
-          <h2 data-i18n="photosTitle">Zeigt uns den Tag durch eure Augen.</h2>
-          <p data-i18n="photosText">Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!</p>
-        </div>
-
-        <div class="upload-card reveal" id="uploadCard">
-          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden>
-          <button class="upload-dropzone" type="button" id="uploadDropzone">
-            <span class="upload-icon" aria-hidden="true">↥</span>
-            <strong data-i18n="uploadTitle">Fotos auswählen oder hier ablegen</strong>
-            <small data-i18n="uploadHint">JPG, PNG, WEBP oder HEIC · max. 15 MB pro Foto</small>
-          </button>
-          <div class="upload-files" id="uploadFiles"></div>
-          <button class="button button-primary upload-submit" type="button" id="uploadSubmit" disabled>
-            <span data-i18n="uploadButton">Fotos hochladen</span>
-            <span class="button-arrow" aria-hidden="true">↑</span>
-          </button>
-          <progress id="uploadProgress" max="100" value="0" hidden aria-label="Upload" data-i18n-aria="uploadLabel"></progress>
-          <p class="form-status" id="uploadStatus" role="status"></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq-section section" id="faq">
-      <div class="section-shell faq-shell">
-        <div class="section-heading reveal">
-          <p class="section-number">07</p>
-          <p class="eyebrow">FAQ</p>
-          <h2 data-i18n="faqTitle">Gut zu wissen.</h2>
-        </div>
-
-        <div class="faq-list reveal">
-          <details>
-            <summary><span data-i18n="faqDressQ">Gibt es einen Dresscode?</span><i>＋</i></summary>
-            <p data-i18n="faqDressA">Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.</p>
-          </details>
-          <details>
-            <summary><span data-i18n="faqTravelQ">Wie gelange ich zu den Locations?</span><i>＋</i></summary>
-            <p data-i18n="faqTravelA">Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.</p>
-          </details>
-          <details>
-            <summary><span data-i18n="faqFoodQ">Was ist mit Allergien oder Unverträglichkeiten?</span><i>＋</i></summary>
-            <p data-i18n="faqFoodA">Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.</p>
-          </details>
-          <details>
-            <summary><span data-i18n="faqKidsQ">Was ist mit Kindern?</span><i>＋</i></summary>
-            <p data-i18n="faqKidsA">Falls Kinder Teil eurer Einladung sind, könnt ihr sie wie jede andere Person bei der Anmeldung hinzufügen.</p>
-          </details>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">

@@ -615,11 +615,15 @@ function initAudio() {
   const audio=document.getElementById('weddingAudio'),toggle=document.getElementById('soundToggle');
   if(!audio||!toggle)return;
   const Context=window.AudioContext||window.webkitAudioContext;
-  let context,gain,source,buffer,loading,offset=0,startedAt=0,wanted=false,fallback=!Context;
-  let raw=fetch(audio.getAttribute('src'),{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error('Audio unavailable');return r.arrayBuffer()});
+  // Playback sessions route music independently of the iPhone ringer switch.
+  // Older browsers use the native media element rather than an ambient AudioContext.
+  let playbackSession=false;
+  try { if(navigator.audioSession){navigator.audioSession.type='playback';playbackSession=true;} } catch {}
+  let context,gain,source,buffer,loading,offset=0,startedAt=0,wanted=false,fallback=!Context||!playbackSession;
+  let raw=fallback?Promise.resolve(null):fetch(audio.getAttribute('src'),{cache:'force-cache'}).then(r=>{if(!r.ok)throw new Error('Audio unavailable');return r.arrayBuffer()});
   raw.catch(()=>{});
   function sync(){
-    const playing=fallback?!audio.paused:!!source&&context?.state==='running';
+    const playing=fallback?!audio.paused&&audio.readyState>=3:!!source&&context?.state==='running';
     toggle.classList.toggle('is-playing',playing);
     toggle.classList.toggle('is-loading',wanted&&!playing);
     toggle.setAttribute('aria-pressed',String(wanted));
@@ -635,6 +639,7 @@ function initAudio() {
   }
   function fallbackPlay(){audio.volume=.68;audio.play().then(sync).catch(()=>{wanted=false;sync()})}
   function play(){
+    try { if(navigator.audioSession)navigator.audioSession.type='playback'; } catch {}
     wanted=true;
     if(fallback){fallbackPlay();return;}
     if(!context){
@@ -665,7 +670,8 @@ function initAudio() {
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)recover()});
   document.addEventListener('pointerdown',recover,{passive:true});
   document.addEventListener('wedding:languagechange',sync);
-  audio.addEventListener('play',sync);audio.addEventListener('pause',sync);
+  ['play','playing','pause','waiting','canplay'].forEach(event=>audio.addEventListener(event,sync));
+  audio.addEventListener('loadedmetadata',()=>{audio.dataset.duration=String(audio.duration)});
   sync();
 }
 
