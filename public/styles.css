@@ -911,7 +911,7 @@ input:focus,textarea:focus { border-color:#738c70; box-shadow:0 0 0 4px rgba(115
 .language-gate.is-closing .gate-card { animation:none; transition:opacity 1s ease,transform 1.3s ease; }
 body.lang-pending .hero-content { opacity:0; }
 .hero-content>* { animation:none; }
-.hero-title > span,.hero-title > i { animation:none!important; }
+.hero-title > span:not(.written-name),.hero-title > i { animation:none!important; }
 .hero-title .written-letter,.written-letter { display:inline-block; animation:inkAppear 1s var(--letter-delay,0ms) cubic-bezier(.2,.65,.25,1) both; }
 .hero-title span.written-letter { display:inline-block; margin:0; }
 @keyframes inkAppear { from{opacity:0;clip-path:inset(0 100% 0 0);transform:translateY(.13em);filter:blur(3px)} to{opacity:1;clip-path:inset(-20% -15% -25% -15%);transform:none;filter:none} }
@@ -919,6 +919,11 @@ body.lang-pending .hero-content { opacity:0; }
 .hero-content.intro-playing>.hero-date { animation:heroSlowIn 1.8s 1.8s both; }
 .hero-content.intro-playing>.hero-rsvp-note { animation:heroSlowIn 1.8s 2.1s both; }
 .hero-title { outline:none; }
+.hero-title { font-family:var(--script); font-weight:400; letter-spacing:0; line-height:1; font-size:clamp(5.5rem,11vw,11rem); }
+.hero-title > span.written-name { animation:quietInk 1.65s var(--letter-delay,0ms) ease both; }
+.hero-title i { font-size:.68em; }
+.gate-card h1 { font-family:var(--script); font-weight:400; letter-spacing:0; line-height:1; }
+@media(max-width:700px){ .hero-title { font-size:clamp(3.4rem,17vw,6rem); } .gate-card h1 { font-size:clamp(3.5rem,13vw,6rem); } }
 .hero-subtitle { overflow:visible; padding:.12em 0; }
 .hero-date { gap:14px; font-size:clamp(1rem,1.6vw,1.2rem); letter-spacing:.08em; justify-content:center; }
 .hero-date strong { font-size:clamp(1.15rem,2vw,1.5rem); color:#fff; }
