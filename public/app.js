@@ -14,9 +14,9 @@ const translations = {
     churchDescription: "Barock, Geschichte und genau der feierliche Rahmen, den wir uns für unser Ja-Wort wünschen.",
     casinoDescription: "Hier feiern wir weiter – mit Dinner, Musik und euch bis tief in die Nacht.", openMaps: "In Maps öffnen",
     menuKicker: "Mangiare, ridere, brindare", menuTitle: "Das Menü bleibt noch ein kleines Geheimnis.",
-    menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien und Unverträglichkeiten könnt ihr direkt bei der Anmeldung angeben.",
-    menuTag1: "Menü folgt", menuTag2: "Unverträglichkeiten bei der Anmeldung",
-    rsvpTitle: "Seid ihr dabei?", rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.",
+    menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge.",
+    menuTag1: "Menü folgt", menuTag2: "Details folgen",
+    rsvpTitle: "Seid ihr dabei?", rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen.",
     contactName: "Kontaktperson", contactEmail: "E-Mail", optional: "(optional)", attendanceQuestion: "Könnt ihr mit uns feiern?",
     attendYes: "Ja, wir sind dabei!", attendYesSub: "Wir freuen uns.", attendNo: "Leider schaffen wir es nicht.", attendNoSub: "Wir denken an euch.",
     guestsKicker: "Eure Gruppe", guestsTitle: "Wer kommt mit?", addGuest: "Person hinzufügen",
@@ -74,11 +74,11 @@ const translations = {
     "openMaps": "Aprire in Maps",
     "menuKicker": "Mangiare, ridere, brindare",
     "menuTitle": "Il menù? Ancora una piccola sorpresa!",
-    "menuText": "Non appena avremo definito il menù, troverete qui tutte le portate. Potrete segnalarci eventuali allergie o intolleranze direttamente nel modulo di conferma.",
+    "menuText": "Non appena avremo definito il menù, troverete qui tutte le portate.",
     "menuTag1": "Menù in arrivo",
-    "menuTag2": "Segnalateci eventuali intolleranze",
+    "menuTag2": "Dettagli in arrivo",
     "rsvpTitle": "Ci sarete?",
-    "rsvpIntro": "Non vediamo l'ora di festeggiare con voi. Indicate tutte le persone che parteciperanno, specificando per ciascuna eventuali allergie o intolleranze alimentari.",
+    "rsvpIntro": "Non vediamo l'ora di festeggiare con voi. Indicate tutte le persone che parteciperanno.",
     "contactName": "Referente",
     "contactEmail": "E-mail (facoltativa)",
     "optional": "(facoltativo)",
@@ -241,7 +241,7 @@ function applyLanguage(lang, closeGate) {
       if (document.getElementById('soundToggle').getAttribute('aria-pressed') === 'true') {
         hint.textContent=t('musicStarting');
         hint.classList.add('is-visible');
-        setTimeout(() => hint.classList.remove('is-visible'), 4200);
+        setTimeout(() => hint.classList.remove('is-visible'), 3400);
       }
       document.querySelector('.hero-title').focus({preventScroll:true});
     }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : motionMilliseconds('--gate-fade'));
@@ -317,12 +317,10 @@ function syncGuestLabels() {
     var heading = card.querySelector(".guest-heading");
     var first = card.querySelector(".guest-label-first");
     var last = card.querySelector(".guest-label-last");
-    var diet = card.querySelector(".guest-label-diet");
     var remove = card.querySelector(".guest-remove");
     if (heading) heading.textContent = t("guest") + " " + (index + 1);
     if (first) first.textContent = t("firstName");
     if (last) last.textContent = t("lastName");
-    if (diet) diet.textContent = t("dietary");
     if (remove) remove.setAttribute("aria-label", t("removeGuest"));
   });
 }
@@ -345,9 +343,12 @@ function addGuest(removable) {
 function setAttendanceState() {
   var attending = document.querySelector('input[name="attending"]:checked').value === "yes";
   var area = document.getElementById("guestArea");
+  var contact = document.getElementById("contactArea");
   area.classList.toggle("is-hidden", !attending);
+  contact.classList.toggle("is-hidden", attending);
+  contact.querySelector('input').required = !attending;
   area.querySelectorAll("input[data-field]").forEach(function (input) {
-    input.required = attending && input.dataset.field !== "dietary";
+    input.required = attending;
   });
 }
 
@@ -445,18 +446,15 @@ async function submitRsvp(event) {
     document.querySelectorAll(".guest-card").forEach(function (card) {
       guests.push({
         firstName: card.querySelector('[data-field="firstName"]').value.trim(),
-        lastName: card.querySelector('[data-field="lastName"]').value.trim(),
-        dietary: card.querySelector('[data-field="dietary"]').value.trim()
+        lastName: card.querySelector('[data-field="lastName"]').value.trim()
       });
     });
   }
 
   var payload = {
-    contactName: form.elements.contactName.value.trim(),
-    contactEmail: form.elements.contactEmail.value.trim(),
+    contactName: attending ? '' : form.elements.contactName.value.trim(),
     attending: attending,
     language: currentLang,
-    notes: form.elements.notes.value.trim(),
     guests: guests
   };
 

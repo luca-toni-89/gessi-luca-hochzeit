@@ -1094,7 +1094,8 @@ main section[tabindex="-1"]:focus { outline:none; }
 .signature { padding:.14em .18em .28em .3em; line-height:1.25; }
 @media(max-width:700px){.signature{font-size:clamp(2.9rem,13vw,3.4rem)}}
 
-.music-hint { position:fixed; z-index:80; left:50%; bottom:calc(26px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%,6px); width:max-content; max-width:calc(100vw - 40px); padding:9px 16px; border:1px solid rgba(115,140,112,.2); border-radius:999px; background:rgba(245,240,232,.9); color:#536b53; box-shadow:0 8px 25px rgba(23,32,25,.08); font:500 .7rem/1.3 var(--sans); letter-spacing:.06em; text-align:center; pointer-events:none; opacity:0; }
-.music-hint.is-visible { animation:musicHintFade 4.2s ease both; }
-@keyframes musicHintFade { 0%{opacity:0;transform:translate(-50%,6px)} 18%,68%{opacity:.82;transform:translate(-50%,0)} 100%{opacity:0;transform:translate(-50%,-5px)} }
-@media(prefers-reduced-motion:reduce){.music-hint.is-visible{animation:none!important;opacity:.82;transform:translate(-50%,0)}}
+.music-hint { position:fixed; z-index:80; left:50%; bottom:calc(26px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%,6px); width:max-content; max-width:calc(100vw - 40px); padding:9px 16px; border:1px solid rgba(115,140,112,.2); border-radius:999px; background:rgba(245,240,232,.9); color:#536b53; box-shadow:0 8px 25px rgba(23,32,25,.08); font:500 .7rem/1.3 var(--sans); letter-spacing:.06em; text-align:center; pointer-events:none; opacity:0; transition:opacity .75s ease,transform .75s ease; }
+.music-hint.is-visible { opacity:.82; transform:translate(-50%,0); }
+@media(prefers-reduced-motion:reduce){.music-hint{transition:none}}
+.contact-area.is-hidden { display:none; }
+.contact-area { margin-bottom:30px; }

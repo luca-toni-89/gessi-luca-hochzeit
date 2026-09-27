@@ -28,9 +28,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/images/gessica-luca-900.webp?v=20260927-2" media="(max-width: 700px)" fetchpriority="high">
   <link rel="preload" as="image" href="/images/gessica-luca-1600.webp?v=20260927-2" media="(min-width: 701px)" fetchpriority="high">
-  <link rel="stylesheet" href="/styles.css?v=20260927-g-flourish">
+  <link rel="stylesheet" href="/styles.css?v=20260927-rsvp-simple">
   <link rel="stylesheet" href="/motion.css?v=20260927-24">
-  <script src="/app.js?v=20260927-music-hint" defer></script>
+  <script src="/app.js?v=20260927-rsvp-simple" defer></script>
 </head>
 <body class="lang-pending">
   <section class="language-gate" id="languageGate" aria-label="Scegliete la lingua / Sprache wählen">
@@ -243,10 +243,10 @@
           <p class="section-number">04</p>
           <p class="eyebrow" data-i18n="menuKicker">Mangiare, ridere, brindare</p>
           <h2 data-i18n="menuTitle">Das Menü bleibt noch ein kleines Geheimnis.</h2>
-          <p data-i18n="menuText">Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien und Unverträglichkeiten könnt ihr direkt bei der Anmeldung angeben.</p>
+          <p data-i18n="menuText">Sobald unser Menü final ist, findet ihr hier alle Gänge.</p>
           <div class="menu-tags">
             <span data-i18n="menuTag1">Menü folgt</span>
-            <span data-i18n="menuTag2">Unverträglichkeiten bei der Anmeldung</span>
+            <span data-i18n="menuTag2">Details folgen</span>
           </div>
         </div>
       </div>
@@ -313,21 +313,10 @@
           <p class="section-number">07</p>
           <p class="eyebrow" data-i18n="navRsvp">Anmeldung</p>
           <h2 data-i18n="rsvpTitle">Seid ihr dabei?</h2>
-          <p data-i18n="rsvpIntro">Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.</p>
+          <p data-i18n="rsvpIntro">Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen.</p>
         </div>
 
         <form class="rsvp-form reveal" id="rsvpForm" novalidate>
-          <div class="form-row form-row-two">
-            <label>
-              <span data-i18n="contactName">Kontaktperson</span>
-              <input type="text" name="contactName" autocomplete="name" maxlength="120" required>
-            </label>
-            <label>
-              <span data-i18n="contactEmail">E-Mail (optional)</span>
-              <input type="email" name="contactEmail" autocomplete="email" maxlength="254">
-            </label>
-          </div>
-
           <fieldset class="attendance-fieldset">
             <legend data-i18n="attendanceQuestion">Könnt ihr mit uns feiern?</legend>
             <div class="attendance-options">
@@ -344,6 +333,13 @@
             </div>
           </fieldset>
 
+          <div class="contact-area is-hidden" id="contactArea">
+            <label>
+              <span data-i18n="contactName">Kontaktperson</span>
+              <input type="text" name="contactName" autocomplete="name" maxlength="120">
+            </label>
+          </div>
+
           <div class="guest-area" id="guestArea">
             <div class="guest-area-head">
               <div>
@@ -356,11 +352,6 @@
             </div>
             <div id="guestList" class="guest-list"></div>
           </div>
-
-          <label class="form-message">
-            <span data-i18n="messageLabel">Nachricht an uns (optional)</span>
-            <textarea name="notes" rows="4" maxlength="1000" data-i18n-placeholder="messagePlaceholder" placeholder="Nachricht an uns"></textarea>
-          </label>
 
           <p class="privacy-note" data-i18n="privacy">Eure Angaben werden ausschliesslich für die Organisation unserer Hochzeit verwendet und nicht öffentlich gespeichert.</p>
 
@@ -400,10 +391,6 @@
           <input type="text" data-field="lastName" maxlength="80" autocomplete="family-name" required>
         </label>
       </div>
-      <label>
-        <span class="guest-label-diet"></span>
-        <input type="text" data-field="dietary" maxlength="300">
-      </label>
     </article>
   </template>
 </body>

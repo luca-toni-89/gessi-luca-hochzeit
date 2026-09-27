@@ -27,26 +27,20 @@ export async function onRequestPost(context) {
   }
 
   var contactName = text(payload.contactName, 120);
-  var contactEmail = text(payload.contactEmail, 254);
-  var notes = text(payload.notes, 1000);
   var language = payload.language === "it" ? "it" : "de";
   var attending = payload.attending === true;
   var guests = Array.isArray(payload.guests) ? payload.guests.slice(0, 10) : [];
 
-  if (!contactName) return json({ error: "Contact name is required." }, 400);
-  if (contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)) {
-    return json({ error: "Invalid email." }, 400);
-  }
   if (attending && guests.length === 0) return json({ error: "At least one guest is required." }, 400);
+  if (!attending && !contactName) return json({ error: "Contact name is required." }, 400);
 
   var normalizedGuests = [];
   if (attending) {
     for (var i = 0; i < guests.length; i += 1) {
       var firstName = text(guests[i] && guests[i].firstName, 80);
       var lastName = text(guests[i] && guests[i].lastName, 80);
-      var dietary = text(guests[i] && guests[i].dietary, 300);
       if (!firstName || !lastName) return json({ error: "Guest name is incomplete." }, 400);
-      normalizedGuests.push({ firstName: firstName, lastName: lastName, dietary: dietary });
+      normalizedGuests.push({ firstName: firstName, lastName: lastName });
     }
   }
 
@@ -54,14 +48,14 @@ export async function onRequestPost(context) {
   var statements = [
     env.DB.prepare(
       "INSERT INTO rsvps (id, contact_name, contact_email, attending, language, notes) VALUES (?, ?, ?, ?, ?, ?)"
-    ).bind(rsvpId, contactName, contactEmail || null, attending ? 1 : 0, language, notes || null)
+    ).bind(rsvpId, attending ? normalizedGuests[0].firstName + " " + normalizedGuests[0].lastName : contactName, null, attending ? 1 : 0, language, null)
   ];
 
   normalizedGuests.forEach(function (guest) {
     statements.push(
       env.DB.prepare(
         "INSERT INTO guests (id, rsvp_id, first_name, last_name, dietary_requirements) VALUES (?, ?, ?, ?, ?)"
-      ).bind(crypto.randomUUID(), rsvpId, guest.firstName, guest.lastName, guest.dietary || null)
+      ).bind(crypto.randomUUID(), rsvpId, guest.firstName, guest.lastName, null)
     );
   });
 
