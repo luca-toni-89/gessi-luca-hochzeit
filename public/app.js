@@ -284,7 +284,6 @@ function replayHero() {
   const hero=document.querySelector('.hero-content');
   hero.classList.remove('intro-playing');
   document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,350+i*850));
-  writeIn(document.querySelector('.hero-subtitle'),1600);
   void hero.offsetWidth; hero.classList.add('intro-playing');
   animateCountdownIntro();
 }
@@ -380,7 +379,6 @@ function animateCountdownIntro() {
 }
 
 function initReveal() {
-  document.querySelectorAll('.menu-handwriting').forEach((node,i)=>writeIn(node,250+i*1200,130));
   // Each piece has one motion owner: never fade both a card and its text.
   document.querySelectorAll('.reveal').forEach(n=>n.classList.remove('reveal','is-visible'));
   const selector='.signature-interlude, .section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-index, .timeline-body > *, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form > .form-row > label, .attendance-fieldset, .guest-area-head > *, .guest-card, .form-message, .privacy-note, .form-submit-row, .photo-intro > *, .upload-dropzone, .upload-submit, .faq-list details, .site-footer';
@@ -679,7 +677,6 @@ document.addEventListener("DOMContentLoaded", function () {
   resetToTop();
   applyLanguage(currentLang, false);
   writeIn(document.querySelector(".gate-card h1"),300);
-  document.querySelectorAll(".gate-vows > span").forEach(n=>writeIn(n,1300));
   document.querySelector("#main").inert=true;
   document.querySelector("#siteHeader").inert=true;
   document.querySelector(".site-footer").inert=true;
