@@ -283,14 +283,7 @@ function writeIn(node, delay=0, pace=90) {
 function replayHero() {
   const hero=document.querySelector('.hero-content');
   hero.classList.remove('intro-playing');
-  document.querySelectorAll('.hero-title > span').forEach((n,i)=>{
-    n.textContent=n.getAttribute('data-name') || n.textContent;
-    n.setAttribute('data-name',n.textContent);
-    n.style.setProperty('--letter-delay',`${350+i*850}ms`);
-    n.classList.remove('written-name');
-    void n.offsetWidth;
-    n.classList.add('written-name');
-  });
+  document.querySelectorAll('.hero-title > span').forEach((n,i)=>writeIn(n,350+i*850));
   writeIn(document.querySelector('.hero-subtitle'),1600);
   void hero.offsetWidth; hero.classList.add('intro-playing');
   animateCountdownIntro();
