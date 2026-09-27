@@ -180,8 +180,8 @@ Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musi
 Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
 Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
 Object.assign(translations.de, {"navigationLabel": "Navigation", "countdownLabel": "Countdown", "coupleLabel": "Gessica und Luca", "uploadLabel": "Upload", "heroPlaces": "Muri · Zug", "muriRegion": "Muri · Aargau", "zugRegion": "Zug · Zugersee", "documentTitle": "Gessica & Luca 🤍 Wir heiraten · 10.07.2027"});
-let currentLang = "it";
-try { currentLang = localStorage.getItem("weddingLanguage") === "de" ? "de" : "it"; } catch {}
+let currentLang = "de";
+try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
 let selectedPhotos = [];
 
