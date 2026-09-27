@@ -739,6 +739,7 @@ body { background:var(--paper); color:var(--ink); }
 .hero-kicker { color:#fff; font-size:.72rem; }
 .hero-title { position:relative; display:flex; flex-direction:row; justify-content:center; align-items:baseline; gap:clamp(9px,2vw,26px); margin:12px 0 4px; font-size:clamp(4.4rem,9vw,9rem); line-height:.82; letter-spacing:-.055em; text-align:center; }
 .hero-title span,.hero-title span:last-child { display:inline; margin:0; }
+.hero-title > span { white-space:nowrap; }
 .hero-title i { position:static; margin:0; font-family:var(--script); font-size:.58em; font-weight:400; color:#fff; transform:rotate(-8deg); text-shadow:0 2px 15px rgba(0,0,0,.35); }
 .hero-subtitle { margin:14px 0 16px; font-family:var(--script); font-size:clamp(2.2rem,4.8vw,4.2rem); font-style:normal; line-height:1; color:#fff; }
 .hero-date { margin:0 auto 24px; max-width:510px; border-color:rgba(255,255,255,.5); color:#fff; }
