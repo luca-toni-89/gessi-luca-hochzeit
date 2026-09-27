@@ -710,10 +710,11 @@ progress { width:100%; height:6px; margin-top:18px; accent-color:#e4b76d; }
 
 /* Sage & Ivory — final art direction */
 @font-face { font-family:Allura; src:url('/fonts/allura.ttf') format('truetype'); font-display:swap; }
+@font-face { font-family:Gessele; src:url('/fonts/gessele.ttf') format('truetype'); font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-regular.ttf') format('truetype'); font-weight:400; font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-medium.ttf') format('truetype'); font-weight:500; font-display:swap; }
 @font-face { font-family:Cormorant; src:url('/fonts/cormorant-italic.ttf') format('truetype'); font-style:italic; font-display:swap; }
-:root { --paper:#f5f0e8; --paper-deep:#e8dfd0; --ink:#171717; --muted:#4f554e; --wine:#738c70; --wine-dark:#536b53; --sage:#8baa88; --gold:#b7a071; --line:rgba(23,23,23,.16); --white:#fffdf7; --serif:Cormorant,Georgia,serif; --script:Allura,'Snell Roundhand',cursive; --radius:2px; }
+:root { --paper:#f5f0e8; --paper-deep:#e8dfd0; --ink:#171717; --muted:#4f554e; --wine:#738c70; --wine-dark:#536b53; --sage:#8baa88; --gold:#b7a071; --line:rgba(23,23,23,.16); --white:#fffdf7; --serif:Cormorant,Georgia,serif; --script:Gessele,Allura,'Snell Roundhand',cursive; --radius:2px; }
 body { background:var(--paper); color:var(--ink); }
 ::selection { background:#8baa88; color:#fff; }
 .site-header { top:22px; width:min(1180px,calc(100% - 40px)); border-radius:999px; padding:10px 12px 10px 24px; background:rgba(245,240,232,.88); color:var(--ink); border:1px solid rgba(255,255,255,.7); box-shadow:0 16px 45px rgba(28,43,29,.12); backdrop-filter:blur(18px); }
