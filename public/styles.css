@@ -1103,6 +1103,10 @@ main section[tabindex="-1"]:focus { outline:none; }
 .language-flag { display:block; flex:none; width:25px; height:17px; border:1px solid rgba(255,255,255,.48); border-radius:2px; overflow:hidden; }
 .rsvp-section { padding-bottom:clamp(32px,4vw,55px); }
 .site-footer { padding-top:32px; }
+@media(max-width:900px){
+  .faq-shell { row-gap:12px; }
+  .faq-shell .section-heading,.faq-shell .section-heading h2 { margin-bottom:0; }
+}
 @media(max-width:700px){
   .menu-art { font-size:clamp(5rem,27vw,12rem); text-align:center; margin-bottom:8px; padding:.12em .07em; }
   .menu-art .menu-handwriting,
