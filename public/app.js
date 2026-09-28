@@ -240,7 +240,6 @@ function applyLanguage(lang, closeGate) {
   if (closeGate) {
     const gate = document.getElementById('languageGate');
     resetToTop();
-    document.body.classList.add('portrait-revealing');
     gate.classList.add('is-closing');
     setTimeout(() => {
       gate.hidden = true;
@@ -248,7 +247,6 @@ function applyLanguage(lang, closeGate) {
       document.querySelector('#siteHeader').inert=false;
       document.querySelector('.site-footer').inert=false;
       document.body.classList.remove('lang-pending');
-      document.body.classList.remove('portrait-revealing');
       resetToTop();
       replayHero();
       document.querySelector('.hero-title').focus({preventScroll:true});
@@ -394,7 +392,7 @@ function animateCountdownIntro() {
       else{countdown();countdownTimer=setInterval(countdown,1000);}
     }
     countdownFrame=requestAnimationFrame(frame);
-  },2900);
+  },2400);
 }
 
 function initReveal() {
@@ -593,8 +591,8 @@ function initSlideshow() {
     clearTimeout(timer);root.classList.remove('is-timing');
     progressAnimation?.cancel();
     if(!visible||paused||document.hidden)return;
-    progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:7500,fill:'forwards',easing:'linear'});
-    timer=setTimeout(()=>show(index+1),7500);
+    progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:5000,fill:'forwards',easing:'linear'});
+    timer=setTimeout(()=>show(index+1),5000);
   }
   let changeRequest=0;
   async function show(next){
