@@ -123,6 +123,9 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 
 .signature-interlude { padding:44px 24px 10px; background:#f5f0e8; }
 .signature-interlude .hero-mr-mrs { margin:0 auto; }
+.signature-heart { display:block; width:22px; height:22px; margin:3px auto 0; color:#111; transform-origin:center; animation:signatureHeartbeat 2.4s ease-in-out infinite; }
+@keyframes signatureHeartbeat { 0%,42%,100%{transform:scale(1)} 12%{transform:scale(1.16)} 25%{transform:scale(1.04)} 32%{transform:scale(1.12)} }
+@media(prefers-reduced-motion:reduce){.signature-heart{animation:none}}
 .signature-interlude + .love-note { padding-top:16px; }
 
 /* Distinct entrances, using only opacity and transform. No blur or nested fades. */
