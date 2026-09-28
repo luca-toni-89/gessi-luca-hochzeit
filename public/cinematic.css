@@ -16,9 +16,9 @@ body.lang-pending .site-header,body.lang-pending .hero-folio,body.lang-pending .
 .hero-picture img { animation:none; transform:scale(1); filter:blur(0); transition:filter 2.8s var(--motion-ease); }
 body.lang-pending .hero-picture img { filter:blur(10px); }
 body.lang-pending.portrait-revealing .hero-picture img { filter:blur(0); }
-body:not(.lang-pending) .hero-picture img { animation:cinemaPortrait 10s .5s ease-in-out infinite alternate both; }
+body:not(.lang-pending) .hero-picture img { animation:cinemaPortrait 5s .5s ease-in-out infinite alternate both; }
 body.hero-offscreen .hero-picture img { animation-play-state:paused; }
-@keyframes cinemaPortrait { from{transform:scale(1)} to{transform:scale(1.07)} }
+@keyframes cinemaPortrait { from{transform:scale(1)} to{transform:scale(1.15)} }
 .hero::after { content:""; display:block; position:absolute; inset:-15%; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 82% 8%,#f8d68b4a,transparent 53%),linear-gradient(118deg,transparent 42%,#fff1cf10 49%,transparent 58%); mix-blend-mode:screen; opacity:.55; transform-origin:top right; animation:cinemaLight 18s ease-in-out infinite alternate; }
 @keyframes cinemaLight { from{opacity:.22;transform:translate3d(2%,0,0) rotate(-3deg)} to{opacity:.65;transform:translate3d(-2%,2%,0) rotate(3deg)} }
 .hero-content { opacity:var(--content-fade); translate:0 var(--content-y); }
