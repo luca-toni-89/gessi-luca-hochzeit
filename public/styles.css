@@ -1097,8 +1097,5 @@ main section[tabindex="-1"]:focus { outline:none; }
 .contact-area.is-hidden { display:none; }
 .contact-area { margin-bottom:30px; }
 
-/* Show the whole church in each Muri gallery frame, including portrait photos. */
-.muri-gallery { background:#202820; }
-.muri-gallery .location-slides img { object-fit:contain; object-position:center; }
 .guest-area > #addGuest { display:flex; margin-top:22px; }
 @media(max-width:700px){.guest-area > #addGuest{width:100%;justify-content:center}}
