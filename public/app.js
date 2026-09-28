@@ -392,7 +392,7 @@ function animateCountdownIntro() {
       else{countdown();countdownTimer=setInterval(countdown,1000);}
     }
     countdownFrame=requestAnimationFrame(frame);
-  },2400);
+  },2900);
 }
 
 function initReveal() {
@@ -591,8 +591,8 @@ function initSlideshow() {
     clearTimeout(timer);root.classList.remove('is-timing');
     progressAnimation?.cancel();
     if(!visible||paused||document.hidden)return;
-    progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:5000,fill:'forwards',easing:'linear'});
-    timer=setTimeout(()=>show(index+1),5000);
+    progressAnimation=root.querySelector('.slide-progress span').animate([{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:7500,fill:'forwards',easing:'linear'});
+    timer=setTimeout(()=>show(index+1),7500);
   }
   let changeRequest=0;
   async function show(next){

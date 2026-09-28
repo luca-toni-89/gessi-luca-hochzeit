@@ -1,0 +1,95 @@
+/* A coordinated cinematic layer. Layout, copy and image crops stay unchanged. */
+:root { --cinema-ease:cubic-bezier(.16,1,.3,1); }
+
+/* Opening: warm light crosses the photograph before the names appear. */
+.language-gate::before,.language-gate::after { opacity:.4; }
+.gate-card { animation-timing-function:var(--cinema-ease); }
+.gate-backdrop::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 76% 18%,#f7db9d45,transparent 60%); opacity:.35; transition:opacity 2.8s ease; }
+.language-gate.is-closing .gate-backdrop::after { opacity:.8; }
+.hero { --camera-y:0px; --content-y:0px; --content-fade:1; }
+.hero-picture { inset:-28px 0; transform:translate3d(0,var(--camera-y),0); }
+.hero-picture img { animation:cinemaPortrait 24s ease-in-out infinite alternate; }
+@keyframes cinemaPortrait { from{transform:scale(1.07)} to{transform:scale(1.015)} }
+.hero::after { content:""; display:block; position:absolute; inset:-15%; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 82% 8%,#f8d68b4a,transparent 53%),linear-gradient(118deg,transparent 42%,#fff1cf10 49%,transparent 58%); mix-blend-mode:screen; opacity:.55; transform-origin:top right; animation:cinemaLight 18s ease-in-out infinite alternate; }
+@keyframes cinemaLight { from{opacity:.22;transform:translate3d(2%,0,0) rotate(-3deg)} to{opacity:.65;transform:translate3d(-2%,2%,0) rotate(3deg)} }
+.hero-content { opacity:var(--content-fade); translate:0 var(--content-y); }
+body.lang-pending .hero-content { opacity:0; }
+.hero-title .written-letter { animation:cinemaInk 2.4s var(--letter-delay,0ms) var(--cinema-ease) both; }
+@keyframes cinemaInk { from{opacity:0;transform:translate3d(0,.24em,0) rotate(3deg)} to{opacity:1;transform:none} }
+.hero-title > i { opacity:0; }
+.intro-playing .hero-title > i { animation:cinemaTitleAmp 2.3s 1.05s var(--cinema-ease) both!important; }
+@keyframes cinemaTitleAmp { from{opacity:0;transform:translateY(.15em) rotate(-14deg) scale(.92)} to{opacity:1;transform:rotate(-8deg) scale(1)} }
+.hero-content.intro-playing > .hero-kicker { animation:cinemaRise 2s .1s var(--cinema-ease) both; }
+.hero-content.intro-playing > .hero-subtitle { animation:cinemaRise 2.5s 1.8s var(--cinema-ease) both; }
+.hero-content.intro-playing > .hero-date { animation:cinemaRise 2.6s 2.3s var(--cinema-ease) both; }
+.hero-content.intro-playing > .hero-countdown { animation:cinemaRise 2.6s 2.65s var(--cinema-ease) both; }
+.hero-content.intro-playing > .hero-rsvp-note { animation:cinemaRise 2.2s 3.2s var(--cinema-ease) both; }
+@keyframes cinemaRise { from{opacity:0;transform:translate3d(0,20px,0)} to{opacity:1;transform:none} }
+.intro-playing .hero-countdown .countdown-unit { animation:cinemaRise 1.8s calc(2.7s + var(--unit-order,0)*.14s) var(--cinema-ease) both; }
+.hero-countdown .countdown-unit:nth-child(3){--unit-order:1}.hero-countdown .countdown-unit:nth-child(5){--unit-order:2}.hero-countdown .countdown-unit:nth-child(7){--unit-order:3}
+.hero-countdown { background:linear-gradient(110deg,#17201915,#17201938,#17201915); }
+body:not(.lang-pending) .site-header { animation:cinemaHeader 1.7s .5s var(--cinema-ease) both; }
+@keyframes cinemaHeader { from{opacity:0;translate:0 -12px} to{opacity:1;translate:0 0} }
+.rice-field,.ambient-rings { transition:opacity 1.8s ease; }
+.hero-offscreen .rice-field,.hero-offscreen .ambient-rings { opacity:0; }
+.rice-field i:nth-child(3n) { width:5px;height:5px;border-radius:50%;background:#fff1c4;box-shadow:0 0 9px #fff0c666; }
+body.lang-pending .hero::after,.hero-offscreen .hero::after,.hero-offscreen .rice-field i,.hero-offscreen .ambient-rings i { animation-play-state:paused; }
+
+/* A quiet handwritten beat, then the story opens word by word. */
+.cinema-enabled .signature-heart { opacity:0; animation:none; }
+.cinema-enabled .signature-interlude.is-visible .signature-heart { animation:cinemaHeartIn 1.1s 3.65s ease both,signatureHeartbeat 2.4s 4.75s ease-in-out infinite; }
+@keyframes cinemaHeartIn { from{opacity:0;transform:scale(.72)} to{opacity:1;transform:scale(1)} }
+.cinema-enabled .cinema-heading.reveal { opacity:1!important; transform:none!important; }
+.cinema-word { display:inline-block; opacity:0; transform:translate3d(0,.32em,0); transition:opacity 1.6s ease,transform 2s var(--cinema-ease); transition-delay:calc(var(--reveal-delay,0ms) + var(--word-delay,0ms)); }
+.is-visible .cinema-word { opacity:1;transform:translate3d(0,0,0); }
+.reveal.motion-caption { --entrance-duration:1.6s; }
+.reveal.motion-copy { --entrance-duration:1.9s; }
+.eyebrow.reveal { position:relative; }
+.section-heading > .eyebrow::before,.editorial-copy > .eyebrow::before { content:""; display:block; width:34px; height:1px; background:currentColor; opacity:.5; margin-bottom:14px; transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--cinema-ease); }
+.section-heading.centered > .eyebrow::before { margin-inline:auto;transform-origin:center; }
+.section-heading > .eyebrow.is-visible::before,.editorial-copy > .eyebrow.is-visible::before { transform:scaleX(1); }
+/* Do not add vertical space between the signature and the first caption. */
+.editorial-copy > .eyebrow::before { position:absolute;top:-8px;margin:0; }
+.signature.reveal.is-visible { animation:cinemaSignature 2.4s var(--cinema-ease) both!important; }
+@keyframes cinemaSignature { from{opacity:0;transform:translateY(12px) rotate(-2deg)} to{opacity:1;transform:none} }
+
+/* The itinerary lights up in sequence; photos dissolve without a dark frame. */
+.timeline::after { background:linear-gradient(#b7a071,#738c70);box-shadow:0 0 14px #b7a07135; }
+.timeline-item.is-current .timeline-index { box-shadow:0 0 0 7px #738c700d,0 8px 24px #536b531c; }
+.location-photo.reveal { transition:opacity 1.8s ease,transform 2.2s var(--cinema-ease),clip-path 2.2s var(--cinema-ease);clip-path:inset(0); }
+.location-photo.reveal:not(.is-visible) { transform:translate3d(0,30px,0);clip-path:inset(8% 0 5%); }
+.location-slides img { transition:transform 10s cubic-bezier(.2,.5,.3,1); }
+.location-slides figure:nth-child(even) img { transform-origin:58% 42%; }
+.location-slides figure:nth-child(odd) img { transform-origin:42% 58%; }
+.location-slideshow::after { content:""; position:absolute;inset:0;z-index:3;pointer-events:none;border:1px solid #fff8e533;border-radius:inherit; }
+.menu-art.is-visible .menu-handwriting { animation:cinemaRise 2.3s .2s var(--cinema-ease) both; }
+.menu-art.is-visible .menu-handwriting + .menu-handwriting { animation-delay:1s; }
+
+/* A tactile but calm RSVP, and a final personal sign-off. */
+.guest-card.reveal { --entrance-duration:.65s; --reveal-delay:0ms!important; }
+.rsvp-form input,.rsvp-form textarea { transition:border-color .35s,box-shadow .35s,background .35s; }
+.rsvp-form input:focus,.rsvp-form textarea:focus { box-shadow:0 0 0 4px #738c701c; }
+.button,.language-choice { transition:transform .45s var(--cinema-ease),background .4s,color .4s,box-shadow .45s; }
+@media(hover:hover) and (pointer:fine){.button:hover,.language-choice:hover{transform:translateY(-3px);box-shadow:0 10px 24px #17201912}.button:active,.language-choice:active{transform:translateY(0)}}
+.site-footer .footer-monogram { position:relative; }
+.site-footer .footer-monogram::before { content:""; position:absolute;top:0;left:calc(50% - 24px);width:48px;height:1px;background:linear-gradient(90deg,transparent,#b7a071,transparent);transform:scaleX(0);transition:transform 2s .25s var(--cinema-ease); }
+.site-footer.is-visible .footer-monogram::before { transform:scaleX(1); }
+.site-footer.is-visible .footer-date { animation:cinemaRise 1.8s .4s var(--cinema-ease) both; }
+.site-footer.is-visible [data-i18n="footerLine"] { animation:cinemaRise 2.1s .65s var(--cinema-ease) both; }
+
+@media(max-width:700px){
+ .hero::after{opacity:.35;mix-blend-mode:normal}
+ .cinema-word{transition-duration:1.3s,1.7s}
+ .rice-field i:nth-child(n+13){display:none}
+ .location-photo.reveal:not(.is-visible){clip-path:inset(4% 0 3%);transform:translate3d(0,20px,0)}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-picture,.hero-content{transform:none!important;translate:none!important;opacity:1!important}
+ .hero-picture{inset:0}
+ body.lang-pending .hero-content{opacity:0!important}
+ .hero::after,.gate-backdrop::after,.rice-field,.ambient-rings{display:none!important}
+ .hero-title > i,.intro-playing .hero-title > i,.hero-title .written-letter,.intro-playing .countdown-unit,.hero-content.intro-playing > *,.site-header,.cinema-enabled .signature-heart,.signature.reveal.is-visible,.site-footer.is-visible .footer-date,.site-footer.is-visible [data-i18n="footerLine"]{animation:none!important;opacity:1!important;transform:none!important;translate:none!important}
+ .cinema-word{opacity:1!important;transform:none!important;transition:none!important}
+ .location-photo.reveal{clip-path:none!important;transition:none!important}
+ .section-heading > .eyebrow::before,.editorial-copy > .eyebrow::before,.site-footer .footer-monogram::before{transform:none!important;transition:none!important}
+}
