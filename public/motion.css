@@ -106,12 +106,12 @@ body.lang-pending .hero-picture img,.hero-offscreen .hero-picture img { animatio
 @keyframes handwrittenStroke { to{stroke-dashoffset:0} }
 @media(prefers-reduced-motion:reduce){.hero-mr-mrs path{animation:none!important;stroke-dashoffset:0}}
 
-.hero-mr-mrs path:nth-child(1) {--ink-delay:.1s;--ink-time:.58s;}
-.hero-mr-mrs path:nth-child(2) {--ink-delay:.66s;--ink-time:.32s;}
-.hero-mr-mrs path:nth-child(3) {--ink-delay:.96s;--ink-time:.38s;}
-.hero-mr-mrs path:nth-child(4) {--ink-delay:1.32s;--ink-time:.58s;}
-.hero-mr-mrs path:nth-child(5) {--ink-delay:1.88s;--ink-time:.3s;}
-.hero-mr-mrs path:nth-child(6) {--ink-delay:2.16s;--ink-time:.4s;}
+.hero-mr-mrs path:nth-child(1) {--ink-delay:.15s;--ink-time:.85s;}
+.hero-mr-mrs path:nth-child(2) {--ink-delay:.98s;--ink-time:.47s;}
+.hero-mr-mrs path:nth-child(3) {--ink-delay:1.42s;--ink-time:.56s;}
+.hero-mr-mrs path:nth-child(4) {--ink-delay:1.95s;--ink-time:.85s;}
+.hero-mr-mrs path:nth-child(5) {--ink-delay:2.76s;--ink-time:.44s;}
+.hero-mr-mrs path:nth-child(6) {--ink-delay:3.17s;--ink-time:.59s;}
 .rice-field i:nth-child(17) {--n:16;}
 .rice-field i:nth-child(18) {--n:17;}
 .rice-field i:nth-child(19) {--n:18;}
