@@ -7,7 +7,7 @@
 .gate-backdrop::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 76% 18%,#f7db9d45,transparent 60%); opacity:.35; transition:opacity 2.8s ease; }
 .language-gate.is-closing .gate-backdrop::after { opacity:.8; }
 .hero { --camera-y:0px; --content-y:0px; --content-fade:1; }
-.hero-picture { inset:-28px 0; transform:translate3d(0,var(--camera-y),0); }
+.hero-picture { inset:-28px 0; height:calc(100% + 56px); transform:translate3d(0,var(--camera-y),0); }
 .hero-picture img { animation:cinemaPortrait 24s ease-in-out infinite alternate; }
 @keyframes cinemaPortrait { from{transform:scale(1.07)} to{transform:scale(1.015)} }
 .hero::after { content:""; display:block; position:absolute; inset:-15%; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 82% 8%,#f8d68b4a,transparent 53%),linear-gradient(118deg,transparent 42%,#fff1cf10 49%,transparent 58%); mix-blend-mode:screen; opacity:.55; transform-origin:top right; animation:cinemaLight 18s ease-in-out infinite alternate; }
@@ -39,7 +39,7 @@ body.lang-pending .hero::after,.hero-offscreen .hero::after,.hero-offscreen .ric
 .cinema-enabled .signature-heart { opacity:0; animation:none; }
 .cinema-enabled .signature-interlude.is-visible .signature-heart { animation:cinemaHeartIn 1.1s 3.65s ease both,signatureHeartbeat 2.4s 4.75s ease-in-out infinite; }
 @keyframes cinemaHeartIn { from{opacity:0;transform:scale(.72)} to{opacity:1;transform:scale(1)} }
-.cinema-enabled .cinema-heading.reveal { opacity:1!important; transform:none!important; }
+.cinema-enabled .cinema-heading.reveal { opacity:1!important; transform:none!important; line-height:1.03; }
 .cinema-word { display:inline-block; opacity:0; transform:translate3d(0,.32em,0); transition:opacity 1.6s ease,transform 2s var(--cinema-ease); transition-delay:calc(var(--reveal-delay,0ms) + var(--word-delay,0ms)); }
 .is-visible .cinema-word { opacity:1;transform:translate3d(0,0,0); }
 .reveal.motion-caption { --entrance-duration:1.6s; }
@@ -85,7 +85,7 @@ body.lang-pending .hero::after,.hero-offscreen .hero::after,.hero-offscreen .ric
 }
 @media(prefers-reduced-motion:reduce){
  .hero-picture,.hero-content{transform:none!important;translate:none!important;opacity:1!important}
- .hero-picture{inset:0}
+ .hero-picture{inset:0;height:100%}
  body.lang-pending .hero-content{opacity:0!important}
  .hero::after,.gate-backdrop::after,.rice-field,.ambient-rings{display:none!important}
  .hero-title > i,.intro-playing .hero-title > i,.hero-title .written-letter,.intro-playing .countdown-unit,.hero-content.intro-playing > *,.site-header,.cinema-enabled .signature-heart,.signature.reveal.is-visible,.site-footer.is-visible .footer-date,.site-footer.is-visible [data-i18n="footerLine"]{animation:none!important;opacity:1!important;transform:none!important;translate:none!important}
