@@ -32,7 +32,7 @@ const translations = {
     uploadUnavailable: "Der Foto-Upload wird gerade freigeschaltet. Bitte versucht es später noch einmal.", uploadError: "Mindestens ein Foto konnte nicht hochgeladen werden.",
     faqTitle: "Gut zu wissen.", faqDressQ: "Gibt es einen Dresscode?", faqDressA: "Die Details folgen mit der Einladung. Vor allem wünschen wir uns, dass ihr euch wohlfühlt und mit uns feiert.",
     faqTravelQ: "Wie komme ich zwischen Muri und Zug?", faqTravelA: "Die finalen Reise- und Transferinformationen ergänzen wir hier, sobald der Tagesablauf feststeht.",
-    faqFoodQ: "Was ist mit Allergien oder Unverträglichkeiten?", faqFoodA: "Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.",
+    faqFoodQ: "Was ist mit Allergien oder Unverträglichkeiten?", faqFoodA: "Allergien und Intoleranzen könnt ihr unten im Anmeldeformular für jede Person einzeln eintragen. So können wir sie bei der Menüplanung berücksichtigen.",
     faqKidsQ: "Was ist mit Kindern?", faqKidsA: "Falls Kinder Teil eurer Einladung sind, könnt ihr sie wie jede andere Person bei der Anmeldung hinzufügen.",
     footerLine: "Wir können es kaum erwarten, mit euch zu feiern.", photoCredits: "Location-Fotos:"
   },
@@ -120,7 +120,7 @@ const translations = {
     "faqTravelQ": "Come raggiungere i luoghi della cerimonia e del ricevimento?",
     "faqTravelA": "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Theater Casino Zug. Per chi arriva in aereo organizzeremo dei passaggi in auto. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle rispettive sezioni.",
     "faqFoodQ": "E per quanto riguarda allergie o intolleranze alimentari?",
-    "faqFoodA": "Segnalatele per ciascun ospite direttamente nel modulo di conferma, così potremo tenerne conto nella scelta del menù.",
+    "faqFoodA": "Potete indicare allergie e intolleranze per ogni persona nel modulo di conferma qui sotto, così potremo tenerne conto nella scelta del menù.",
     "faqKidsQ": "Anche i bambini sono invitati?",
     "faqKidsA": "Se anche i bambini sono inclusi nel vostro invito, potete aggiungerli al modulo di conferma come gli altri ospiti.",
     "footerLine": "Non vediamo l'ora di festeggiare con voi.",

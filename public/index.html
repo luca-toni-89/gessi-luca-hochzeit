@@ -28,9 +28,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/images/gessica-luca-900.webp?v=20260927-2" media="(max-width: 700px)" fetchpriority="high">
   <link rel="preload" as="image" href="/images/gessica-luca-1600.webp?v=20260927-2" media="(min-width: 701px)" fetchpriority="high">
-  <link rel="stylesheet" href="/styles.css?v=20260928-schedule">
-  <link rel="stylesheet" href="/motion.css?v=20260927-24">
-  <script src="/app.js?v=20260928-schedule" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260928-rsvp-layout">
+  <link rel="stylesheet" href="/motion.css?v=20260928-signature">
+  <script src="/app.js?v=20260928-rsvp-layout" defer></script>
 </head>
 <body class="lang-pending">
   <section class="language-gate" id="languageGate" aria-label="Scegliete la lingua / Sprache wählen">
@@ -303,7 +303,7 @@
           </details>
           <details>
             <summary><span data-i18n="faqFoodQ">Was ist mit Allergien oder Unverträglichkeiten?</span><i>＋</i></summary>
-            <p data-i18n="faqFoodA">Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.</p>
+            <p data-i18n="faqFoodA">Allergien und Intoleranzen könnt ihr unten im Anmeldeformular für jede Person einzeln eintragen. So können wir sie bei der Menüplanung berücksichtigen.</p>
           </details>
           <details>
             <summary><span data-i18n="faqKidsQ">Was ist mit Kindern?</span><i>＋</i></summary>
@@ -351,11 +351,11 @@
                 <p class="eyebrow" data-i18n="guestsKicker">Eure Gruppe</p>
                 <h3 data-i18n="guestsTitle">Wer kommt mit?</h3>
               </div>
-              <button class="button button-quiet" type="button" id="addGuest">
-                <span aria-hidden="true">＋</span><span data-i18n="addGuest">Person hinzufügen</span>
-              </button>
             </div>
             <div id="guestList" class="guest-list"></div>
+            <button class="button button-quiet" type="button" id="addGuest">
+              <span aria-hidden="true">＋</span><span data-i18n="addGuest">Person hinzufügen</span>
+            </button>
           </div>
 
           <p class="privacy-note" data-i18n="privacy">Eure Angaben werden ausschliesslich für die Organisation unserer Hochzeit verwendet und nicht öffentlich gespeichert.</p>
