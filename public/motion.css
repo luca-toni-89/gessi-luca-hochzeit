@@ -1,8 +1,12 @@
 /* Motion timing and compositing: opacity + transform, one reveal layer per item. */
-:root { --gate-fade:2.8s; --language-fade:1.3s; --reveal-time:2.2s; --motion-ease:cubic-bezier(.22,.61,.36,1); }
+:root { --gate-fade:3.8s; --language-fade:1.3s; --reveal-time:2.2s; --motion-ease:cubic-bezier(.22,.61,.36,1); }
 .language-gate { transition:opacity var(--gate-fade) ease,visibility 0s var(--gate-fade); }
 .language-gate.is-closing .gate-card { transition:opacity 2.1s ease,transform 2.5s var(--motion-ease);transform:translate3d(0,-12px,0); }
 .gate-backdrop { filter:none;animation:gateStill 18s ease-out both; }
+.language-gate .gate-backdrop { filter:blur(17px); transition:filter 2.8s var(--motion-ease); }
+.language-gate.is-closing .gate-backdrop { filter:blur(0); }
+.language-gate.is-closing { transition:opacity 2.4s 1.3s ease,visibility 0s var(--gate-fade); }
+@media(prefers-reduced-motion:reduce){.language-gate .gate-backdrop{filter:none;transition:none}.language-gate.is-closing{transition:none}}
 @keyframes gateStill { from{transform:scale(1.055)} to{transform:scale(1)} }
 .language-gate::before,.language-gate::after { animation-duration:15s; }
 .gate-card { animation-duration:2.5s; }
