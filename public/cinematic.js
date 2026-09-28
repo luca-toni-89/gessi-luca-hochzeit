@@ -36,9 +36,7 @@
       const rect=hero.getBoundingClientRect();
       const progress=Math.max(0,Math.min(1,-rect.top/Math.max(1,rect.height)));
       const moving=!reduced.matches && !document.hidden;
-      // The foreground leaves slightly ahead of the portrait, like a slow dolly.
-      // Only upward movement: the image never exposes an empty top edge.
-      hero.style.setProperty('--camera-y',(moving?-progress*(innerWidth<701?12:24):0)+'px');
+      // Only the foreground shifts; the shared opening portrait keeps its frame.
       hero.style.setProperty('--content-y',(moving?-progress*24:0)+'px');
       hero.style.setProperty('--content-fade',moving?String(1-Math.min(.75,progress*.85)):'1');
     }

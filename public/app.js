@@ -240,6 +240,7 @@ function applyLanguage(lang, closeGate) {
   if (closeGate) {
     const gate = document.getElementById('languageGate');
     resetToTop();
+    document.body.classList.add('portrait-revealing');
     gate.classList.add('is-closing');
     setTimeout(() => {
       gate.hidden = true;
@@ -247,6 +248,7 @@ function applyLanguage(lang, closeGate) {
       document.querySelector('#siteHeader').inert=false;
       document.querySelector('.site-footer').inert=false;
       document.body.classList.remove('lang-pending');
+      document.body.classList.remove('portrait-revealing');
       resetToTop();
       replayHero();
       document.querySelector('.hero-title').focus({preventScroll:true});
