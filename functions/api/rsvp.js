@@ -39,8 +39,9 @@ export async function onRequestPost(context) {
     for (var i = 0; i < guests.length; i += 1) {
       var firstName = text(guests[i] && guests[i].firstName, 80);
       var lastName = text(guests[i] && guests[i].lastName, 80);
+      var dietary = text(guests[i] && guests[i].dietary, 300);
       if (!firstName || !lastName) return json({ error: "Guest name is incomplete." }, 400);
-      normalizedGuests.push({ firstName: firstName, lastName: lastName });
+      normalizedGuests.push({ firstName: firstName, lastName: lastName, dietary: dietary });
     }
   }
 
@@ -55,7 +56,7 @@ export async function onRequestPost(context) {
     statements.push(
       env.DB.prepare(
         "INSERT INTO guests (id, rsvp_id, first_name, last_name, dietary_requirements) VALUES (?, ?, ?, ?, ?)"
-      ).bind(crypto.randomUUID(), rsvpId, guest.firstName, guest.lastName, null)
+      ).bind(crypto.randomUUID(), rsvpId, guest.firstName, guest.lastName, guest.dietary || null)
     );
   });
 

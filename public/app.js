@@ -14,9 +14,9 @@ const translations = {
     churchDescription: "Barock, Geschichte und genau der feierliche Rahmen, den wir uns für unser Ja-Wort wünschen.",
     casinoDescription: "Hier feiern wir weiter – mit Dinner, Musik und euch bis tief in die Nacht.", openMaps: "In Maps öffnen",
     menuKicker: "Mangiare, ridere, brindare", menuTitle: "Das Menü bleibt noch ein kleines Geheimnis.",
-    menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge.",
-    menuTag1: "Menü folgt", menuTag2: "Details folgen",
-    rsvpTitle: "Seid ihr dabei?", rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen.",
+    menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien und Unverträglichkeiten könnt ihr direkt bei der Anmeldung angeben.",
+    menuTag1: "Menü folgt", menuTag2: "Unverträglichkeiten bei der Anmeldung",
+    rsvpTitle: "Seid ihr dabei?", rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien oder Unverträglichkeiten.",
     contactName: "Kontaktperson", contactEmail: "E-Mail", optional: "(optional)", attendanceQuestion: "Könnt ihr mit uns feiern?",
     attendYes: "Ja, wir sind dabei!", attendYesSub: "Wir freuen uns.", attendNo: "Leider schaffen wir es nicht.", attendNoSub: "Wir denken an euch.",
     guestsKicker: "Eure Gruppe", guestsTitle: "Wer kommt mit?", addGuest: "Person hinzufügen",
@@ -32,7 +32,7 @@ const translations = {
     uploadUnavailable: "Der Foto-Upload wird gerade freigeschaltet. Bitte versucht es später noch einmal.", uploadError: "Mindestens ein Foto konnte nicht hochgeladen werden.",
     faqTitle: "Gut zu wissen.", faqDressQ: "Gibt es einen Dresscode?", faqDressA: "Die Details folgen mit der Einladung. Vor allem wünschen wir uns, dass ihr euch wohlfühlt und mit uns feiert.",
     faqTravelQ: "Wie komme ich zwischen Muri und Zug?", faqTravelA: "Die finalen Reise- und Transferinformationen ergänzen wir hier, sobald der Tagesablauf feststeht.",
-    faqFoodQ: "Was ist mit Allergien oder Unverträglichkeiten?", faqFoodA: "Bitte gebt uns persönlich Bescheid, damit wir sie bei der Menüplanung berücksichtigen können.",
+    faqFoodQ: "Was ist mit Allergien oder Unverträglichkeiten?", faqFoodA: "Bitte tragt sie bei jeder Person direkt in der Anmeldung ein. So können wir sie bei der Menüplanung berücksichtigen.",
     faqKidsQ: "Was ist mit Kindern?", faqKidsA: "Falls Kinder Teil eurer Einladung sind, könnt ihr sie wie jede andere Person bei der Anmeldung hinzufügen.",
     footerLine: "Wir können es kaum erwarten, mit euch zu feiern.", photoCredits: "Location-Fotos:"
   },
@@ -74,11 +74,11 @@ const translations = {
     "openMaps": "Aprire in Maps",
     "menuKicker": "Mangiare, ridere, brindare",
     "menuTitle": "Il menù? Ancora una piccola sorpresa!",
-    "menuText": "Non appena avremo definito il menù, troverete qui tutte le portate.",
+    "menuText": "Non appena avremo definito il menù, troverete qui tutte le portate. Potrete segnalarci eventuali allergie o intolleranze direttamente nel modulo di conferma.",
     "menuTag1": "Menù in arrivo",
-    "menuTag2": "Dettagli in arrivo",
+    "menuTag2": "Segnalateci eventuali intolleranze",
     "rsvpTitle": "Ci sarete?",
-    "rsvpIntro": "Non vediamo l'ora di festeggiare con voi. Indicate tutte le persone che parteciperanno.",
+    "rsvpIntro": "Non vediamo l'ora di festeggiare con voi. Indicate tutte le persone che parteciperanno, specificando per ciascuna eventuali allergie o intolleranze alimentari.",
     "contactName": "Referente",
     "contactEmail": "E-mail (facoltativa)",
     "optional": "(facoltativo)",
@@ -120,7 +120,7 @@ const translations = {
     "faqTravelQ": "Come raggiungere i luoghi della cerimonia e del ricevimento?",
     "faqTravelA": "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Theater Casino Zug. Per chi arriva in aereo organizzeremo dei passaggi in auto. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle rispettive sezioni.",
     "faqFoodQ": "E per quanto riguarda allergie o intolleranze alimentari?",
-    "faqFoodA": "Fatecelo sapere personalmente, così potremo tenerne conto nella scelta del menù.",
+    "faqFoodA": "Segnalatele per ciascun ospite direttamente nel modulo di conferma, così potremo tenerne conto nella scelta del menù.",
     "faqKidsQ": "Anche i bambini sono invitati?",
     "faqKidsA": "Se anche i bambini sono inclusi nel vostro invito, potete aggiungerli al modulo di conferma come gli altri ospiti.",
     "footerLine": "Non vediamo l'ora di festeggiare con voi.",
@@ -176,12 +176,24 @@ Object.assign(translations.de, {"skip": "Zum Inhalt", "portraitAlt": "Typografis
 
 Object.assign(translations.de, {portraitAlt:"Illustration von Gessica und Luca am See",galleryLabel:"Impressionen unserer Orte",muriFacadeAlt:"Fassade der Klosterkirche Muri",muriFacadeCaption:"Muri · Fassade",zugWestAlt:"Westseite des Theater Casino Zug",zugLakeCaption:"Zug · Am See",menuOpen:"Menü öffnen",menuClose:"Menü schliessen"});
 Object.assign(translations.de, {heroCta:"Anmeldung weiter unten",musicPlay:"Musik abspielen",musicPause:"Musik pausieren",slidePrev:"Vorheriges Bild",slideNext:"Nächstes Bild"});
-Object.assign(translations.de, {musicStarting:"♪ Musik startet"});
-Object.assign(translations.it, {musicStarting:"♪ La musica inizia"});
 
 Object.assign(translations.de,{navMenu:'Das Menü',navFaq:'Gut zu wissen',pauseSlides:'Automatischen Bildwechsel pausieren'});
 Object.assign(translations.de,{"faqDressA": "Nein – kommt so, wie ihr euch wohlfühlt. Ein eleganter Look passt wunderbar zu unserem Tag, aber das Wichtigste ist, dass ihr euch selbst treu bleibt und mit uns feiern könnt.", "faqTravelQ": "Wie gelange ich zu den Locations?", "faqTravelA": "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Theater Casino Zug. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Die Adressen und die Links zur Anfahrt findet ihr direkt bei den beiden Locations.", "musicLoading": "Musik wird geladen", "galleryCredits": "Bildnachweise", "muriDomeAlt": "Fresken in der Kuppel der Klosterkirche Muri", "muriAltarAlt": "Chor und Hochaltar der Klosterkirche Muri", "muriCloisterAlt": "Klosterkirche Muri mit Kreuzgang", "zugLakeAlt": "Theater Casino Zug und Zugersee", "zugEastAlt": "Bergseitige Fassade des Theater Casino Zug", "zugTerraceAlt": "Seeseite des Theater Casino Zug"});
 Object.assign(translations.de, {"navigationLabel": "Navigation", "countdownLabel": "Countdown", "coupleLabel": "Gessica und Luca", "uploadLabel": "Upload", "heroPlaces": "Muri · Zug", "muriRegion": "Muri · Aargau", "zugRegion": "Zug · Zugersee", "documentTitle": "Gessica & Luca 🤍 Wir heiraten · 10.07.2027"});
+Object.assign(translations.de, {
+  dayIntro:"Um 14:00 Uhr sagen wir in Muri Ja. Danach folgen Apéro, Abendessen und Feier.",
+  ceremonyTime:"14:00 Uhr", aperoTime:"ca. 15:30 Uhr", aperoTitle:"Apéro", aperoText:"Zeit zum Anstossen und für die ersten gemeinsamen Momente.",
+  dinnerTime:"ca. 18:30 Uhr", dinnerTitle:"Abendessen & Feier", dinnerText:"Gemeinsam essen und feiern im Theater Casino Zug.",
+  churchDescription:translations.de.churchDescription.replace("Hier möchten wir einen Moment innehalten und einander unser Ja geben.", "Hier möchten wir um 14:00 Uhr einander unser Ja geben.").replace(" Die Uhrzeit unserer Trauung teilen wir euch noch mit.", ""),
+  casinoDescription:translations.de.casinoDescription.replace("Für uns beginnt hier der gesellige Teil des Tages: mit euch zusammensitzen, gemeinsam essen, anstossen und Zeit füreinander haben.", "Hier möchten wir ab etwa 18:30 Uhr mit euch zu Abend essen und feiern.").replace("Welche Räume wir nutzen, wie das Menü aussieht und wann genau die Feier beginnt, ergänzen wir, sobald diese Details feststehen.", "Welche Räume wir nutzen und wie das Menü aussieht, ergänzen wir, sobald diese Details feststehen.")
+});
+Object.assign(translations.it, {
+  dayIntro:"Alle 14:00 ci diremo sì a Muri. Seguiranno l'aperitivo, la cena e la festa.",
+  ceremonyTime:"ore 14:00", aperoTime:"verso le 15:30", aperoTitle:"Aperitivo", aperoText:"Un momento per brindare e stare insieme dopo la cerimonia.",
+  dinnerTime:"verso le 18:30", dinnerTitle:"Cena e festa", dinnerText:"Ceneremo e festeggeremo insieme al Theater Casino Zug.",
+  churchDescription:translations.it.churchDescription.replace("Qui desideriamo fermarci un momento e dirci sì.", "Qui ci diremo sì alle 14:00.").replace(" Vi comunicheremo più avanti l'orario della cerimonia.", ""),
+  casinoDescription:translations.it.casinoDescription.replace("Qui inizierà il momento più conviviale della giornata: sederci insieme, mangiare, brindare e dedicare tempo a ciascuno di voi.", "Qui ceneremo e festeggeremo insieme a partire dalle 18:30 circa.").replace("Vi comunicheremo quali spazi ci accoglieranno, il menù e l'orario di inizio del ricevimento non appena questi dettagli saranno definiti.", "Vi comunicheremo quali spazi ci accoglieranno e il menù non appena questi dettagli saranno definiti.")
+});
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
@@ -237,12 +249,6 @@ function applyLanguage(lang, closeGate) {
       document.body.classList.remove('lang-pending');
       resetToTop();
       replayHero();
-      const hint=document.getElementById('musicHint');
-      if (document.getElementById('soundToggle').getAttribute('aria-pressed') === 'true') {
-        hint.textContent=t('musicStarting');
-        hint.classList.add('is-visible');
-        setTimeout(() => hint.classList.remove('is-visible'), 3400);
-      }
       document.querySelector('.hero-title').focus({preventScroll:true});
     }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : motionMilliseconds('--gate-fade'));
   }
@@ -317,10 +323,12 @@ function syncGuestLabels() {
     var heading = card.querySelector(".guest-heading");
     var first = card.querySelector(".guest-label-first");
     var last = card.querySelector(".guest-label-last");
+    var diet = card.querySelector(".guest-label-diet");
     var remove = card.querySelector(".guest-remove");
     if (heading) heading.textContent = t("guest") + " " + (index + 1);
     if (first) first.textContent = t("firstName");
     if (last) last.textContent = t("lastName");
+    if (diet) diet.textContent = t("dietary");
     if (remove) remove.setAttribute("aria-label", t("removeGuest"));
   });
 }
@@ -348,12 +356,12 @@ function setAttendanceState() {
   contact.classList.toggle("is-hidden", attending);
   contact.querySelector('input').required = !attending;
   area.querySelectorAll("input[data-field]").forEach(function (input) {
-    input.required = attending;
+    input.required = attending && input.dataset.field !== "dietary";
   });
 }
 
 function countdown() {
-  var target = new Date("2027-07-10T00:00:00+02:00").getTime();
+  var target = new Date("2027-07-10T14:00:00+02:00").getTime();
   var now = Date.now();
   var diff = Math.max(0, target - now);
   var days = Math.floor(diff / 86400000);
@@ -446,7 +454,8 @@ async function submitRsvp(event) {
     document.querySelectorAll(".guest-card").forEach(function (card) {
       guests.push({
         firstName: card.querySelector('[data-field="firstName"]').value.trim(),
-        lastName: card.querySelector('[data-field="lastName"]').value.trim()
+        lastName: card.querySelector('[data-field="lastName"]').value.trim(),
+        dietary: card.querySelector('[data-field="dietary"]').value.trim()
       });
     });
   }
