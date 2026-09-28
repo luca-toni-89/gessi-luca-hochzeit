@@ -1101,3 +1101,5 @@ main section[tabindex="-1"]:focus { outline:none; }
 @media(max-width:700px){.guest-area > #addGuest{width:100%;justify-content:center}}
 .language-choice { font-size:.78rem; font-weight:600; letter-spacing:.12em; }
 .language-flag { display:block; flex:none; width:25px; height:17px; border:1px solid rgba(255,255,255,.48); border-radius:2px; overflow:hidden; }
+.rsvp-section { padding-bottom:clamp(32px,4vw,55px); }
+.site-footer { padding-top:32px; }
