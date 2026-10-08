@@ -1112,3 +1112,17 @@ main section[tabindex="-1"]:focus { outline:none; }
   .menu-art .menu-handwriting,
   .menu-art .menu-handwriting + .menu-handwriting { margin-inline:auto; }
 }
+
+/* Remove doubled spacing where stacked content already provides its own gap. */
+.location-grid > .location-card:first-child { margin-top:0; }
+.faq-map-links { display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin:0 0 24px; }
+.faq-map-links .text-link { margin:0; flex-wrap:wrap; }
+@media(max-width:900px){
+  .rsvp-shell,.photo-shell { row-gap:32px; }
+  .rsvp-shell > .section-heading,.photo-shell > .section-heading { margin-bottom:0; }
+  .rsvp-shell > .section-heading > :last-child,.photo-shell > .section-heading > :last-child { margin-bottom:0; }
+}
+@media(max-width:700px){
+  .faq-section { padding-bottom:32px; }
+  .rsvp-section { padding-top:40px; }
+}
