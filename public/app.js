@@ -469,14 +469,9 @@ function initReveal() {
     entrance=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
         if(!entry.isIntersecting)return;
-        const text=entry.target.matches('.motion-title,.motion-copy,.motion-caption,.menu-art');
-        // Text responds once a meaningful portion has entered above the screen edge.
-        // Very tall blocks still enter on short screens, without requiring an impossible ratio.
-        const required=Math.min(entry.boundingClientRect.height*(text ? .15 : .25),entry.rootBounds.height*(text ? .45 : .4));
-        if(entry.intersectionRect.height+1<required)return;
         entry.target.classList.add('is-visible');entrance.unobserve(entry.target);
       });
-    },{threshold:Array.from({length:21},(_,i)=>i/20),rootMargin:'-80px 0px -'+Math.round(innerHeight*.025)+'px 0px'});
+    },{threshold:0,rootMargin:'0px 0px 40px 0px'});
     items.forEach(node=>{if(!node.classList.contains('is-visible'))entrance.observe(node);});
   }
   observeEntrances();
@@ -487,7 +482,7 @@ function initReveal() {
     items.add(node);
     const kind=node.matches('h2,h3')?'title':node.matches('.eyebrow,.section-number,.timeline-time,.timeline-place')?'caption':node.matches('.location-photo')?'image':node.matches('p,address,.text-link')?'copy':'panel';
     node.classList.add('reveal','motion-'+kind);
-    node.style.setProperty('--reveal-delay',Math.min([...node.parentElement.children].indexOf(node),3)*100+'ms');
+    node.style.setProperty('--reveal-delay','0ms');
     if(!entrance||reduced.matches)node.classList.add('is-visible');else entrance.observe(node);
   }
   document.querySelectorAll(selector).forEach(register);
