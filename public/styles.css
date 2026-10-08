@@ -1126,3 +1126,16 @@ main section[tabindex="-1"]:focus { outline:none; }
   .faq-section { padding-bottom:32px; }
   .rsvp-section { padding-top:40px; }
 }
+
+/* Compact the oversized mobile section transitions shown in the guest view. */
+@media(max-width:700px){
+  .locations-section { padding-bottom:32px; }
+  .location-content address:last-child { margin-bottom:0; }
+  .menu-section,.photos-section { padding-block:32px; }
+  .faq-section { padding-top:32px; }
+  .menu-art { line-height:.96; padding-block:.06em; margin-bottom:0; }
+  .menu-shell { row-gap:24px; }
+  .upload-dropzone { min-height:220px; padding:22px; }
+  .upload-files:empty,.upload-card .form-status:empty { display:none; }
+  .upload-submit { margin-top:18px; }
+}
