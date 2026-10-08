@@ -471,7 +471,7 @@ function initReveal() {
         if(!entry.isIntersecting)return;
         entry.target.classList.add('is-visible');entrance.unobserve(entry.target);
       });
-    },{threshold:0,rootMargin:'0px 0px 40px 0px'});
+    },{threshold:0,rootMargin:'0px 0px -'+Math.round(innerHeight*.1)+'px 0px'});
     items.forEach(node=>{if(!node.classList.contains('is-visible'))entrance.observe(node);});
   }
   observeEntrances();
