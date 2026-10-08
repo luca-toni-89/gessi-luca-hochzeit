@@ -205,6 +205,7 @@ Object.assign(translations.de, {
   celebrationBadge: "Apéro & Feier", groefliRegion: "Muri · Sodhof",
   groefliDescription: "Im Gröfli-Festraum im Sodhof in Muri feiern wir weiter. Helle Gewölbe, kräftige Säulen und alte Mauern geben dem ehemaligen Keller seinen besonderen Charakter. Warmes Licht, gemeinsame Tafeln und die Bar machen ihn zu einem gemütlichen Ort für unseren Abend. Hier möchten wir mit euch anstossen, zusammen essen, lachen und tanzen. Den Apéro geniessen wir ab ca. 15:30 Uhr, zum Abendessen treffen wir uns ab ca. 18:00 Uhr. Wir freuen uns darauf, diesen Raum mit unseren Familien, Freunden und vielen schönen Erinnerungen zu füllen.",
   groefliHallAlt: "Gewölbesaal des Gröfli-Festraums mit Säulen und langen Tafeln",
+  groefliPhotoAlt: "Festlich gedeckte Tafel im Gröfli-Festraum",
   groefliBarAlt: "Bar im Gewölbekeller des Gröfli-Festraums",
   locationTransfer: "Nur ca. 3 Minuten mit dem Auto von der Klosterkirche zum Gröfli-Festraum.",
   churchDescription: translations.de.churchDescription.replace("14:00", "13:00"),
@@ -212,7 +213,7 @@ Object.assign(translations.de, {
   rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien, Unverträglichkeiten und Ernährungswünschen.",
   dietary: "Allergien, Unverträglichkeiten & Ernährungswünsche (optional)",
   menuTag2: "Ernährungswünsche bei der Anmeldung",
-  dietaryHint: "Zum Beispiel: kein Schweinefleisch, vegetarisch, vegan, laktosefrei. Bitte nennt auch besondere Anforderungen an die Zubereitung.",
+  dietaryHint: "Bitte teilt uns hier mit, was wir bei eurem Essen berücksichtigen sollen.",
   faqTravelQ: "Wie gelange ich zu den Locations?",
   faqTravelA: "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Gröfli-Festraum im Sodhof. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Adressen und Anfahrtslinks findet ihr direkt bei den Locations.",
   faqParkingQ: "Wo können wir parkieren?",
@@ -220,7 +221,7 @@ Object.assign(translations.de, {
   faqChurchQ: "Was ist in und vor der Kirche zu beachten?",
   faqChurchA: "Bitte werft weder in noch vor der Kirche Reis, Blumen, Blütenblätter oder Konfetti. In der Kirche sind Essen, Trinken, Rauchen und Telefonieren sowie Seifenblasen, Tiere und Drohnen nicht erlaubt. Bitte achtet auf respektvolle Kleidung und folgt den Hinweisen des Sakristans. Unser Apéro findet anschliessend im Gröfli-Festraum statt.",
   faqFoodQ: "Was ist mit Allergien, Unverträglichkeiten oder Ernährungswünschen?",
-  faqFoodA: "Bitte tragt diese unten im Anmeldeformular für jede Person einzeln ein. Dazu gehören auch vegetarische oder vegane Ernährung und religiöse Ernährungsvorgaben, zum Beispiel kein Schweinefleisch. Besondere Anforderungen an die Zubereitung könnt ihr im selben Feld angeben. So können wir alles bei der Menüplanung berücksichtigen."
+  faqFoodA: "Bitte tragt Allergien, Unverträglichkeiten und persönliche Ernährungswünsche unten im Anmeldeformular für jede Person einzeln ein. So können wir sie bei der Menüplanung berücksichtigen."
 });
 Object.assign(translations.it, {
   heroPlaces: "Muri · Argovia",
@@ -232,6 +233,7 @@ Object.assign(translations.it, {
   celebrationBadge: "Aperitivo e festa", groefliRegion: "Muri · Sodhof",
   groefliDescription: "La festa proseguirà al Gröfli-Festraum, all’interno del Sodhof a Muri. Le volte chiare, le grandi colonne e le antiche mura danno a questa ex cantina un carattere speciale. La luce calda, le lunghe tavolate e il bar creano un’atmosfera accogliente per la nostra serata. Qui vogliamo brindare, mangiare, ridere e ballare con voi. L’aperitivo inizierà verso le 15:30 e ci ritroveremo a cena dalle 18:00 circa. Non vediamo l’ora di riempire questa sala con le nostre famiglie, i nostri amici e tanti bei ricordi.",
   groefliHallAlt: "Sala del Gröfli-Festraum con soffitto a volte, colonne e lunghe tavolate",
+  groefliPhotoAlt: "Tavola apparecchiata a festa nel Gröfli-Festraum",
   groefliBarAlt: "Bar nella cantina a volte del Gröfli-Festraum",
   locationTransfer: "Solo 3 minuti circa in auto dalla chiesa abbaziale al Gröfli-Festraum.",
   churchDescription: translations.it.churchDescription.replace("14:00", "13:00"),
@@ -239,7 +241,7 @@ Object.assign(translations.it, {
   rsvpIntro: "Non vediamo l’ora di festeggiare con voi. Inserite tutte le persone che verranno con voi, indicando eventuali allergie, intolleranze ed esigenze alimentari.",
   dietary: "Allergie, intolleranze ed esigenze alimentari (facoltativo)",
   menuTag2: "Esigenze alimentari nel modulo di conferma",
-  dietaryHint: "Ad esempio: niente carne di maiale, vegetariano, vegano, senza lattosio. Indicate anche eventuali esigenze particolari per la preparazione.",
+  dietaryHint: "Indicate qui ciò di cui dovremmo tenere conto per il vostro pasto.",
   faqTravelQ: "Come raggiungere i luoghi della cerimonia e della festa?",
   faqTravelA: "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Gröfli-Festraum, presso il Sodhof. Per chi arriva in aereo organizzeremo dei passaggi in auto. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle sezioni dedicate ai luoghi.",
   faqParkingQ: "Dove possiamo parcheggiare?",
@@ -247,7 +249,7 @@ Object.assign(translations.it, {
   faqChurchQ: "Quali regole vanno rispettate in chiesa e sul sagrato?",
   faqChurchA: "Non lanciate riso, fiori, petali o coriandoli, né in chiesa né all’esterno. In chiesa non sono consentiti cibo, bevande, fumo, telefonate, bolle di sapone, animali o droni. Scegliete un abbigliamento rispettoso del luogo e seguite le indicazioni del sacrestano. L’aperitivo si terrà successivamente al Gröfli-Festraum.",
   faqFoodQ: "Come indicare allergie, intolleranze o esigenze alimentari?",
-  faqFoodA: "Indicatele per ogni persona nel modulo di conferma qui sotto. Potete includere anche un’alimentazione vegetariana o vegana e le esigenze religiose, ad esempio niente carne di maiale. Nello stesso campo potete specificare particolari necessità di preparazione. Ne terremo conto nella scelta del menù."
+  faqFoodA: "Indicate allergie, intolleranze ed esigenze alimentari personali per ogni persona nel modulo di conferma qui sotto. Ne terremo conto nella scelta del menù."
 });
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
