@@ -472,11 +472,11 @@ function initReveal() {
         const text=entry.target.matches('.motion-title,.motion-copy,.motion-caption,.menu-art');
         // Text responds once a meaningful portion has entered above the screen edge.
         // Very tall blocks still enter on short screens, without requiring an impossible ratio.
-        const required=Math.min(entry.boundingClientRect.height*(text ? .35 : .25),entry.rootBounds.height*(text ? .45 : .4));
+        const required=Math.min(entry.boundingClientRect.height*(text ? .15 : .25),entry.rootBounds.height*(text ? .45 : .4));
         if(entry.intersectionRect.height+1<required)return;
         entry.target.classList.add('is-visible');entrance.unobserve(entry.target);
       });
-    },{threshold:Array.from({length:21},(_,i)=>i/20),rootMargin:'-80px 0px -'+Math.round(innerHeight*.08)+'px 0px'});
+    },{threshold:Array.from({length:21},(_,i)=>i/20),rootMargin:'-80px 0px -'+Math.round(innerHeight*.025)+'px 0px'});
     items.forEach(node=>{if(!node.classList.contains('is-visible'))entrance.observe(node);});
   }
   observeEntrances();

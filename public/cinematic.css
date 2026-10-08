@@ -8,7 +8,7 @@ html { scrollbar-gutter:stable; }
 .language-gate .gate-backdrop { background:linear-gradient(180deg,#07130915,#07130955); filter:none; animation:none; transform:none; }
 .language-gate.is-closing .gate-backdrop { filter:none; }
 body.lang-pending .site-header,body.lang-pending .hero-folio,body.lang-pending .hero-scroll { visibility:hidden; }
-.gate-card { animation-duration:3.5s; animation-timing-function:var(--cinema-ease); }
+.gate-card { animation-duration:4.5s; animation-timing-function:var(--cinema-ease); }
 .gate-backdrop::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 76% 18%,#f7db9d45,transparent 60%); opacity:.35; transition:opacity 2.8s ease; }
 .language-gate.is-closing .gate-backdrop::after { opacity:.8; }
 .hero { --content-y:0px; --content-fade:1; }
@@ -47,7 +47,7 @@ body.lang-pending.portrait-revealing .rice-field { visibility:visible; }
 body.lang-pending.portrait-revealing .rice-field i { animation-play-state:running; }
 body.lang-pending .hero::after,.hero-offscreen .hero::after,.hero-offscreen .ambient-rings i { animation-play-state:paused; }
 
-.gate-vows > span { animation-duration:2.6s; }
+.gate-vows > span { animation-duration:3.4s; }
 
 /* A quiet handwritten beat, then the story opens word by word. */
 .cinema-enabled .signature-heart { opacity:0; animation:none; }
