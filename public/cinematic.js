@@ -21,7 +21,7 @@
           span.className='cinema-word';
           span.textContent=word;
           span.setAttribute('aria-hidden','true');
-          span.style.setProperty('--word-delay',Math.min(index*120,840)+'ms');
+          span.style.setProperty('--word-delay',Math.min(index*85,595)+'ms');
           fragment.append(span);
         });
         node.replaceChildren(fragment);
