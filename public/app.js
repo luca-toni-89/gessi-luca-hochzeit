@@ -462,11 +462,26 @@ function initReveal() {
   const selector='.signature-interlude, .section-heading > *, .editorial > .section-number, .editorial-copy > *, .timeline-index, .timeline-body > *, .location-photo, .location-content > :not(details), .menu-art, .menu-copy > *, .rsvp-form > .form-row > label, .attendance-fieldset, .guest-area-head > *, .guest-card, .form-message, .privacy-note, .form-submit-row, .photo-intro > *, .upload-dropzone, .upload-submit, .faq-list details, .site-footer';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const items=new Set();
-  const entrance='IntersectionObserver' in window ? new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){entry.target.classList.add('is-visible');entrance.unobserve(entry.target);}
-    });
-  },{threshold:.08,rootMargin:'0px 0px -32px 0px'}):null;
+  let entrance=null;
+  function observeEntrances(){
+    entrance?.disconnect();
+    if(!('IntersectionObserver' in window)||reduced.matches)return;
+    entrance=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        const text=entry.target.matches('.motion-title,.motion-copy,.motion-caption,.menu-art');
+        // Normal text enters as a complete block, safely above the screen edge.
+        // Very tall blocks still enter on short screens, without requiring an impossible ratio.
+        const required=Math.min(entry.boundingClientRect.height*(text?.95:.3),entry.rootBounds.height*(text?.72:.4));
+        if(entry.intersectionRect.height+1<required)return;
+        entry.target.classList.add('is-visible');entrance.unobserve(entry.target);
+      });
+    },{threshold:Array.from({length:21},(_,i)=>i/20),rootMargin:'-80px 0px -'+Math.round(innerHeight*.18)+'px 0px'});
+    items.forEach(node=>{if(!node.classList.contains('is-visible'))entrance.observe(node);});
+  }
+  observeEntrances();
+  let entranceResize;
+  addEventListener('resize',()=>{clearTimeout(entranceResize);entranceResize=setTimeout(observeEntrances,150);},{passive:true});
   function register(node){
     if(items.has(node))return;
     items.add(node);
