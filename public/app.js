@@ -194,6 +194,57 @@ Object.assign(translations.it, {
   churchDescription:translations.it.churchDescription.replace("Qui desideriamo fermarci un momento e dirci sì.", "Qui ci diremo sì alle 14:00.").replace(" Vi comunicheremo più avanti l'orario della cerimonia.", ""),
   casinoDescription:translations.it.casinoDescription.replace("Qui inizierà il momento più conviviale della giornata: sederci insieme, mangiare, brindare e dedicare tempo a ciascuno di voi.", "Qui ceneremo e festeggeremo insieme a partire dalle 18:30 circa.").replace("Vi comunicheremo quali spazi ci accoglieranno, il menù e l'orario di inizio del ricevimento non appena questi dettagli saranno definiti.", "Vi comunicheremo quali spazi ci accoglieranno e il menù non appena questi dettagli saranno definiti.")
 });
+// Confirmed celebration details, October 2026.
+Object.assign(translations.de, {
+  heroPlaces: "Muri · Aargau",
+  dayIntro: "Um 13:00 Uhr sagen wir in Muri Ja. Danach feiern wir mit euch im Gröfli-Festraum auf dem Sodhof.",
+  ceremonyTime: "13:00 Uhr", dinnerTime: "ca. 18:00 Uhr",
+  aperoText: "Ab ca. 15:30 Uhr stossen wir im Gröfli-Festraum auf dem Sodhof gemeinsam an.",
+  dinnerText: "Ab ca. 18:00 Uhr essen und feiern wir gemeinsam im Gröfli-Festraum.",
+  locationsTitle: "Unser Ja-Wort. Unser Fest. Alles in Muri.",
+  celebrationBadge: "Apéro & Feier", groefliRegion: "Muri · Sodhof",
+  groefliDescription: "Nach der Trauung geht es zum Gröfli-Festraum auf dem Sodhof in Muri. Hier stossen wir ab ca. 15:30 Uhr mit euch an. Ab ca. 18:00 Uhr sitzen wir zum Abendessen zusammen und feiern mit unseren Familien und Freunden weiter. Wir freuen uns auf einen Abend voller Gespräche, Lachen und gemeinsamer Erinnerungen.",
+  locationTransfer: "Nur ca. 3 Minuten mit dem Auto von der Klosterkirche zum Gröfli-Festraum.",
+  churchDescription: translations.de.churchDescription.replace("14:00", "13:00"),
+  menuText: "Sobald unser Menü final ist, findet ihr hier alle Gänge. Allergien, Unverträglichkeiten und Ernährungswünsche könnt ihr direkt bei der Anmeldung angeben.",
+  rsvpIntro: "Wir freuen uns riesig auf euch. Bitte tragt alle Personen ein, die mit euch kommen – inklusive Allergien, Unverträglichkeiten und Ernährungswünschen.",
+  dietary: "Allergien, Unverträglichkeiten & Ernährungswünsche (optional)",
+  menuTag2: "Ernährungswünsche bei der Anmeldung",
+  dietaryHint: "Zum Beispiel: kein Schweinefleisch, vegetarisch, vegan, laktosefrei. Bitte nennt auch besondere Anforderungen an die Zubereitung.",
+  faqTravelQ: "Wie gelange ich zu den Locations?",
+  faqTravelA: "Am besten kommt ihr mit dem eigenen Auto zur Klosterkirche Muri und anschliessend zum Gröfli-Festraum auf dem Sodhof. Für alle, die mit dem Flugzeug anreisen, organisieren wir Mitfahrgelegenheiten. Adressen und Anfahrtslinks findet ihr direkt bei den Locations.",
+  faqParkingQ: "Wo können wir parkieren?",
+  faqParkingA: "Bei der Kirche gibt es genügend öffentliche, gebührenpflichtige Parkplätze. Bitte nutzt diese: Der unmittelbare Klosterkirchenvorplatz darf weder befahren noch zum Parkieren genutzt werden. Beim Gröfli-Festraum gibt es ebenfalls genügend Parkplätze – dort könnt ihr direkt im Hof parkieren.",
+  faqChurchQ: "Was ist in und vor der Kirche zu beachten?",
+  faqChurchA: "Bitte werft weder in noch vor der Kirche Reis, Blumen, Blütenblätter oder Konfetti. In der Kirche sind Essen, Trinken, Rauchen und Telefonieren sowie Seifenblasen, Tiere und Drohnen nicht erlaubt. Bitte achtet auf respektvolle Kleidung und folgt den Hinweisen des Sakristans. Unser Apéro findet anschliessend im Gröfli-Festraum statt.",
+  faqFoodQ: "Was ist mit Allergien, Unverträglichkeiten oder Ernährungswünschen?",
+  faqFoodA: "Bitte tragt diese unten im Anmeldeformular für jede Person einzeln ein. Dazu gehören auch vegetarische oder vegane Ernährung und religiöse Ernährungsvorgaben, zum Beispiel kein Schweinefleisch. Besondere Anforderungen an die Zubereitung könnt ihr im selben Feld angeben. So können wir alles bei der Menüplanung berücksichtigen."
+});
+Object.assign(translations.it, {
+  heroPlaces: "Muri · Argovia",
+  dayIntro: "Alle 13:00 ci diremo sì a Muri. Poi festeggeremo con voi al Gröfli-Festraum, presso il Sodhof.",
+  ceremonyTime: "ore 13:00", dinnerTime: "verso le 18:00",
+  aperoText: "Dalle 15:30 circa brinderemo insieme al Gröfli-Festraum, presso il Sodhof.",
+  dinnerText: "Dalle 18:00 circa ceneremo e festeggeremo insieme al Gröfli-Festraum.",
+  locationsTitle: "Il nostro sì. La nostra festa. Tutto a Muri.",
+  celebrationBadge: "Aperitivo e festa", groefliRegion: "Muri · Sodhof",
+  groefliDescription: "Dopo la cerimonia ci ritroveremo al Gröfli-Festraum, presso il Sodhof a Muri. Dalle 15:30 circa brinderemo insieme a voi. Dalle 18:00 circa ci siederemo a tavola e continueremo a festeggiare con le nostre famiglie e i nostri amici. Non vediamo l’ora di condividere una serata di chiacchiere, risate e ricordi da portare con noi.",
+  locationTransfer: "Solo 3 minuti circa in auto dalla chiesa abbaziale al Gröfli-Festraum.",
+  churchDescription: translations.it.churchDescription.replace("14:00", "13:00"),
+  menuText: "Quando il menù sarà definito, troverete qui tutte le portate. Potete indicare allergie, intolleranze ed esigenze alimentari direttamente nel modulo di conferma.",
+  rsvpIntro: "Non vediamo l’ora di festeggiare con voi. Inserite tutte le persone che verranno con voi, indicando eventuali allergie, intolleranze ed esigenze alimentari.",
+  dietary: "Allergie, intolleranze ed esigenze alimentari (facoltativo)",
+  menuTag2: "Esigenze alimentari nel modulo di conferma",
+  dietaryHint: "Ad esempio: niente carne di maiale, vegetariano, vegano, senza lattosio. Indicate anche eventuali esigenze particolari per la preparazione.",
+  faqTravelQ: "Come raggiungere i luoghi della cerimonia e della festa?",
+  faqTravelA: "Vi consigliamo di raggiungere la chiesa abbaziale di Muri in auto e di proseguire poi verso il Gröfli-Festraum, presso il Sodhof. Per chi arriva in aereo organizzeremo dei passaggi in auto. Gli indirizzi e i link alle indicazioni stradali sono disponibili nelle sezioni dedicate ai luoghi.",
+  faqParkingQ: "Dove possiamo parcheggiare?",
+  faqParkingA: "Vicino alla chiesa ci sono sufficienti parcheggi pubblici a pagamento. Utilizzate questi: è vietato accedere con veicoli o parcheggiare sul sagrato della chiesa abbaziale. Anche al Gröfli-Festraum ci sono posti sufficienti: potete parcheggiare direttamente nel cortile del Sodhof.",
+  faqChurchQ: "Quali regole vanno rispettate in chiesa e sul sagrato?",
+  faqChurchA: "Non lanciate riso, fiori, petali o coriandoli, né in chiesa né all’esterno. In chiesa non sono consentiti cibo, bevande, fumo, telefonate, bolle di sapone, animali o droni. Scegliete un abbigliamento rispettoso del luogo e seguite le indicazioni del sacrestano. L’aperitivo si terrà successivamente al Gröfli-Festraum.",
+  faqFoodQ: "Come indicare allergie, intolleranze o esigenze alimentari?",
+  faqFoodA: "Indicatele per ogni persona nel modulo di conferma qui sotto. Potete includere anche un’alimentazione vegetariana o vegana e le esigenze religiose, ad esempio niente carne di maiale. Nello stesso campo potete specificare particolari necessità di preparazione. Ne terremo conto nella scelta del menù."
+});
 let currentLang = "de";
 try { currentLang = localStorage.getItem("weddingLanguage") === "it" ? "it" : "de"; } catch {}
 let guestSerial = 0;
@@ -331,6 +382,8 @@ function syncGuestLabels() {
     if (first) first.textContent = t("firstName");
     if (last) last.textContent = t("lastName");
     if (diet) diet.textContent = t("dietary");
+    const dietHint = card.querySelector(".guest-diet-hint");
+    if (dietHint) dietHint.textContent = t("dietaryHint");
     if (remove) remove.setAttribute("aria-label", t("removeGuest"));
   });
 }
@@ -363,7 +416,7 @@ function setAttendanceState() {
 }
 
 function countdown() {
-  var target = new Date("2027-07-10T14:00:00+02:00").getTime();
+  var target = new Date("2027-07-10T13:00:00+02:00").getTime();
   var now = Date.now();
   var diff = Math.max(0, target - now);
   var days = Math.floor(diff / 86400000);
