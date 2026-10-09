@@ -229,7 +229,7 @@ Object.assign(translations.it, {
   heroPlaces: "Muri · Argovia",
   dayIntro: "Alle 13:00 ci diremo sì a Muri. Poi festeggeremo insieme a voi al Gröfli-Festraum, nel Sodhof.",
   ceremonyTime: "ore 13:00", dinnerTime: "verso le 18:00",
-  aperoText: "Dalle 15:30 circa brinderemo insieme al Gröfli-Festraum, nel Sodhof.",
+  aperoText: "Ci ritroveremo al Gröfli-Festraum, nel Sodhof, per brindare insieme e dare inizio ai festeggiamenti.",
   dinnerText: "Dalle 18:00 circa ci ritroveremo al Gröfli-Festraum per cenare e festeggiare insieme.",
   locationsTitle: "Il nostro sì, la nostra festa. Tutto a Muri.",
   celebrationBadge: "Aperitivo e festa", groefliRegion: "Muri · Sodhof",
