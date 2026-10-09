@@ -34,10 +34,10 @@
   </style>
   <link rel="preload" href="/fonts/great-vibes.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="/fonts/cormorant-regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20261009-photo-select">
+  <link rel="stylesheet" href="/styles.css?v=20261009-photo-lock">
   <link rel="stylesheet" href="/motion.css?v=20260928-black-heart">
   <link rel="stylesheet" href="/cinematic.css?v=20261008-gate-earlier">
-  <script src="/app.js?v=20261009-photo-select" defer></script>
+  <script src="/app.js?v=20261009-photo-lock" defer></script>
   <script src="/cinematic.js?v=20261008-scroll-balanced" defer></script>
 </head>
 <body class="lang-pending">
@@ -259,9 +259,9 @@
           <p data-i18n="photosText">Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!</p>
         </div>
 
-        <div class="upload-card reveal" id="uploadCard">
-          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden>
-          <button class="upload-dropzone" type="button" id="uploadDropzone">
+        <div class="upload-card reveal is-locked" id="uploadCard">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden disabled>
+          <button class="upload-dropzone" type="button" id="uploadDropzone" disabled>
             <span class="upload-icon" aria-hidden="true">↥</span>
             <strong data-i18n="uploadTitle">Fotos auswählen</strong>
             <small data-i18n="uploadHint">JPG, PNG, WEBP oder HEIC</small>
@@ -273,6 +273,7 @@
           </button>
           <progress id="uploadProgress" max="100" value="0" hidden aria-label="Upload" data-i18n-aria="uploadLabel"></progress>
           <p class="form-status" id="uploadStatus" role="status"></p>
+          <p class="upload-locked-note" id="uploadLockedNote" data-i18n="uploadLocked">Foto-Upload ab dem 10. Juli 2027 verfügbar.</p>
         </div>
       </div>
     </section>
