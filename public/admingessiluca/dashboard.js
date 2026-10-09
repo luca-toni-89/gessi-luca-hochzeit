@@ -88,14 +88,30 @@
     var fragment = document.createDocumentFragment();
     visible.forEach(function (item) {
       var tr = document.createElement("tr");
-      tr.appendChild(makeCell(item.name));
+      var nameTd = document.createElement("td");
+      var nameCell = document.createElement("div");
+      nameCell.className = "name-cell";
+      var avatar = document.createElement("span");
+      avatar.className = "avatar" + (item.attending ? "" : " is-absent");
+      avatar.setAttribute("aria-hidden", "true");
+      var words = String(item.name || "").trim().split(/\\s+/);
+      avatar.textContent = words.filter(Boolean).slice(0, 2).map(function (word) {
+        return word.charAt(0).toLocaleUpperCase("de");
+      }).join("") || "♡";
+      var nameText = document.createElement("span");
+      nameText.className = "name-label";
+      nameText.textContent = item.name || "–";
+      nameCell.appendChild(avatar);
+      nameCell.appendChild(nameText);
+      nameTd.appendChild(nameCell);
+      tr.appendChild(nameTd);
       var statusTd = document.createElement("td");
       var marker = document.createElement("span");
       marker.className = "status" + (item.attending ? "" : " no");
       marker.textContent = item.attending ? "Zusage" : "Absage";
       statusTd.appendChild(marker);
       tr.appendChild(statusTd);
-      tr.appendChild(makeCell(item.dietary, "diet"));
+      tr.appendChild(makeCell(item.dietary, "diet" + (item.dietary.trim() ? " has-diet" : "")));
       tr.appendChild(makeCell(item.createdAt, "muted"));
       tr.appendChild(makeCell(item.contactName, "muted"));
       fragment.appendChild(tr);
