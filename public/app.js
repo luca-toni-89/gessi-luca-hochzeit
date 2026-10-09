@@ -28,6 +28,7 @@ const translations = {
     photosKicker: "Eure Perspektive", photosTitle: "Zeigt uns den Tag durch eure Augen.",
     photosText: "Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!",
     uploadTitle: "Fotos auswählen", uploadHint: "JPG, PNG, WEBP oder HEIC", uploadButton: "Fotos hochladen",
+    uploadLocked: "Foto-Upload ab dem 10. Juli 2027 verfügbar.",
     uploadNone: "Bitte wählt zuerst mindestens ein Foto aus.", uploadUploading: "Fotos werden hochgeladen …", uploadSuccess: "Geschafft! Danke für eure Erinnerungen. ♡",
     uploadUnavailable: "Der Foto-Upload wird gerade freigeschaltet. Bitte versucht es später noch einmal.", uploadError: "Mindestens ein Foto konnte nicht hochgeladen werden.",
     faqTitle: "Gut zu wissen.", faqDressQ: "Gibt es einen Dresscode?", faqDressA: "Die Details folgen mit der Einladung. Vor allem wünschen wir uns, dass ihr euch wohlfühlt und mit uns feiert.",
@@ -109,6 +110,7 @@ const translations = {
     "uploadTitle": "Selezionate le foto",
     "uploadHint": "JPG, PNG, WEBP o HEIC",
     "uploadButton": "Caricare le foto",
+    "uploadLocked": "Il caricamento delle foto sarà disponibile dal 10 luglio 2027.",
     "uploadNone": "Selezionate almeno una foto prima di procedere.",
     "uploadUploading": "Caricamento delle foto in corso …",
     "uploadSuccess": "Grazie per aver condiviso con noi i vostri ricordi! ♡",
@@ -572,6 +574,16 @@ function formatBytes(bytes) {
 }
 
 let uploading = false;
+const PHOTO_UPLOAD_OPENS = Date.parse("2027-07-09T22:00:00Z"); // 10 July 2027, 00:00 in Switzerland
+function photoUploadIsOpen() { return Date.now() >= PHOTO_UPLOAD_OPENS; }
+function updatePhotoUploadAvailability() {
+  const open = photoUploadIsOpen();
+  document.getElementById('uploadCard').classList.toggle('is-locked', !open);
+  document.getElementById('uploadLockedNote').hidden = open;
+  document.getElementById('photoInput').disabled = !open || uploading;
+  document.getElementById('uploadDropzone').disabled = !open || uploading;
+  renderPhotos();
+}
 function setStatus(node, key) { node.dataset.statusKey = key; node.textContent = t(key); }
 function renderPhotos() {
   const list = document.getElementById('uploadFiles'); list.replaceChildren();
@@ -581,10 +593,10 @@ function renderPhotos() {
     const size = document.createElement('span'); size.textContent = formatBytes(file.size);
     row.append(name,size); list.append(row);
   });
-  document.getElementById('uploadSubmit').disabled = uploading || !selectedPhotos.length;
+  document.getElementById('uploadSubmit').disabled = !photoUploadIsOpen() || uploading || !selectedPhotos.length;
 }
 function setSelectedPhotos(files) {
-  if (uploading) return;
+  if (uploading || !photoUploadIsOpen()) return;
   const candidates = Array.from(files || []);
   const valid = candidates.length <= 12 && candidates.every(f => f.size > 0 && f.size <= 15*1024*1024 && /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name) && ['', 'image/jpeg','image/png','image/webp','image/heic','image/heif'].includes(f.type));
   const status = document.getElementById('uploadStatus');
@@ -602,7 +614,7 @@ function sendPhoto(file, onProgress) {
   });
 }
 async function uploadPhotos() {
-  if(uploading || !selectedPhotos.length) return;
+  if(uploading || !selectedPhotos.length || !photoUploadIsOpen()) return;
   uploading = true;
   const status = document.getElementById('uploadStatus');
   const progress = document.getElementById('uploadProgress');
@@ -622,7 +634,7 @@ async function uploadPhotos() {
       if(code===503) { unavailable=true; failed.push(...batch.slice(i+1)); break; }
     } catch { failed.push(batch[i]); }
   }
-  selectedPhotos=failed; uploading=false; input.disabled=drop.disabled=false; input.value=''; renderPhotos();
+  selectedPhotos=failed; uploading=false; input.value=''; updatePhotoUploadAvailability();
   progress.hidden=true; status.className='form-status '+(failed.length?'error':'success');
   setStatus(status,unavailable?'uploadUnavailable':failed.length?'uploadError':'uploadSuccess');
 }
@@ -833,6 +845,8 @@ document.addEventListener("DOMContentLoaded", function () {
   dropzone.addEventListener("click", function () { photoInput.click(); });
   photoInput.addEventListener("change", function () { setSelectedPhotos(photoInput.files); });
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
+  updatePhotoUploadAvailability();
+  setInterval(updatePhotoUploadAvailability, 60000);
 
   initReveal();
   initMotion();
