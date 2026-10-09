@@ -33,6 +33,11 @@ export async function onRequestPost(context) {
   var request = context.request;
   var env = context.env;
 
+  // 10 July 2027, 00:00 in Switzerland (CEST, UTC+02:00).
+  if (Date.now() < Date.parse("2027-07-09T22:00:00Z")) {
+    return json({ error: "Photo uploads open on 10 July 2027." }, 403);
+  }
+
   if (!env.PHOTOS) return json({ error: "Photo storage is not configured." }, 503);
 
   var form;
