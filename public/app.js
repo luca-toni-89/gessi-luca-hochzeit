@@ -367,6 +367,8 @@ function changeLanguage(lang) {
   if(languageChanging) return;
   languageChanging=true;
   document.getElementById('siteNav').classList.remove('is-open');
+  document.getElementById('siteNav').hidden=true;
+  document.getElementById('siteNav').inert=true;
   document.getElementById('menuToggle').setAttribute('aria-expanded','false');
   document.body.classList.remove('menu-open');
   document.getElementById('main').inert=false;
@@ -794,6 +796,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var menuToggle = document.getElementById("menuToggle");
   var siteNav = document.getElementById("siteNav");
   function setMenu(open) {
+    if(document.body.classList.contains('lang-pending')) open=false;
+    siteNav.hidden=!open;
+    siteNav.inert=!open;
     menuToggle.setAttribute('aria-expanded',String(open));
     menuToggle.setAttribute('aria-label',t(open?'menuClose':'menuOpen'));
     siteNav.classList.toggle('is-open',open);

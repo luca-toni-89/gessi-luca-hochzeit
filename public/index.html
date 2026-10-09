@@ -30,6 +30,7 @@
   <link rel="preload" as="image" href="/images/gessica-luca-1600.webp?v=20260927-2" media="(min-width: 701px)" fetchpriority="high">
   <style>
     /* Closed navigation must never flash during initial style/layout updates. */
+    #siteNav[hidden], body.lang-pending #siteNav { display:none!important; }
     #siteNav:not(.is-open) { visibility:hidden!important; opacity:0!important; pointer-events:none!important; transition:none!important; }
   </style>
   <link rel="preload" href="/fonts/great-vibes.woff" as="font" type="font/woff" crossorigin>
@@ -37,7 +38,7 @@
   <link rel="stylesheet" href="/styles.css?v=20261009-photo-lock">
   <link rel="stylesheet" href="/motion.css?v=20260928-black-heart">
   <link rel="stylesheet" href="/cinematic.css?v=20261008-gate-earlier">
-  <script src="/app.js?v=20261009-photo-lock" defer></script>
+  <script src="/app.js?v=20261009-nav-guard-20261009-photo-lock" defer></script>
   <script src="/cinematic.js?v=20261008-scroll-balanced" defer></script>
 </head>
 <body class="lang-pending">
@@ -64,7 +65,7 @@
       <span class="brand-mark">G<span>&amp;</span>L</span>
       <span class="brand-date">10.07.27</span>
     </a>
-    <nav class="site-nav" id="siteNav" aria-label="Navigation" data-i18n-aria="navigationLabel">
+    <nav class="site-nav" id="siteNav" hidden inert aria-label="Navigation" data-i18n-aria="navigationLabel">
       <a href="#day" data-i18n="navDay">Der Tag</a>
       <a href="#locations" data-i18n="navLocations">Orte</a>
       <a href="#menu" data-i18n="navMenu">Das Menü</a>
