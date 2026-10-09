@@ -56,7 +56,7 @@ const translations = {
     "minutes": "Minuti",
     "seconds": "Secondi",
     "dayKicker": "10 luglio 2027",
-    "dayTitle": "Il nostro giorno, passo dopo passo.",
+    "dayTitle": "Il nostro giorno, momento dopo momento.",
     "dayIntro": "Il nostro sì a Muri. Poi festeggeremo insieme a Zugo. Gli orari precisi e gli altri dettagli arriveranno con l’invito.",
     "timeFollows": "Orario da confermare",
     "ceremonyTitle": "Cerimonia religiosa",
