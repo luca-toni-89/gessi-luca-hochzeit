@@ -479,7 +479,7 @@ input:focus, textarea:focus { border-color: rgba(127,75,77,.62); box-shadow: 0 0
 .upload-dropzone {
   width: 100%;
   min-height: 270px;
-  border: 1px dashed rgba(255,255,255,.28);
+  border: 1px solid rgba(255,255,255,.28);
   border-radius: 22px;
   background: rgba(255,255,255,.025);
   color: var(--white);
@@ -491,7 +491,7 @@ input:focus, textarea:focus { border-color: rgba(127,75,77,.62); box-shadow: 0 0
   justify-content: center;
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
 }
-.upload-dropzone:hover, .upload-dropzone.is-dragging { border-color: #d3b987; background: rgba(255,255,255,.055); transform: translateY(-2px); }
+.upload-dropzone:hover { border-color: #d3b987; background: rgba(255,255,255,.055); transform: translateY(-2px); }
 .upload-icon { width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); display: grid; place-items: center; margin-bottom: 18px; font-size: 1.5rem; color: #d3b987; }
 .upload-dropzone strong { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; }
 .upload-dropzone small { color: rgba(255,255,255,.5); margin-top: 6px; }
