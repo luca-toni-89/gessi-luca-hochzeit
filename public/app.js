@@ -27,7 +27,7 @@ const translations = {
     rsvpUnavailable: "Die Anmeldung wird gerade freigeschaltet. Bitte versucht es später noch einmal.", rsvpError: "Das hat leider nicht geklappt. Bitte versucht es noch einmal.",
     photosKicker: "Eure Perspektive", photosTitle: "Zeigt uns den Tag durch eure Augen.",
     photosText: "Ab unserem Hochzeitstag könnt ihr eure Lieblingsmomente direkt hier hochladen – vom spontanen Schnappschuss bis zum Tanzflächen-Meisterwerk. Wir freuen uns auf eure Erinnerungen!",
-    uploadTitle: "Fotos auswählen oder hier ablegen", uploadHint: "JPG, PNG, WEBP oder HEIC · max. 15 MB pro Foto", uploadButton: "Fotos hochladen",
+    uploadTitle: "Fotos auswählen", uploadHint: "JPG, PNG, WEBP oder HEIC", uploadButton: "Fotos hochladen",
     uploadNone: "Bitte wählt zuerst mindestens ein Foto aus.", uploadUploading: "Fotos werden hochgeladen …", uploadSuccess: "Geschafft! Danke für eure Erinnerungen. ♡",
     uploadUnavailable: "Der Foto-Upload wird gerade freigeschaltet. Bitte versucht es später noch einmal.", uploadError: "Mindestens ein Foto konnte nicht hochgeladen werden.",
     faqTitle: "Gut zu wissen.", faqDressQ: "Gibt es einen Dresscode?", faqDressA: "Die Details folgen mit der Einladung. Vor allem wünschen wir uns, dass ihr euch wohlfühlt und mit uns feiert.",
@@ -106,8 +106,8 @@ const translations = {
     "photosKicker": "Il vostro punto di vista",
     "photosTitle": "Raccontateci questa giornata attraverso i vostri occhi.",
     "photosText": "Dal giorno del nostro matrimonio potrete caricare qui le vostre foto preferite: dagli scatti spontanei a quelli sulla pista da ballo. Non vediamo l'ora di rivivere questa giornata attraverso i vostri ricordi!",
-    "uploadTitle": "Selezionate le foto o trascinatele qui",
-    "uploadHint": "JPG, PNG, WEBP o HEIC · max. 15 MB per foto",
+    "uploadTitle": "Selezionate le foto",
+    "uploadHint": "JPG, PNG, WEBP o HEIC",
     "uploadButton": "Caricare le foto",
     "uploadNone": "Selezionate almeno una foto prima di procedere.",
     "uploadUploading": "Caricamento delle foto in corso …",
@@ -832,19 +832,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var dropzone = document.getElementById("uploadDropzone");
   dropzone.addEventListener("click", function () { photoInput.click(); });
   photoInput.addEventListener("change", function () { setSelectedPhotos(photoInput.files); });
-  ["dragenter", "dragover"].forEach(function (type) {
-    dropzone.addEventListener(type, function (event) {
-      event.preventDefault();
-      dropzone.classList.add("is-dragging");
-    });
-  });
-  ["dragleave", "drop"].forEach(function (type) {
-    dropzone.addEventListener(type, function (event) {
-      event.preventDefault();
-      dropzone.classList.remove("is-dragging");
-    });
-  });
-  dropzone.addEventListener("drop", function (event) { setSelectedPhotos(event.dataTransfer.files); });
   document.getElementById("uploadSubmit").addEventListener("click", uploadPhotos);
 
   initReveal();
