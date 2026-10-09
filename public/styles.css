@@ -709,11 +709,11 @@ progress { width:100%; height:6px; margin-top:18px; accent-color:#e4b76d; }
 }
 
 /* Sage & Ivory — final art direction */
-@font-face { font-family:Allura; src:url('/fonts/allura.ttf') format('truetype'); font-display:swap; }
-@font-face { font-family:GreatVibes; src:url('/fonts/great-vibes.woff') format('woff'); font-display:swap; }
-@font-face { font-family:Cormorant; src:url('/fonts/cormorant-regular.ttf') format('truetype'); font-weight:400; font-display:swap; }
-@font-face { font-family:Cormorant; src:url('/fonts/cormorant-medium.ttf') format('truetype'); font-weight:500; font-display:swap; }
-@font-face { font-family:Cormorant; src:url('/fonts/cormorant-italic.ttf') format('truetype'); font-style:italic; font-display:swap; }
+@font-face { font-family:Allura; src:url('/fonts/allura.ttf') format('truetype'); font-display:block; }
+@font-face { font-family:GreatVibes; src:url('/fonts/great-vibes.woff') format('woff'); font-display:block; }
+@font-face { font-family:Cormorant; src:url('/fonts/cormorant-regular.ttf') format('truetype'); font-weight:400; font-display:block; }
+@font-face { font-family:Cormorant; src:url('/fonts/cormorant-medium.ttf') format('truetype'); font-weight:500; font-display:block; }
+@font-face { font-family:Cormorant; src:url('/fonts/cormorant-italic.ttf') format('truetype'); font-style:italic; font-display:block; }
 :root { --paper:#f5f0e8; --paper-deep:#e8dfd0; --ink:#171717; --muted:#4f554e; --wine:#738c70; --wine-dark:#536b53; --sage:#8baa88; --gold:#b7a071; --line:rgba(23,23,23,.16); --white:#fffdf7; --serif:Cormorant,Georgia,serif; --script:GreatVibes,Allura,'Snell Roundhand',cursive; --radius:2px; }
 body { background:var(--paper); color:var(--ink); }
 ::selection { background:#8baa88; color:#fff; }

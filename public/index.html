@@ -28,7 +28,13 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="/images/gessica-luca-900.webp?v=20260927-2" media="(max-width: 700px)" fetchpriority="high">
   <link rel="preload" as="image" href="/images/gessica-luca-1600.webp?v=20260927-2" media="(min-width: 701px)" fetchpriority="high">
-  <link rel="stylesheet" href="/styles.css?v=20261008-mobile-spacing">
+  <style>
+    /* Closed navigation must never flash during initial style/layout updates. */
+    #siteNav:not(.is-open) { visibility:hidden!important; opacity:0!important; pointer-events:none!important; transition:none!important; }
+  </style>
+  <link rel="preload" href="/fonts/great-vibes.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/styles.css?v=20261009-stable-start">
   <link rel="stylesheet" href="/motion.css?v=20260928-black-heart">
   <link rel="stylesheet" href="/cinematic.css?v=20261008-gate-earlier">
   <script src="/app.js?v=20261008-faq-maps" defer></script>
