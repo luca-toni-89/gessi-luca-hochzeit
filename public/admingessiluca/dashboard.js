@@ -94,7 +94,7 @@
       var avatar = document.createElement("span");
       avatar.className = "avatar" + (item.attending ? "" : " is-absent");
       avatar.setAttribute("aria-hidden", "true");
-      var words = String(item.name || "").trim().split(/\\s+/);
+      var words = String(item.name || "").trim().split(/\s+/);
       avatar.textContent = words.filter(Boolean).slice(0, 2).map(function (word) {
         return word.charAt(0).toLocaleUpperCase("de");
       }).join("") || "♡";
