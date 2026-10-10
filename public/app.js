@@ -558,7 +558,11 @@ async function submitRsvp(event) {
     var data = await response.json().catch(function () { return {}; });
     if (response.ok) {
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Hold the current box while the content fades; never collapse it instantly.
+      form.style.height = form.getBoundingClientRect().height + 'px';
+      form.style.overflow = 'hidden';
       form.classList.add('rsvp-complete', 'rsvp-fading');
+      form.scrollIntoView({behavior:reduced ? 'auto' : 'smooth', block:'start'});
       form.setAttribute('aria-busy', 'true');
       form.querySelectorAll('input,textarea,button').forEach(field => field.disabled = true);
       await new Promise(resolve => setTimeout(resolve, reduced ? 0 : 1100));
@@ -567,9 +571,21 @@ async function submitRsvp(event) {
       form.classList.add('rsvp-thanked');
       const confirmation = document.getElementById('rsvpConfirmation');
       confirmation.hidden = false;
+      const box = getComputedStyle(form);
+      const targetHeight = confirmation.getBoundingClientRect().height
+        + parseFloat(box.paddingTop) + parseFloat(box.paddingBottom)
+        + parseFloat(box.borderTopWidth) + parseFloat(box.borderBottomWidth);
+      if (!reduced) {
+        await form.animate([
+          {height:form.style.height}, {height:targetHeight+'px'}
+        ], {duration:1400, easing:'cubic-bezier(.22,1,.36,1)', fill:'forwards'}).finished;
+      }
+      form.style.height = 'auto';
+      form.getAnimations().forEach(animation => animation.cancel());
+      form.style.overflow = '';
       form.removeAttribute('aria-busy');
       confirmation.focus({preventScroll:true});
-      confirmation.scrollIntoView({behavior:reduced ? 'auto' : 'smooth', block:'center'});
+
     } else if (response.status === 503) {
       status.className = "form-status error";
       setStatus(status, "rsvpUnavailable");

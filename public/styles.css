@@ -1156,7 +1156,7 @@ main section[tabindex="-1"]:focus { outline:none; }
 
 /* RSVP turns into a keepsake-style confirmation only after server success. */
 .rsvp-form > * { transition:opacity 1.1s ease,transform 1.1s ease; }
-.rsvp-form.rsvp-fading > * { opacity:0; transform:translateY(-8px); pointer-events:none; }
+.rsvp-form.rsvp-fading > * { opacity:0!important; transform:translateY(-8px)!important; pointer-events:none; transition:opacity 1.1s ease,transform 1.1s ease!important; }
 .rsvp-form.rsvp-thanked > :not(.rsvp-confirmation) { display:none; }
 .rsvp-confirmation[hidden] { display:none; }
 .rsvp-confirmation { min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px 8px; animation:rsvpThankYou 2.4s ease both; outline:none; }
@@ -1165,3 +1165,5 @@ main section[tabindex="-1"]:focus { outline:none; }
 .rsvp-confirmation-signature { font-family:var(--script); font-size:2.3rem; color:var(--wine-dark); }
 @keyframes rsvpThankYou { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 @media(prefers-reduced-motion:reduce){ .rsvp-form > * { transition:none; } .rsvp-confirmation { animation:none; } }
+
+.rsvp-form { scroll-margin-top:120px; overflow-anchor:none; }
