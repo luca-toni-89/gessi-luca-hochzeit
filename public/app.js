@@ -510,8 +510,10 @@ function initReveal() {
   });
 }
 
+let rsvpSubmitting = false;
 async function submitRsvp(event) {
   event.preventDefault();
+  if (rsvpSubmitting) return;
   var form = event.currentTarget;
   var status = document.getElementById("rsvpStatus");
   var submit = form.querySelector('button[type="submit"]');
@@ -542,6 +544,7 @@ async function submitRsvp(event) {
     guests: guests
   };
 
+  rsvpSubmitting = true;
   submit.disabled = true;
   status.className = "form-status";
   setStatus(status, "rsvpSending");
@@ -554,6 +557,13 @@ async function submitRsvp(event) {
     });
     var data = await response.json().catch(function () { return {}; });
     if (response.ok) {
+      form.reset();
+      document.getElementById('guestList').replaceChildren();
+      addGuest(false);
+      setAttendanceState();
+      status.setAttribute('tabindex', '-1');
+      status.focus({preventScroll:true});
+      status.scrollIntoView({behavior:'smooth', block:'center'});
       status.className = "form-status success";
       setStatus(status, "rsvpSuccess");
     } else if (response.status === 503) {
@@ -566,6 +576,7 @@ async function submitRsvp(event) {
     status.className = "form-status error";
     setStatus(status, "rsvpError");
   } finally {
+    rsvpSubmitting = false;
     submit.disabled = false;
   }
 }
