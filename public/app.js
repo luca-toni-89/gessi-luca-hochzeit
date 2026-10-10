@@ -561,7 +561,7 @@ async function submitRsvp(event) {
       form.classList.add('rsvp-complete', 'rsvp-fading');
       form.setAttribute('aria-busy', 'true');
       form.querySelectorAll('input,textarea,button').forEach(field => field.disabled = true);
-      await new Promise(resolve => setTimeout(resolve, reduced ? 0 : 550));
+      await new Promise(resolve => setTimeout(resolve, reduced ? 0 : 1100));
       form.reset();
       form.classList.remove('rsvp-fading');
       form.classList.add('rsvp-thanked');
