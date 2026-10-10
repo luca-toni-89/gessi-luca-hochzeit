@@ -1153,3 +1153,15 @@ main section[tabindex="-1"]:focus { outline:none; }
   .upload-files:empty,.upload-card .form-status:empty { display:none; }
   .upload-submit { margin-top:18px; }
 }
+
+/* RSVP turns into a keepsake-style confirmation only after server success. */
+.rsvp-form > * { transition:opacity .55s ease,transform .55s ease; }
+.rsvp-form.rsvp-fading > * { opacity:0; transform:translateY(-8px); pointer-events:none; }
+.rsvp-form.rsvp-thanked > :not(.rsvp-confirmation) { display:none; }
+.rsvp-confirmation[hidden] { display:none; }
+.rsvp-confirmation { min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px 8px; animation:rsvpThankYou 1.2s ease both; outline:none; }
+.rsvp-confirmation-heart { font-size:2.6rem; margin-bottom:18px; }
+.rsvp-confirmation p { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.5rem); line-height:1.2; max-width:470px; margin:0 0 24px; color:var(--ink); }
+.rsvp-confirmation-signature { font-family:var(--script); font-size:2.3rem; color:var(--wine-dark); }
+@keyframes rsvpThankYou { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+@media(prefers-reduced-motion:reduce){ .rsvp-form > * { transition:none; } .rsvp-confirmation { animation:none; } }

@@ -513,7 +513,7 @@ function initReveal() {
 let rsvpSubmitting = false;
 async function submitRsvp(event) {
   event.preventDefault();
-  if (rsvpSubmitting) return;
+  if (rsvpSubmitting || event.currentTarget.classList.contains("rsvp-complete")) return;
   var form = event.currentTarget;
   var status = document.getElementById("rsvpStatus");
   var submit = form.querySelector('button[type="submit"]');
@@ -557,15 +557,19 @@ async function submitRsvp(event) {
     });
     var data = await response.json().catch(function () { return {}; });
     if (response.ok) {
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      form.classList.add('rsvp-complete', 'rsvp-fading');
+      form.setAttribute('aria-busy', 'true');
+      form.querySelectorAll('input,textarea,button').forEach(field => field.disabled = true);
+      await new Promise(resolve => setTimeout(resolve, reduced ? 0 : 550));
       form.reset();
-      document.getElementById('guestList').replaceChildren();
-      addGuest(false);
-      setAttendanceState();
-      status.setAttribute('tabindex', '-1');
-      status.focus({preventScroll:true});
-      status.scrollIntoView({behavior:'smooth', block:'center'});
-      status.className = "form-status success";
-      setStatus(status, "rsvpSuccess");
+      form.classList.remove('rsvp-fading');
+      form.classList.add('rsvp-thanked');
+      const confirmation = document.getElementById('rsvpConfirmation');
+      confirmation.hidden = false;
+      form.removeAttribute('aria-busy');
+      confirmation.focus({preventScroll:true});
+      confirmation.scrollIntoView({behavior:reduced ? 'auto' : 'smooth', block:'center'});
     } else if (response.status === 503) {
       status.className = "form-status error";
       setStatus(status, "rsvpUnavailable");
@@ -577,7 +581,7 @@ async function submitRsvp(event) {
     setStatus(status, "rsvpError");
   } finally {
     rsvpSubmitting = false;
-    submit.disabled = false;
+    submit.disabled = form.classList.contains("rsvp-complete");
   }
 }
 
